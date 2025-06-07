@@ -1,0 +1,38 @@
+@mixin sidemenu-theme($theme-colors) {
+  .custom-nav-list {
+    padding: 0 !important;
+
+    span { font-size: 16px; }
+
+    i { margin-right: 10px; }
+
+    .custom-sub-nav-list-item {
+      height: 36px !important;
+      span{ font-size: 14px; }
+    }
+
+    .custom-nav-list-item  {
+      height: 40px !important;
+    }
+
+    .custom-expansion-panel {
+      .custom-expansion-panel-header {
+        padding: 0 16px !important;
+        height: 40px !important;
+      }
+
+      .mat-expansion-panel-content {
+        .mat-expansion-panel-body {
+          padding: 0 !important;
+        }
+      }
+    }
+
+    .is-active {
+      background: map-get($theme-colors, sidemenu-active-bg-color) !important;
+      border-left: 8px solid map-get($theme-colors, sidemenu-active-left);
+      padding: 0 8px;
+    }
+  }
+}
+

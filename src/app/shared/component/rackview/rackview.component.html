@@ -1,0 +1,199 @@
+
+  <div style="display: flex;flex-direction: row;">
+    <ng-container *ngFor="let cabinet of rackviewData">
+      <div id="rack" class="rack">
+        <div class="rack-div">
+          <ul class="rack-ul">
+            <li>
+              <div class="rack_cabinet_title">
+                <a>{{cabinet.device}}[{{cabinet.data.length}}]</a>
+              </div>
+            </li>
+            <div id="rack{{node}}" class="rack_node" *ngFor="let node of rackNode"
+             >
+              <span *ngIf="node < 10" class="rack_nodeNum">0{{node}}</span>
+              <span *ngIf="node >= 10" class="rack_nodeNum">{{node}}</span>
+              <ng-container *ngFor="let rackdata of cabinet.data;let i = index;">
+                 <!-- 1U 1Node -->
+                <div class="rack_cabinet" style="--ch:{{rackdata.size}};display: flex;" *ngIf="node == rackdata.position && rackdata.node == 1"
+                (click)="clickRacknode(cabinet.data[i])">
+                  <div style="position: relative;left: 7%;flex: 0 0 25%;">
+                    <div class="rack_container_1" style="--nr:{{rackdata.size}};">
+                      <div *ngFor="let c of rackContainer(rackdata.size)"></div>
+                    </div>
+                  </div>
+                  <div style="flex: 0 0 50%;">
+                    <span style="position: absolute;right: 36%;">{{rackdata.model}}</span>
+                    <div class="rack_container_2" style="--nr:{{rackdata.size}};">
+                      <div *ngFor="let c of rackContainer(4*rackdata.size)"></div>
+                    </div>
+                  </div>
+                  <div>
+                      <ng-container *ngIf="!rackdata.discovered;else discovered">
+                        <div *ngIf="!rackdata.discovered" class="connectionLightOff"></div>
+                      </ng-container>
+                      <ng-template #discovered>
+                        <ng-container *ngIf="rackdata.status && rackdata.status.length > 0">
+                          <div *ngIf="!rackdata.discovered" class="connectionLightOff"></div>
+                          <div *ngIf="rackdata.discovered && rackdata.status[0].value =='Connected' " class="onlineLight"></div>
+                          <div *ngIf="rackdata.discovered && rackdata.status[0].value =='Disconnected' " class="offlineLight"></div>
+                          <div class="taskLightOn" [ngClass]="rackdata.orderStatus[0].value"></div>
+                          <div *ngIf="rackdata.discovered && rackdata.locatorLight[0].value" class="locatorLightOn"></div>
+                        </ng-container>
+                      </ng-template>
+                      <div class="rack_container_3" style="--nr:{{rackdata.size}};">
+                        <div *ngFor="let c of rackContainer(rackdata.size)"></div>
+                      </div>
+                  </div>
+                  <div id="tooltiptext" class="tooltiptext">
+                    <span class="tooltiptext_title">{{'i18n_DeviceStatus' | translate}}:&nbsp;</span>
+                    <ng-container *ngIf="rackdata.status">
+                    <span class="tooltiptext_content" [ngClass]="rackdata.status[0].value">{{rackdata.status[0].value}}</span>
+                    </ng-container>
+                  </div>
+                </div>
+
+                 <!-- 1U 2Node -->
+                 <ng-container *ngIf="node == rackdata.position && rackdata.size == 1 && rackdata.node == 2">
+                  <div class="rack_cabinet" style="--ch:{{rackdata.size}};display: flex;"
+                  (click)="clickRacknode(cabinet.data[i])">
+                  <!-- Left node -->
+                    <div style="position: relative;left: 12%;flex: 0 0 25%;">
+                      <ng-container *ngFor="let c of rackContainer(rackdata.size);let lu = index;">
+                        <ng-container *ngIf="!rackdata.discovered;else discovered">
+                          <div class="connectionLightOffLnode" style="--ru:{{lu}}px;--rb:{{rackdata.size}}"></div>
+                        </ng-container>
+                        <ng-template #discovered>
+                          <ng-container *ngIf="rackdata.status && rackdata.status.length > lu">
+                            <div *ngIf="!rackdata.discovered" class="connectionLightOffLnode" style="--ru:{{lu}}px;--rb:{{rackdata.size}}"></div>
+                            <div *ngIf="rackdata.discovered && rackdata.status[0].value =='Connected' " class="onlineLightLnode" style="--ru:{{lu}}px;--rb:{{rackdata.size}}"></div>
+                            <div *ngIf="rackdata.discovered && rackdata.status[0].value =='Disconnected' " class="offlineLightLnode" style="--ru:{{lu}}px;--rb:{{rackdata.size}}"></div>
+                            <div class="taskLightOnLnode" style="--ru:{{lu}}px;--rb:{{rackdata.size}}" [ngClass]="rackdata.orderStatus[0].value"></div>
+                            <div *ngIf="rackdata.discovered && rackdata.locatorLight[0].value" class="locatorLightOnLnode" style="--ru:{{lu}}px;--rb:{{rackdata.size}}"></div>
+                          </ng-container>
+                        </ng-template>
+                        </ng-container>
+                        <div class="rack_container_3_Lnode" style="--nr:{{rackdata.size}};">
+                          <div *ngFor="let c of rackContainer(rackdata.size)"></div>
+                        </div>
+                    </div>
+                    <!-- Model Name -->
+                    <div style="flex: 0 0 50%;">
+                      <span style="position: absolute;right: 34%;">{{rackdata.model}}</span>
+                      <div class="rack_container_2" style="--nr:{{rackdata.size}};">
+                        <div *ngFor="let c of rackContainer(4*rackdata.size)"></div>
+                      </div>
+                    </div>
+                    <!-- Right node -->
+                    <div>
+                      <ng-container *ngFor="let c of rackContainer(rackdata.size);let ru = index;">
+                          <ng-container *ngIf="!rackdata.discovered;else discovered">
+                            <div class="connectionLightOffRnode" style="--ru:{{ru}}px;--rb:{{rackdata.size}}"></div>
+                          </ng-container>
+                          <ng-template #discovered>
+                            <ng-container *ngIf="rackdata.status && rackdata.status.length > 1">
+                              <div *ngIf="!rackdata.discovered" class="connectionLightOffRnode" style="--ru:{{ru}}px;--rb:{{rackdata.size}}"></div>
+                              <div *ngIf="rackdata.discovered && rackdata.status[1].value =='Connected' " class="onlineLightRnode" style="--ru:{{ru}}px;--rb:{{rackdata.size}}"></div>
+                              <div *ngIf="rackdata.discovered && rackdata.status[1].value =='Disconnected' " class="offlineLightRnode" style="--ru:{{ru}}px;--rb:{{rackdata.size}}"></div>
+                              <div class="taskLightOnRnode" style="--ru:{{ru}}px;--rb:{{rackdata.size}}" [ngClass]="rackdata.orderStatus[1].value"></div>
+                              <div *ngIf="rackdata.discovered && rackdata.locatorLight[1].value" class="locatorLightOnRnode" style="--ru:{{ru}}px;--rb:{{rackdata.size}}"></div>
+                           </ng-container>
+                          </ng-template>
+                      </ng-container>
+                      <div class="rack_container_3_Rnode" style="--nr:{{rackdata.size}};">
+                        <div *ngFor="let c of rackContainer(rackdata.size)"></div>
+                      </div>
+                    </div>
+                    <div id="tooltiptext" class="tooltiptext">
+                      <span class="tooltiptext_title">{{'i18n_DeviceStatus' | translate}}:&nbsp;</span>
+                      <ng-container *ngIf="rackdata.status">
+                        <div style="display: flex;flex-direction: column-reverse;">
+                          <ng-container *ngFor="let c of rackContainer(rackdata.size);let lu = index;">
+                            <span class="tooltiptext_content" [ngClass]="rackdata.status[0].value">node{{rackdata.status[0].node}}:&nbsp;{{rackdata.status[0].value}}&nbsp;</span>
+                          </ng-container>
+                        </div>
+                        <div style="display: flex;flex-direction: column-reverse;">
+                          <ng-container *ngFor="let c of rackContainer(rackdata.size);let ru = index;">
+                            <span *ngIf="rackdata.status && rackdata.status.length > 1" class="tooltiptext_content" [ngClass]="rackdata.status[1].value">node{{rackdata.status[1].node}}:&nbsp;{{rackdata.status[1].value}}&nbsp;</span>
+                          </ng-container>
+                        </div>
+                      </ng-container>
+                    </div>
+                  </div>
+                </ng-container>
+
+                <!-- More than one unit -->
+                <ng-container *ngIf="node == rackdata.position && rackdata.size > 1 && rackdata.node > 1">
+                <div class="rack_cabinet" style="--ch:{{rackdata.size}};display: flex;"
+                (click)="clickRacknode(cabinet.data[i])">
+                <!-- Left node -->
+                  <div style="position: relative;left: 12%;flex: 0 0 25%;" [ngStyle]="{'margin-top': rackdata.size * 5 +'px'}">
+                    <ng-container *ngFor="let c of rackContainer(rackdata.size);let lu = index;">
+                        <ng-container *ngIf="!rackdata.discovered;else discovered">
+                          <div class="connectionLightOffLnode" style="--ru:{{lu}}px;--rb:{{rackdata.size}}"></div>
+                        </ng-container>
+                        <ng-template #discovered>
+                          <ng-container *ngIf="rackdata.status && rackdata.status.length > lu">
+                            <div *ngIf="!rackdata.discovered" class="connectionLightOffLnode" style="--ru:{{lu}}px;--rb:{{rackdata.size}}"></div>
+                            <div *ngIf="rackdata.discovered && rackdata.status[lu].value =='Connected' " class="onlineLightLnode" style="--ru:{{lu}}px;--rb:{{rackdata.size}}"></div>
+                            <div *ngIf="rackdata.discovered && rackdata.status[lu].value =='Disconnected' " class="offlineLightLnode" style="--ru:{{lu}}px;--rb:{{rackdata.size}}"></div>
+                            <div class="taskLightOnLnode" style="--ru:{{lu}}px;--rb:{{rackdata.size}}" [ngClass]="rackdata.orderStatus[lu].value"></div>
+                            <div *ngIf="rackdata.discovered && rackdata.locatorLight[lu].value" class="locatorLightOnLnode" style="--ru:{{lu}}px;--rb:{{rackdata.size}}"></div>
+                        </ng-container>
+                        </ng-template>
+                      </ng-container>
+                      <div class="rack_container_3_Lnode" style="--nr:{{rackdata.size}};margin-left: -2px;" [ngStyle]="{'margin-top': rackdata.size * (-5) +'px'}">
+                        <div *ngFor="let c of rackContainer(rackdata.size)"></div>
+                      </div>
+                  </div>
+                  <!-- Model Name -->
+                  <div style="flex: 0 0 50%;">
+                    <span style="position: absolute;right: 34%;">{{rackdata.model}}</span>
+                    <div class="rack_container_2" style="--nr:{{rackdata.size}};">
+                      <div *ngFor="let c of rackContainer(4*rackdata.size)"></div>
+                    </div>
+                  </div>
+                  <!-- Right node -->
+                  <div style="position: relative;flex: 0 0 25%;" [ngStyle]="{'margin-top': rackdata.size * 5 +'px'}">
+                    <ng-container *ngFor="let c of rackContainer(rackdata.size);let ru = index;">
+                      <ng-container *ngIf="!rackdata.discovered;else discovered">
+                        <div class="connectionLightOffRnode" style="--ru:{{ru}}px;--rb:{{rackdata.size}}"></div>
+                      </ng-container>
+                      <ng-template #discovered>
+                        <ng-container *ngIf="rackdata.status && rackdata.status.length > 1">
+                          <div *ngIf="!rackdata.discovered" class="connectionLightOffRnode" style="--ru:{{ru}}px;--rb:{{rackdata.size}}"></div>
+                          <div *ngIf="rackdata.discovered && rackdata.status[ru+rackdata.size].value =='Connected' " class="onlineLightRnode" style="--ru:{{ru}}px;--rb:{{rackdata.size}}"></div>
+                          <div *ngIf="rackdata.discovered && rackdata.status[ru+rackdata.size].value =='Disconnected' " class="offlineLightRnode" style="--ru:{{ru}}px;--rb:{{rackdata.size}}"></div>
+                          <div class="taskLightOnRnode" style="--ru:{{ru}}px;--rb:{{rackdata.size}}" [ngClass]="rackdata.orderStatus[ru+rackdata.size].value"></div>
+                          <div *ngIf="rackdata.discovered && rackdata.locatorLight[ru+rackdata.size].value" class="locatorLightOnRnode" style="--ru:{{ru}}px;--rb:{{rackdata.size}}"></div>
+                        </ng-container>
+                      </ng-template>
+                    </ng-container>
+                    <div class="rack_container_3_Rnode" style="--nr:{{rackdata.size}};margin-left: -2px;" [ngStyle]="{'margin-top': rackdata.size * (-5) +'px'}">
+                      <div *ngFor="let c of rackContainer(rackdata.size)"></div>
+                    </div>
+                  </div>
+                  <div class="tooltiptext">
+                    <span class="tooltiptext_title">{{'i18n_DeviceStatus' | translate}}:&nbsp;</span>
+                    <ng-container *ngIf="rackdata.status && rackdata.status.length > 1">
+                      <div style="display: flex;flex-direction: column-reverse;">
+                        <ng-container *ngFor="let c of rackContainer(rackdata.size);let lu = index;">
+                          <span class="tooltiptext_content" [ngClass]="rackdata.status[lu].value">node{{rackdata.status[lu].node}}:&nbsp;{{rackdata.status[lu].value}}&nbsp;</span>
+                        </ng-container>
+                      </div>
+                      <div style="display: flex;flex-direction: column-reverse;">
+                        <ng-container *ngFor="let c of rackContainer(rackdata.size);let ru = index;">
+                          <span class="tooltiptext_content" [ngClass]="rackdata.status[ru+rackdata.size].value">node{{rackdata.status[ru+rackdata.size].node}}:&nbsp;{{rackdata.status[ru+rackdata.size].value}}&nbsp;</span>
+                        </ng-container>
+                      </div>
+                    </ng-container>
+                  </div>
+                </div>
+              </ng-container>
+              </ng-container>
+            </div>
+          </ul>
+        </div>
+      </div>
+    </ng-container>
+  </div>

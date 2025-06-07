@@ -1,0 +1,11 @@
+#base image
+FROM maven:3.8.6-openjdk-8-slim as build
+
+# set working directory
+WORKDIR /app
+
+# add app
+COPY . /app
+
+# mvn build
+RUN mvn test

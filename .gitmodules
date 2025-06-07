@@ -1,0 +1,6 @@
+[submodule "cicd"]
+	path = cicd
+	url = ../infrastructure/dcs-cicd.git
+[submodule "helm-charts"]
+	path = helm-charts
+	url = ../infrastructure/dcs-helm-charts.git

@@ -1,0 +1,87 @@
+<div class="container-fluid p-0">
+  <div class="row row-cols-xl-3 row-cols-lg-2 row-cols-md-1 row-cols-1 g-3">
+    <div class="col animate__animated animate__fadeIn delay-0-1">
+      <app-status-card id="statusCard"></app-status-card>
+    </div>
+    <div class="col animate__animated animate__fadeIn delay-0-2">
+      <app-location-card id="locationCard"></app-location-card>
+    </div>
+    <div class="col animate__animated animate__fadeIn delay-0-3">
+      <app-duration-card id="durationCard"></app-duration-card>
+    </div>
+  </div>
+  <div class="row list-view">
+    <div class="col-12 animate__animated animate__fadeIn">
+      <mat-card>
+        <mat-card-header>
+          <mat-card-title>
+            <label class="list-title">{{'i18n_Order' | translate}}&nbsp;({{listData.length}})</label>
+
+            <ng-container *ngIf="statusFilter">
+              <mat-chip class="filter-item" [ngClass]="getStatusClass()" selectable="false" (removed)="removeFilter('status')">{{statusFilter}}
+                <button matChipRemove>
+                  <i class="fa-solid fa-xmark"></i>
+                </button>
+              </mat-chip>
+            </ng-container>
+
+            <ng-container *ngFor="let edgeGateway of edgeGatewayFilter; let i=index">
+              <mat-chip class="filter-item" selectable="false" (removed)="removeFilter('edgeGateway', edgeGateway)">{{edgeGateway}}
+                <button matChipRemove>
+                  <i class="fa-solid fa-xmark"></i>
+                </button>
+              </mat-chip>
+            </ng-container>
+
+            <ng-container *ngFor="let order of orderFilter; let i=index">
+              <mat-chip class="filter-item" selectable="false" (removed)="removeFilter('order', order)">{{order}}
+                <button matChipRemove>
+                  <i class="fa-solid fa-xmark"></i>
+                </button>
+              </mat-chip>
+            </ng-container>
+
+            <ng-container *ngIf="startDate">
+              <mat-chip class="filter-item" selectable="false" (removed)="removeFilter('createdDate')">
+                {{'i18n_CreatedDate' | translate}}:&nbsp;{{getDateString(startDate)}}&nbsp;-&nbsp;{{getDateString(endDate)}}
+                <button matChipRemove>
+                  <i class="fa-solid fa-xmark"></i>
+                </button>
+              </mat-chip>
+            </ng-container>
+
+          </mat-card-title>
+
+        </mat-card-header>
+
+        <mat-card-content>
+          <div class="row">
+            <div class="col-md-6 col-sm-12">
+              <app-search-bar [id]="'tableFilterSearch'"
+                              [enteredValue]="filters"
+                              [dateRangerPicker]="true">
+              </app-search-bar>
+            </div>
+            <div class="col-md-6 col-sm-4">
+              <div style="float: right;">
+                <button mat-raised-button color="primary" (click)="exportFile()">
+                  <i class="fa-solid fa-download"></i>&nbsp;{{'i18n_Export' | translate}}
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- table -->
+          <app-data-table
+            [id]="tableID"
+            [data]="listData"
+            [columnDefs]="columnsDef"
+            [groupByColumns]="groupByColumns"
+            [filters]="filters"
+            [height]="'calc(100vh - 590px)'"
+            [isLoading]="isLoadingResults" />
+        </mat-card-content>
+      </mat-card>
+    </div>
+  </div>
+</div>

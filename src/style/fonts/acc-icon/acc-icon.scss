@@ -1,0 +1,590 @@
+@import "variables";
+
+@font-face {
+  font-family: '#{$icomoon-font-family}';
+  src:  url('#{$icomoon-font-path}/#{$icomoon-font-family}.eot?26wd6p');
+  src:  url('#{$icomoon-font-path}/#{$icomoon-font-family}.eot?26wd6p#iefix') format('embedded-opentype'),
+    url('#{$icomoon-font-path}/#{$icomoon-font-family}.ttf?26wd6p') format('truetype'),
+    url('#{$icomoon-font-path}/#{$icomoon-font-family}.woff?26wd6p') format('woff'),
+    url('#{$icomoon-font-path}/#{$icomoon-font-family}.svg?26wd6p##{$icomoon-font-family}') format('svg');
+  font-weight: normal;
+  font-style: normal;
+  font-display: block;
+}
+
+i {
+  /* use !important to prevent issues with browser extensions that change fonts */
+  font-family: '#{$icomoon-font-family}';
+  speak: never;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+
+  /* Better Font Rendering =========== */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.iconacc-access {
+  &:before {
+    content: $iconacc-access;
+  }
+}
+.iconacc-accounts {
+  &:before {
+    content: $iconacc-accounts;
+  }
+}
+.iconacc-add-on-cards {
+  &:before {
+    content: $iconacc-add-on-cards;
+  }
+}
+.iconacc-add {
+  &:before {
+    content: $iconacc-add;
+  }
+}
+.iconacc-add_redfish {
+  &:before {
+    content: $iconacc-add_redfish;
+  }
+}
+.iconacc-add_vsphere {
+  &:before {
+    content: $iconacc-add_vsphere;
+  }
+}
+.iconacc-agents_update {
+  &:before {
+    content: $iconacc-agents_update;
+  }
+}
+.iconacc-appearance {
+  &:before {
+    content: $iconacc-appearance;
+  }
+}
+.iconacc-application {
+  &:before {
+    content: $iconacc-application;
+  }
+}
+.iconacc-backplane_s_on {
+  &:before {
+    content: $iconacc-backplane_s_on;
+  }
+}
+.iconacc-ic_backup {
+  &:before {
+    content: $iconacc-ic_backup;
+  }
+}
+.iconacc-bad {
+  &:before {
+    content: $iconacc-bad;
+  }
+}
+.iconacc-bios {
+  &:before {
+    content: $iconacc-bios;
+  }
+}
+.iconacc-bios_update {
+  &:before {
+    content: $iconacc-bios_update;
+  }
+}
+.iconacc-bmc {
+  &:before {
+    content: $iconacc-bmc;
+  }
+}
+.iconacc-centralized {
+  &:before {
+    content: $iconacc-centralized;
+  }
+}
+.iconacc-chassis_s_on {
+  &:before {
+    content: $iconacc-chassis_s_on;
+  }
+}
+.iconacc-check_s {
+  &:before {
+    content: $iconacc-check_s;
+  }
+}
+.iconacc-close {
+  &:before {
+    content: $iconacc-close;
+  }
+}
+.iconacc-collapse_s {
+  &:before {
+    content: $iconacc-collapse_s;
+  }
+}
+.iconacc-connection {
+  &:before {
+    content: $iconacc-connection;
+  }
+}
+.iconacc-cpu {
+  &:before {
+    content: $iconacc-cpu;
+  }
+}
+.iconacc-cpu_s_on {
+  &:before {
+    content: $iconacc-cpu_s_on;
+  }
+}
+.iconacc-critical {
+  &:before {
+    content: $iconacc-critical;
+  }
+}
+.iconacc-data-base-access {
+  &:before {
+    content: $iconacc-data-base-access;
+  }
+}
+.iconacc-delete {
+  &:before {
+    content: $iconacc-delete;
+  }
+}
+.iconacc-deploy_agents {
+  &:before {
+    content: $iconacc-deploy_agents;
+  }
+}
+.iconacc-deployment {
+  &:before {
+    content: $iconacc-deployment;
+  }
+}
+.iconacc-device_access {
+  &:before {
+    content: $iconacc-device_access;
+  }
+}
+.iconacc-dimm {
+  &:before {
+    content: $iconacc-dimm;
+  }
+}
+.iconacc-dimm_s_on {
+  &:before {
+    content: $iconacc-dimm_s_on;
+  }
+}
+.iconacc-disable {
+  &:before {
+    content: $iconacc-disable;
+  }
+}
+.iconacc-edit {
+  &:before {
+    content: $iconacc-edit;
+  }
+}
+.iconacc-ic_empty {
+  &:before {
+    content: $iconacc-ic_empty;
+  }
+}
+.iconacc-enviroment-info {
+  &:before {
+    content: $iconacc-enviroment-info;
+  }
+}
+.iconacc-event-log {
+  &:before {
+    content: $iconacc-event-log;
+  }
+}
+.iconacc-expand {
+  &:before {
+    content: $iconacc-expand;
+  }
+}
+.iconacc-expand_s {
+  &:before {
+    content: $iconacc-expand_s;
+  }
+}
+.iconacc-export {
+  &:before {
+    content: $iconacc-export;
+  }
+}
+.iconacc-fan {
+  &:before {
+    content: $iconacc-fan;
+  }
+}
+.iconacc-fan_s_on {
+  &:before {
+    content: $iconacc-fan_s_on;
+  }
+}
+.iconacc-feedback {
+  &:before {
+    content: $iconacc-feedback;
+  }
+}
+.iconacc-file {
+  &:before {
+    content: $iconacc-file;
+  }
+}
+.iconacc-filter-config {
+  &:before {
+    content: $iconacc-filter-config;
+  }
+}
+.iconacc-filter {
+  &:before {
+    content: $iconacc-filter;
+  }
+}
+.iconacc-focus_software {
+  &:before {
+    content: $iconacc-focus_software;
+  }
+}
+.iconacc-good {
+  &:before {
+    content: $iconacc-good;
+  }
+}
+.iconacc-hard-disk {
+  &:before {
+    content: $iconacc-hard-disk;
+  }
+}
+.iconacc-hardware {
+  &:before {
+    content: $iconacc-hardware;
+  }
+}
+.iconacc-hidden {
+  &:before {
+    content: $iconacc-hidden;
+  }
+}
+.iconacc-home {
+  &:before {
+    content: $iconacc-home;
+  }
+}
+.iconacc-hotfix {
+  &:before {
+    content: $iconacc-hotfix;
+  }
+}
+.iconacc-hw-sensor {
+  &:before {
+    content: $iconacc-hw-sensor;
+  }
+}
+.iconacc-import {
+  &:before {
+    content: $iconacc-import;
+  }
+}
+.iconacc-language {
+  &:before {
+    content: $iconacc-language;
+  }
+}
+.iconacc-led-loccator {
+  &:before {
+    content: $iconacc-led-loccator;
+  }
+}
+.iconacc-led {
+  &:before {
+    content: $iconacc-led;
+  }
+}
+.iconacc-led_s_on {
+  &:before {
+    content: $iconacc-led_s_on;
+  }
+}
+.iconacc-licence {
+  &:before {
+    content: $iconacc-licence;
+  }
+}
+.iconacc-logout {
+  &:before {
+    content: $iconacc-logout;
+  }
+}
+.iconacc-maintenace {
+  &:before {
+    content: $iconacc-maintenace;
+  }
+}
+.iconacc-market {
+  &:before {
+    content: $iconacc-market;
+  }
+}
+.iconacc-menu {
+  &:before {
+    content: $iconacc-menu;
+  }
+}
+.iconacc-metadata-editor {
+  &:before {
+    content: $iconacc-metadata-editor;
+  }
+}
+.iconacc-model {
+  &:before {
+    content: $iconacc-model;
+  }
+}
+.iconacc-network {
+  &:before {
+    content: $iconacc-network;
+  }
+}
+.iconacc-network_s_on {
+  &:before {
+    content: $iconacc-network_s_on;
+  }
+}
+.iconacc-noresult {
+  &:before {
+    content: $iconacc-noresult;
+  }
+}
+.iconacc-notification {
+  &:before {
+    content: $iconacc-notification;
+  }
+}
+.iconacc-partition_s_on {
+  &:before {
+    content: $iconacc-partition_s_on;
+  }
+}
+.iconacc-power-supply {
+  &:before {
+    content: $iconacc-power-supply;
+  }
+}
+.iconacc-power-supply_s_on {
+  &:before {
+    content: $iconacc-power-supply_s_on;
+  }
+}
+.iconacc-power {
+  &:before {
+    content: $iconacc-power;
+  }
+}
+.iconacc-process {
+  &:before {
+    content: $iconacc-process;
+  }
+}
+.iconacc-refetch {
+  &:before {
+    content: $iconacc-refetch;
+  }
+}
+.iconacc-refresh {
+  &:before {
+    content: $iconacc-refresh;
+  }
+}
+.iconacc-remote {
+  &:before {
+    content: $iconacc-remote;
+  }
+}
+.iconacc-remove_agents {
+  &:before {
+    content: $iconacc-remove_agents;
+  }
+}
+.iconacc-remove_redfish {
+  &:before {
+    content: $iconacc-remove_redfish;
+  }
+}
+.iconacc-remove_vsphere {
+  &:before {
+    content: $iconacc-remove_vsphere;
+  }
+}
+.iconacc-report {
+  &:before {
+    content: $iconacc-report;
+  }
+}
+.iconacc-save {
+  &:before {
+    content: $iconacc-save;
+  }
+}
+.iconacc-scan_deploy {
+  &:before {
+    content: $iconacc-scan_deploy;
+  }
+}
+.iconacc-search {
+  &:before {
+    content: $iconacc-search;
+  }
+}
+.iconacc-security {
+  &:before {
+    content: $iconacc-security;
+  }
+}
+.iconacc-sensor-threshold {
+  &:before {
+    content: $iconacc-sensor-threshold;
+  }
+}
+.iconacc-server {
+  &:before {
+    content: $iconacc-server;
+  }
+}
+.iconacc-settings {
+  &:before {
+    content: $iconacc-settings;
+  }
+}
+.iconacc-show-devices {
+  &:before {
+    content: $iconacc-show-devices;
+  }
+}
+.iconacc-smart_s_on {
+  &:before {
+    content: $iconacc-smart_s_on;
+  }
+}
+.iconacc-smtp {
+  &:before {
+    content: $iconacc-smtp;
+  }
+}
+.iconacc-software {
+  &:before {
+    content: $iconacc-software;
+  }
+}
+.iconacc-software_dispatch {
+  &:before {
+    content: $iconacc-software_dispatch;
+  }
+}
+.iconacc-software_pool {
+  &:before {
+    content: $iconacc-software_pool;
+  }
+}
+.iconacc-software_remove {
+  &:before {
+    content: $iconacc-software_remove;
+  }
+}
+.iconacc-storage {
+  &:before {
+    content: $iconacc-storage;
+  }
+}
+.iconacc-subscription-report {
+  &:before {
+    content: $iconacc-subscription-report;
+  }
+}
+.iconacc-task_report {
+  &:before {
+    content: $iconacc-task_report;
+  }
+}
+.iconacc-temperature {
+  &:before {
+    content: $iconacc-temperature;
+  }
+}
+.iconacc-temperature_s_on {
+  &:before {
+    content: $iconacc-temperature_s_on;
+  }
+}
+.iconacc-time {
+  &:before {
+    content: $iconacc-time;
+  }
+}
+.iconacc-trust_software {
+  &:before {
+    content: $iconacc-trust_software;
+  }
+}
+.iconacc-utilization {
+  &:before {
+    content: $iconacc-utilization;
+  }
+}
+.iconacc-visiable {
+  &:before {
+    content: $iconacc-visiable;
+  }
+}
+.iconacc-voltage {
+  &:before {
+    content: $iconacc-voltage;
+  }
+}
+.iconacc-voltage_s_on {
+  &:before {
+    content: $iconacc-voltage_s_on;
+  }
+}
+.iconacc-warning {
+  &:before {
+    content: $iconacc-warning;
+  }
+}
+.iconacc-warning_s .path1 {
+  &:before {
+    content: $iconacc-warning_s-path1;
+    color: rgb(0, 0, 0);
+  }
+}
+.iconacc-warning_s .path2 {
+  &:before {
+    content: $iconacc-warning_s-path2;
+    margin-left: -1em;
+    color: rgb(255, 255, 255);
+  }
+}
+.iconacc-warning_s .path3 {
+  &:before {
+    content: $iconacc-warning_s-path3;
+    margin-left: -1em;
+    color: rgb(255, 255, 255);
+  }
+}
+.iconacc-zoom-out {
+  &:before {
+    content: $iconacc-zoom-out;
+  }
+}
+

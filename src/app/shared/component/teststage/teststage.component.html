@@ -1,0 +1,277 @@
+<mat-card id="teststage">
+  <mat-card-header>
+    <mat-card-title *ngIf="!displayOnly">
+
+      <div class="row">
+        <div class="col-9">
+          {{'i18n_RangeHint' | translate}}
+          <button mat-raised-button color="primary" (click)="openAddStageDialog()"><i class="fas fa-plus"></i>&nbsp;&nbsp;{{'i18n_Add' | translate}}</button>
+        </div>
+        <div class="col-3">
+          <i *ngIf="!tasksetExpand" class="fas fa-expand-arrows-alt" style="position: absolute;right: 20px;cursor: pointer;" (click)="expandTaskset()"></i>
+          <i *ngIf="tasksetExpand" class="fas fa-compress-arrows-alt" style="position: absolute;right: 20px;cursor: pointer;" (click)="collapseTaskset()"></i>
+        </div>
+      </div>
+    </mat-card-title>
+  </mat-card-header>
+  <mat-card-content style="height: 50vh;overflow-y: auto;padding: 10px;">
+    <div *ngIf="stageData.length > 0" cdkDropList class="stageList animate__animated animate__fadeIn" (cdkDropListDropped)="dropStage($event)">
+      <ng-container *ngFor="let stage of stageData;let i = index;">
+        <div class="stageBox" cdkDragPreviewContainer="parent" [ngStyle]="{'cursor' : displayOnly ? '': 'grab'}" cdkDrag [cdkDragDisabled]="displayOnly">
+          <div *cdkDragPlaceholder class="stageBoxPlaceholder"></div>
+          <div style="flex: 0 0 13%;text-align: center;padding-left: 3%;">
+            <div style="display: flex;flex-direction: column;">
+              <div style="font-size: 2vw;font-weight: bold;">
+                <span *ngIf="displayOnly">{{stage.index+1}}</span>
+                <span *ngIf="!displayOnly">{{i+1}}</span>
+              </div>
+              <div style="font-size: 1.2vw;font-weight: bold;height: 30px;">
+                {{stage.name}}
+              </div>
+              <div *ngIf="!displayOnly" style="height: 50px;">
+                <button mat-raised-button color="primary" (click)="openAddTestToolDialog(i)"><i
+                    class="fas fa-plus"></i>&nbsp;&nbsp;{{'i18n_Add' | translate}}</button>
+              </div>
+              <div *ngIf="!displayOnly" style="height: 30px;">
+                <i class="fas fa-chevron-circle-up fa-2x" style="position: relative;cursor: pointer;z-index: 99;" (click)="moveStageUp(i)"></i>&nbsp;&nbsp;
+                <i class="fas fa-chevron-circle-down fa-2x" style="position: relative;cursor: pointer;z-index: 99;" (click)="moveStageDown(i)"></i>
+              </div>
+            </div>
+          </div>
+           <div class="stageSpin">
+            <i *ngIf="stage.tasks.length > 0" class="fas fa-cog fa-spin fa-3x"
+              style="--fa-animation-duration: 3s;"></i>
+            <i *ngIf="stage.tasks.length == 0" class="fas fa-cog fa-3x"></i>
+          </div>
+          <div class="testtoolGroup" cdkDropListGroup>
+            <ng-container *ngFor="let testtool of stage.tasks;let x=index">
+              <div class="testtoolList" cdkDropList
+              [cdkDropListData]="{testtool:testtool,index:x}" (cdkDropListDropped)="dropTool($event,i)">
+              <div class="testtoolBox" cdkDragPreviewContainer="parent" [ngStyle]="{'cursor' : displayOnly ? '': 'grab'}" cdkDrag
+              [cdkDragDisabled]="displayOnly" [ngClass]="testtool.status">
+                <div *cdkDragPlaceholder class="testtoolBoxPlaceholder"></div>
+                <span *ngIf="displayOnly" class="testToolStep">{{testtool.index+1}}</span>
+                <span *ngIf="!displayOnly" class="testToolStep">{{x+1}}</span>
+                <ng-container *ngIf="!displayOnly">
+                  <div class="testToolRemove">
+                    <i class="fas fa-times" (click)="removetestTool(i,x)"></i>
+                  </div>
+                </ng-container>
+                <span *ngIf="!testtool.status" class="delayBadge"><i
+                  class="fas fa-clock"></i>&nbsp;{{testtool.delayTime}}&nbsp;mins</span>
+                <span *ngIf="testtool.status" class="delayBadge"><i
+                    class="fas fa-clock"></i>&nbsp;{{testtool.tool.createdAt | date:'hh:mm:ss'}}</span>
+                <div style="display: flex;position: relative;top: -5px;width: 100%;">
+                  <div style="flex: 0 0 35%;text-align: center;">
+                    <i class="fas fa-wrench fa-2x testToolOpen" (click)="openTestToolDialog(i,testtool)"></i>
+                  </div>
+                  <div style="align-self: center;margin-left: -3%;">
+                    <span>{{testtool.tool.name}}</span>
+                  </div>
+                </div>
+                <span class="textNameText">
+                  {{testtool.tool.category}}
+                </span>
+                <span *ngIf="testtool.repeated > 1" class="testToolRepeat">
+                  {{'i18n_Repeat' | translate}}:&nbsp;{{testtool.repeated}}
+                </span>
+              </div>
+             </div>
+            </ng-container>
+          </div>
+
+          <ng-container *ngIf="!displayOnly">
+            <div class="stageDrag">
+              <i class="fas fa-bars fa-3x" style="transform: translate(-10%,-14%) scale(0.6, 0.5);"></i>
+            </div>
+            <div class="stageRemove">
+              <i class="fas fa-times-circle fa-2x" (click)="removeStage(i)"></i>
+            </div>
+          </ng-container>
+        </div>
+      </ng-container>
+    </div>
+  </mat-card-content>
+</mat-card>
+
+<ng-template #addStageDialog let-data>
+  <div [formGroup]="stageForm">
+    <div formArrayName="itemDef">
+      <div *ngFor="let item of $any(stageForm.get('itemDef'))?.controls; let i = index; let last = last;">
+        <div class="row rowfield">
+          <div class="col-3 fileldCol">
+            <span>{{item.value.fieldName}}</span>
+          </div>
+          <div class="col-7" [formGroupName]="i">
+            <mat-form-field appearance="outline" class="form-field">
+              <input matInput type="text" formControlName="inputVal">
+            </mat-form-field>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</ng-template>
+
+<ng-template #addTestToolDialog let-data>
+  <div [formGroup]="addtestToolForm">
+    <div formArrayName="itemDef">
+      <div *ngFor="let item of $any(addtestToolForm.get('itemDef'))?.controls; let i = index; let last = last;">
+        <div class="row rowfield">
+          <div class="col-3 fileldCol">
+            <span>{{item.value.fieldName}}</span>
+          </div>
+          <ng-container *ngIf="item.value.selectable;">
+            <div class="col-7" [formGroupName]="i">
+              <mat-form-field appearance="outline" class="form-field">
+                <mat-select formControlName="selectVal" (selectionChange)="getTestTool($event.value,'add')">
+                  <ng-container *ngIf="item.value.field == 'category'">
+                    <mat-option *ngFor="let testTool of toolCatalogyData" [value]="testTool.category">
+                      {{testTool.category}}
+                    </mat-option>
+                    <mat-option>
+                      (<i class="fas fa-plus"></i>)&nbsp;&nbsp;{{'i18n_AddTool' | translate}}
+                    </mat-option>
+                  </ng-container>
+                  <ng-container *ngIf="item.value.field == 'name'">
+                    <mat-option *ngFor="let testName of toolNameData" [value]="testName.name">
+                      {{testName.name}}
+                    </mat-option>
+                  </ng-container>
+                </mat-select>
+              </mat-form-field>
+            </div>
+          </ng-container>
+          <ng-container *ngIf="item.value.field == 'delayTime'">
+            <div class="col-7" [formGroupName]="i">
+              <mat-form-field appearance="outline" class="form-field">
+                <input id="addDelaytime" type="number" matInput min="1" max="60" formControlName="inputVal" onkeydown="return false">
+                <i class="fas fa-minus-circle" onclick="this.parentNode.querySelector('input[type=number]').stepDown()" style="position: absolute;right: 15%;cursor: pointer;line-height: 36px;"></i>
+                <i class="fas fa-plus-circle" onclick="this.parentNode.querySelector('input[type=number]').stepUp()" style="position: absolute;right: 0%;cursor: pointer;line-height: 36px;"></i>
+              </mat-form-field>
+            </div>
+            <div class="col-1" style="align-self: center;">
+              &nbsp;Minute
+            </div>
+          </ng-container>
+          <ng-container *ngIf="item.value.field == 'repeated'">
+            <div class="col-1" [formGroupName]="i">
+              <mat-checkbox style="position: relative; top:0px;left: -15px;" formControlName="checked" [(ngModel)]="isRepeatChecked"></mat-checkbox>
+            </div>
+             <div *ngIf="isRepeatChecked" [formGroupName]="i" class="col-6" >
+              <mat-form-field appearance="outline" class="form-field">
+                <input id="addRepeat" type="number" matInput min="1" formControlName="inputVal">
+                <i class="fas fa-minus-circle" onclick="this.parentNode.querySelector('input[type=number]').stepDown()" style="position: absolute;right: 15%;cursor: pointer;line-height: 36px;"></i>
+                <i class="fas fa-plus-circle" onclick="this.parentNode.querySelector('input[type=number]').stepUp()" style="position: absolute;right: 0%;cursor: pointer;line-height: 36px;"></i>
+              </mat-form-field>
+             </div>
+          </ng-container>
+        </div>
+      </div>
+    </div>
+  </div>
+</ng-template>
+
+<ng-template #editTestToolDialog let-data>
+  <div [formGroup]="editToolForm">
+    <div formArrayName="itemDef">
+      <div *ngFor="let item of $any(editToolForm.get('itemDef'))?.controls; let i = index; let last = last;">
+        <div class="row rowfield">
+          <div class="col-3 fileldCol">
+            <span>{{item.value.fieldName}}</span>
+          </div>
+          <ng-container *ngIf="item.value.selectable;">
+            <div class="col-7" [formGroupName]="i">
+              <mat-form-field appearance="outline" class="form-field">
+                <mat-select formControlName="selectVal" (selectionChange)="getTestTool($event.value,'edit')">
+                  <ng-container *ngIf="item.value.field == 'category'">
+                    <mat-option *ngFor="let testTool of toolCatalogyData" [value]="testTool.category">
+                      {{testTool.category}}
+                    </mat-option>
+                    <mat-option>
+                      (<i class="fas fa-plus"></i>)&nbsp;&nbsp;{{'i18n_AddTool' | translate}}
+                    </mat-option>
+                  </ng-container>
+                  <ng-container *ngIf="item.value.field == 'name'">
+                    <mat-option *ngFor="let testName of toolNameData" [value]="testName.name">
+                      {{testName.name}}
+                    </mat-option>
+                  </ng-container>
+                </mat-select>
+              </mat-form-field>
+            </div>
+          </ng-container>
+          <ng-container *ngIf="item.value.field == 'delayTime'">
+            <div class="col-7" [formGroupName]="i">
+              <mat-form-field appearance="outline" class="form-field">
+                <input id="editDelaytime" type="number" matInput min="1" max="60" formControlName="inputVal" onkeydown="return false">
+                <i class="fas fa-minus-circle" onclick="this.parentNode.querySelector('input[type=number]').stepDown()" style="position: absolute;right: 15%;cursor: pointer;line-height: 36px;"></i>
+                <i class="fas fa-plus-circle" onclick="this.parentNode.querySelector('input[type=number]').stepUp()" style="position: absolute;right: 0%;cursor: pointer;line-height: 36px;"></i>
+              </mat-form-field>
+            </div>
+            <div class="col-1" style="align-self: center;">
+              &nbsp;Minute
+            </div>
+          </ng-container>
+          <ng-container *ngIf="item.value.field == 'repeated'">
+            <div class="col-1" [formGroupName]="i">
+              <mat-checkbox style="position: relative; top:0px;left: -15px;" formControlName="checked" [(ngModel)]="isRepeatChecked"></mat-checkbox>
+            </div>
+             <div *ngIf="isRepeatChecked" [formGroupName]="i" class="col-6" >
+              <mat-form-field appearance="outline" class="form-field">
+                <input id="editRepeat" type="number" matInput min="1" formControlName="inputVal">
+                <i class="fas fa-minus-circle" onclick="this.parentNode.querySelector('input[type=number]').stepDown()" style="position: absolute;right: 15%;cursor: pointer;line-height: 36px;"></i>
+                <i class="fas fa-plus-circle" onclick="this.parentNode.querySelector('input[type=number]').stepUp()" style="position: absolute;right: 0%;cursor: pointer;line-height: 36px;"></i>
+              </mat-form-field>
+             </div>
+          </ng-container>
+        </div>
+      </div>
+    </div>
+  </div>
+</ng-template>
+
+<ng-template #toolInfoDialog let-data>
+  <div [formGroup] = "toolInfoForm">
+    <div formArrayName="itemDef">
+      <div *ngFor="let item of $any(toolInfoForm.get('itemDef'))?.controls; let i = index; let last = last;">
+        <div class="row" style="padding-bottom: 3%;">
+          <div class="col-5 fileldCol">
+            <span>{{item.value.fieldName}}</span>
+          </div>
+          <ng-container >
+            <div class="col-6" [formGroupName]="i">
+              <mat-form-field appearance="outline" class="form-field">
+                <input matInput type="text" formControlName="inputVal" readonly>
+              </mat-form-field>
+            </div>
+          </ng-container>
+        </div>
+      </div>
+    </div>
+  </div>
+  </ng-template>
+
+  <ng-template #deviceToolDialog let-data>
+    <div [formGroup] = "toolInfoForm">
+      <div formArrayName="itemDef">
+        <div *ngFor="let item of $any(toolInfoForm.get('itemDef'))?.controls; let i = index; let last = last;">
+          <div class="row" style="padding-bottom: 3%;">
+            <div class="col-3 fileldCol">
+              <span>{{item.value.fieldName}}</span>
+            </div>
+            <ng-container >
+              <div class="col-9" [formGroupName]="i">
+                <mat-form-field *ngIf="item.value.field !=='logData'" appearance="outline" class="form-field">
+                  <input matInput type="text" formControlName="inputVal" readonly>
+                </mat-form-field>
+                <mat-form-field *ngIf="item.value.field ==='logData'" appearance="outline" class="form-field">
+                  <textarea matInput  rows="10" maxlength="100" type="text" formControlName="inputVal"></textarea>
+                </mat-form-field>
+              </div>
+            </ng-container>
+          </div>
+        </div>
+      </div>
+    </div>
+    </ng-template>

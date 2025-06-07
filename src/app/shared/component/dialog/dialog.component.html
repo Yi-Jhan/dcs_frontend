@@ -1,0 +1,86 @@
+
+<div class="dialog-container">
+  <div mat-dialog-title>
+    <i  class="fa-solid fa-xmark dialog-close"
+        mat-dialog-close matRipple
+        [matRippleCentered]="true"
+        [matRippleUnbounded]="true"
+        [matRippleRadius]="16">
+    </i>
+    <div>
+      <div class="dialog-title">{{title | translate}}</div>
+      @if (subtitle) {
+        <div class="dialog-subtitle">{{subtitle | translate}}</div>
+      }
+    </div>
+  </div>
+
+  <div mat-dialog-content [ngClass]="'dialog-'+size">
+    <ng-container appComponentHost></ng-container>
+    <ng-container>{{message}}</ng-container>
+  </div>
+
+  @if (buttons.length>0) {
+    <div mat-dialog-actions class="justify-content-center">
+
+    @for (button of buttons; track button.id) {
+      @switch (button.type) {
+        @case ('general') {
+          <button
+            mat-raised-button
+            [disabled]="button.disable"
+            [color]="button.status?button.status:status"
+            (click)="onClickButton(button)"
+          >
+            @if (button.icon) {
+              <i [ngClass]="button.icon"></i>
+            }
+            {{button.desc ? (button.desc | translate) : ('i18n_Submit' | translate)}}
+          </button>
+        }
+        @case ('close') {
+          <button
+            mat-raised-button
+            mat-dialog-close
+            [disabled]="button.disable"
+            [color]="button.status?button.status:status"
+            (click)="onClickButton(button)"
+          >
+            @if (button.icon) {
+              <i [ngClass]="button.icon"></i>
+            }
+            {{button.desc ? (button.desc | translate) : ('i18n_Close' | translate)}}
+          </button>
+        }
+        @case ('closeAll') {
+          <button
+            mat-raised-button
+            [disabled]="button.disable"
+            [color]="button.status?button.status:status"
+            (click)="onClickButton(button)"
+          >
+            @if (button.icon) {
+              <i [ngClass]="button.icon"></i>
+            }
+            {{button.desc ? (button.desc | translate) : ('i18n_Close' | translate)}}
+          </button>
+        }
+        @case ('cancel') {
+          <button
+            mat-stroked-button
+            mat-dialog-close
+            [disabled]="button.disable"
+            [color]="button.status?button.status:null"
+            (click)="onClickButton(button)"
+          >
+            @if (button.icon) {
+              <i [ngClass]="button.icon"></i>
+            }
+            {{button.desc ? (button.desc | translate) : ('i18n_Cancel' | translate)}}
+          </button>
+        }
+      }
+    }
+    </div>
+  }
+</div>

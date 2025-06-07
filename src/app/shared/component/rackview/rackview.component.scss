@@ -1,0 +1,1993 @@
+@mixin rack-theme($theme)
+{
+// .theme-dark{
+// .rack{
+//   width: 350px;
+//   height: auto;
+//   box-shadow: inset 0 4px 6px $dark-rack-border-color-1, 0 6px 10px $dark-rack-border-color-2;
+//   animation: rackTranslate 1s ease;
+//   flex: 0 0 18%;
+// }
+
+// @keyframes rackTranslate {
+//   0% {
+//     transform: translateX(30px);
+//   }
+//   100% {
+//     transform: translateX(-1px);
+//   }
+// }
+
+// .rack-div{
+//   height: 100%;
+//   border-style: solid;
+//   border-color: $dark-rack-border-color-1;
+//   border-width: 3px 12px;
+//   background-color: $dark-rack-border-color-1;
+//   width: 310px;
+// }
+
+// .rack-ul {
+//   margin: 0;
+//   padding: 0;
+//   display: block;
+//   width: 100%;
+//   height: 100%;
+//   list-style: none;
+// }
+
+// .rack_cabinet_title{
+//   border: 1px solid $dark-rack-border-color-3;
+//   text-align:center;
+//   height: 14px;
+//   font-family: Arial, sans-serif, 'Microsoft JhengHei';
+//   font-size: 12px;
+// }
+
+// .rack_node {
+//   border: 1px solid $dark-rack-border-color-3;
+//   cursor: pointer;
+//   font-size: 10.5px;
+//   height: 1.77vh;
+//   background-color: $dark-rack-border-color-2;
+//   position: relative;
+//   box-shadow: inset 0 4px 6px $dark-rack-border-color-1, 0 6px 10px $dark-rack-border-color-2;
+// }
+
+// .rack_nodeNum{
+//   position: relative;
+//   z-index: 2;
+//   top:30%;
+//   left: 1%;
+// }
+
+// .rack_node:hover {
+//   background-color: $dark-blue !important;
+// }
+
+// .tooltiptext {
+//   // visibility: hidden;
+//   // z-index: 999;
+//   // position: fixed;
+//   // min-width: 30px;
+//   // white-space:nowrap;
+//   // max-width: 350px;
+//   // padding: 5px 15px;
+//   // border-radius: 5px;
+//   // color: $dark-gray-300;
+//   // text-shadow: 0 1px 0 $dark-gray-900;
+//   // text-align: left;
+//   // line-height: 1.3;
+//   visibility: hidden;
+//   display:flex;
+//   flex-wrap: wrap;
+//   position:absolute;
+//   bottom: 3em;
+//   left: 2em;
+//   color:$dark-gray-700;
+//   border:2px solid $dark-gray-300;
+//   background:$dark-gray-100;
+//   border-radius: 5px;
+//   z-index: 99;
+// }
+
+// .tooltiptext_title{
+//   font-weight: bold;
+//   letter-spacing: .06em;
+//   font-size: 14px;
+//   text-transform: uppercase;
+//   flex: 0 0 65%;
+// }
+
+// .tooltiptext_content{
+//   font-size: 14px;
+
+//   &.Created {
+//     animation: cabinetTranslate 1s ease;
+//     color: $dark-secondary;
+//   }
+
+//   &.Processing {
+//     animation: cabinetTranslate 1s ease;
+//     color: $dark-primary;
+//   }
+
+//   &.Pass {
+//     animation: cabinetTranslate 1s ease;
+//     color: $dark-success;
+//   }
+
+//   &.Fail {
+//     animation: cabinetTranslate 1s ease;
+//     color: $dark-danger;
+//   }
+
+//   &.Connected {
+//     animation: cabinetTranslate 1s ease;
+//     color: $dark-success;
+//   }
+
+//   &.Disconnected {
+//     animation: cabinetTranslate 1s ease;
+//     color: $dark-danger;
+//   }
+// }
+
+// .rack_node:hover .tooltiptext {
+//   visibility: visible;
+//   display:flex;
+//   flex-wrap: wrap;
+//   position:absolute;
+//   bottom: 2em;
+//   left: 2em;
+//   color:$dark-gray-700;
+//   border:2px solid $dark-gray-300;
+//   background:$dark-gray-100;
+// }
+
+// .rack_nodeNodata {
+//   background-color: $dark-rack-border-color-2;
+//   height: 100%;
+// }
+
+// .rack_nodeNodata:hover {
+//   background-color: $dark-blue;
+// }
+
+// .rack_cabinet{
+//   position: relative;
+//   // left:3.3%;
+//   bottom:calc(60% / var(--ch));
+//   z-index: 1;
+//   height: calc(var(--ch) * 83% - 10%);
+//   // width: 95%;
+//   // width: 16vw;
+//   background-color: $dark-rack-border-color-1;
+//   ;
+// }
+
+// .rack_cabinet:hover {
+//   background-color: $dark-blue !important;
+// }
+
+// .rack_container_1 {
+//   display: grid;
+//   grid-template-columns: 1fr;
+//   grid-gap: 2px;
+
+//   div{
+//     background-color: $dark-rack-container-orange;
+//     aspect-ratio: var(--nr);
+//     height: 12px;
+//     width: 36px;
+//     left: 18px;
+//     position: relative;
+//     opacity: 0.8;
+//   }
+// }
+
+// .rack_container_2 {
+//   display: grid;
+//   grid-template-columns: 1fr 1fr 1fr 1fr;
+//   grid-gap: 2px;
+
+//   div{
+//     background-color: $dark-rack-container-blue;
+//     aspect-ratio: var(--nr);
+//     height: 12px;
+//     width: 36px;
+//   }
+// }
+
+// .rack_container_3 {
+//   display: grid;
+//   grid-template-columns: 1fr;
+//   grid-gap: 2px;
+
+//   div{
+//     background-color: $dark-rack-container-orange;
+//     aspect-ratio: calc(var(--nr) * 1.6);
+//     height: 12px;
+//     width: 50px;
+//     position: relative;
+//     left: 2px;
+//     opacity: 0.8;
+//   }
+// }
+
+// .rack_container_3_Lnode {
+//   display: grid;
+//   grid-template-columns: 1fr;
+//   grid-gap: 2px;
+
+//   div{
+//     background-color: $dark-rack-container-orange;
+//     aspect-ratio: calc(var(--nr) * 1.6);
+//     height: 12px;
+//     width: 36px;
+//     position: relative;
+//     left: 4px;
+//     opacity: 0.8;
+//   }
+// }
+
+// .rack_container_3_Rnode {
+//   display: grid;
+//   grid-template-columns: 1fr;
+//   grid-gap: 2px;
+
+//   div{
+//     background-color: $dark-rack-container-orange;
+//     aspect-ratio: calc(var(--nr) * 1.6);
+//     height: 12px;
+//     width: 50px;
+//     position: relative;
+//     left: 2px;
+//     opacity: 0.8;
+//   }
+// }
+
+// @keyframes blinker {
+//     50% {
+//       opacity: 0;
+//     }
+//   }
+
+//   @keyframes delay-animation {
+//     0% {
+//       opacity: 1;
+//     }
+//     50% {
+//       opacity: 1;
+//     }
+//     50.01% {
+//       opacity: 0;
+//     }
+//     100% {
+//       opacity: 0;
+//     }
+//   }
+
+//   @keyframes flashing {
+//     from {
+//       transform: scale(0.5);
+//       opacity: 1;
+//     }
+
+//     to {
+//       transform: scale(1.5);
+//       opacity: 0;
+//     }
+//   }
+
+// .onlineLight::before{
+//   content: '';
+//   margin: auto;
+//   position: absolute;
+//   top: 0;
+//   bottom: 0;
+//   width: 16px;
+//   height: 16px;
+//   background: $dark-green;
+//   border-radius: 50%;
+//   right: -4px;
+//   animation: flashing 1.5s infinite ease-in;
+// }
+
+// .onlineLight {
+//   margin: auto;
+//   position: absolute;
+//   top: 0;
+//   bottom: 0;
+//   width: 8px;
+//   height: 8px;
+//   background: $dark-green;
+//   border-radius: 50%;
+//   right: 5px;
+//   // animation: delay-animation 2s linear infinite,
+//   // blinker 0.5s linear infinite;
+//   box-shadow: 0px 0px 4px 1px $dark-green;
+// }
+
+// .onlineLightLnode::before{
+//   content: '';
+//   margin: auto;
+//   position: absolute;
+//   top: 0;
+//   bottom: 0;
+//   width: 16px;
+//   height: 16px;
+//   background: $dark-green;
+//   border-radius: 50%;
+//   right: -4px;
+//   animation: flashing 1.5s infinite ease-in;
+// }
+
+// .onlineLightLnode {
+//   margin: auto;
+//   position: absolute;
+//   top: calc(var(--ru) * (-25));
+//   bottom: calc(var(--rb) * var(--rb) * -0.8px);
+//   width: 8px;
+//   height: 8px;
+//   background: $dark-green;
+//   border-radius: 50%;
+//   left: -12px;
+//   // animation: delay-animation 2s linear infinite,
+//   // blinker 0.5s linear infinite;
+//   box-shadow: 0px 0px 4px 1px $dark-green;
+// }
+
+// .onlineLightRnode::before{
+//   content: '';
+//   margin: auto;
+//   position: absolute;
+//   top: 0;
+//   bottom: 0;
+//   width: 16px;
+//   height: 16px;
+//   background: $dark-green;
+//   border-radius: 50%;
+//   right: -4px;
+//   animation: flashing 1.5s infinite ease-in;
+// }
+
+// .onlineLightRnode {
+//   margin: auto;
+//   position: absolute;
+//   top: calc(var(--ru) * (-25));
+//   bottom: calc(var(--rb) * var(--rb) * -0.8px);
+//   width: 8px;
+//   height: 8px;
+//   background: $dark-green;
+//   border-radius: 50%;
+//   right: 6px;
+//   // animation: delay-animation 2s linear infinite,
+//   // blinker 0.5s linear infinite;
+//   box-shadow: 0px 0px 4px 1px $dark-green;
+// }
+
+// .offlineLight::before{
+//   content: '';
+//   margin: auto;
+//   position: absolute;
+//   top: 0;
+//   bottom: 0;
+//   width: 16px;
+//   height: 16px;
+//   background: $dark-red;
+//   border-radius: 50%;
+//   right: -4px;
+//   animation: flashing 1s infinite ease-in;
+// }
+
+// .offlineLight {
+//   margin: auto;
+//   position: absolute;
+//   top: 0;
+//   bottom: 0;
+//   width: 8px;
+//   height: 8px;
+//   right: 5px;
+//   background: $dark-red;
+//   border-radius: 50%;
+//   // animation: blinker 0.5s linear infinite;
+//   box-shadow: 0px 0px 4px 1px $dark-red;
+// }
+
+// .offlineLightLnode::before{
+//   content: '';
+//   margin: auto;
+//   position: absolute;
+//   top: 0;
+//   bottom: 0;
+//   width: 16px;
+//   height: 16px;
+//   background: $dark-red;
+//   border-radius: 50%;
+//   right: -4px;
+//   animation: flashing 1s infinite ease-in;
+// }
+
+// .offlineLightLnode {
+//   margin: auto;
+//   position: absolute;
+//   top: calc(var(--ru) * (-25));
+//   bottom: calc(var(--rb) * var(--rb) * -0.8px);
+//   width: 8px;
+//   height: 8px;
+//   left: -12px;
+//   background: $dark-red;
+//   border-radius: 50%;
+//   // animation: blinker 0.5s linear infinite;
+//   box-shadow: 0px 0px 4px 1px $dark-red;
+// }
+
+// .offlineLightRnode::before{
+//   content: '';
+//   margin: auto;
+//   position: absolute;
+//   top: 0;
+//   bottom: 0;
+//   width: 16px;
+//   height: 16px;
+//   background: $dark-red;
+//   border-radius: 50%;
+//   right: -4px;
+//   animation: flashing 1s infinite ease-in;
+// }
+
+// .offlineLightRnode {
+//   margin: auto;
+//   position: absolute;
+//   top: calc(var(--ru) * (-25));
+//   bottom: calc(var(--rb) * var(--rb) * -0.8px);
+//   width: 8px;
+//   height: 8px;
+//   right: 6px;
+//   background: $dark-red;
+//   border-radius: 50%;
+//   // animation: blinker 0.5s linear infinite;
+//   box-shadow: 0px 0px 4px 1px $dark-red;
+// }
+
+// .connectionLightOff{
+//   margin: auto;
+//   position: absolute;
+//   top: 0;
+//   bottom: 0;
+//   width: 8px;
+//   height: 8px;
+//   right: 5px;
+//   background: $dark-gray-600;
+//   border-radius: 50%;
+// }
+
+// .connectionLightOffLnode{
+//   margin: auto;
+//   position: absolute;
+//   top: calc(var(--ru) * (-25));
+//   bottom: calc(var(--rb) * var(--rb) * -0.8px);
+//   width: 8px;
+//   height: 8px;
+//   left: -12px;
+//   background: $dark-gray-600;
+//   border-radius: 50%;
+// }
+
+// .connectionLightOffRnode{
+//   margin: auto;
+//   position: absolute;
+//   top: calc(var(--ru) * (-25));
+//   bottom: calc(var(--rb) * var(--rb) * -0.8px);
+//   width: 8px;
+//   height: 8px;
+//   right: 6px;
+//   background: $dark-gray-600;
+//   border-radius: 50%;
+// }
+
+// .taskLightOn {
+//   margin: auto;
+//   position: absolute;
+//   bottom: 2px;
+//   width: 8px;
+//   height: 8px;
+//   right: 35px;
+//   border-radius: 50%;
+//   // animation: blinker 0.5s linear infinite;
+//   z-index: 99;
+
+//   &.Created {
+//     background: $dark-secondary;
+//   }
+
+//   &.Processing {
+//     background: $dark-primary;
+//   }
+
+//   &.Pass {
+//     background: $dark-success;
+//   }
+
+//   &.Fail {
+//     background: $dark-danger;
+//   }
+// }
+
+// .taskLightOnLnode {
+//   margin: auto;
+//   position: absolute;
+//   bottom: calc(var(--rb) * var(--rb) * -0.8px);
+//   width: 8px;
+//   height: 8px;
+//   left: 10px;
+//   border-radius: 50%;
+//   // animation: blinker 0.5s linear infinite;
+//   top: calc(var(--ru) * (-25));
+//   z-index: 99;
+
+//   &.Created {
+//     background: $dark-secondary;
+//   }
+
+//   &.Processing {
+//     background: $dark-primary;
+//   }
+
+//   &.Pass {
+//     background: $dark-success;
+//   }
+
+//   &.Fail {
+//     background: $dark-danger;
+//   }
+// }
+
+// .taskLightOnRnode {
+//   margin: auto;
+//   position: absolute;
+//   bottom: calc(var(--rb) * var(--rb) * -0.8px);
+//   width: 8px;
+//   height: 8px;
+//   right: 35px;
+//   border-radius: 50%;
+//   // animation: blinker 0.5s linear infinite;
+//   top: calc(var(--ru) * (-25));
+//   z-index: 99;
+
+//   &.Created {
+//     background: $dark-secondary;
+//   }
+
+//   &.Processing {
+//     background: $dark-primary;
+//   }
+
+//   &.Pass {
+//     background: $dark-success;
+//   }
+
+//   &.Fail {
+//     background: $dark-danger;
+//   }
+// }
+
+// .locatorLightOn::before {
+//   content: '';
+//   margin: auto;
+//   position: absolute;
+//   bottom: -4px;
+//   width: 8px;
+//   height: 8px;
+//   right: -1px;
+//   background: $dark-rack-indicator-locator;
+//   border-radius: 50%;
+//   z-index: 99;
+//   animation: flashing 1s infinite ease-in;
+// }
+
+// .locatorLightOn {
+//   margin: auto;
+//   position: absolute;
+//   bottom: 2px;
+//   width: 6px;
+//   height: 6px;
+//   right: 50px;
+//   background: $dark-rack-indicator-locator;
+//   border-radius: 50%;
+//   z-index: 99;
+// }
+
+// .locatorLightOnLnode::before {
+//   content: '';
+//   margin: auto;
+//   position: absolute;
+//   top: 0;
+//   bottom: 0;
+//   width: 8px;
+//   height: 8px;
+//   left: -1px;
+//   background: $dark-rack-indicator-locator;
+//   border-radius: 50%;
+//   z-index: 99;
+//   animation: flashing 1s infinite ease-in;
+// }
+
+// .locatorLightOnLnode {
+//   margin: auto;
+//   position: absolute;
+//   bottom: calc(var(--rb) * var(--rb) * -0.8px);
+//   width: 6px;
+//   height: 6px;
+//   left: 24px;
+//   background: $dark-rack-indicator-locator;
+//   border-radius: 50%;
+//   top: calc(var(--ru) * (-25));
+//   z-index: 99;
+// }
+
+// .locatorLightOnRnode::before {
+//   content: '';
+//   margin: auto;
+//   position: absolute;
+//   top: 0;
+//   bottom: 0;
+//   width: 8px;
+//   height: 8px;
+//   right: -1px;
+//   background: $dark-rack-indicator-locator;
+//   border-radius: 50%;
+//   z-index: 99;
+//   animation: flashing 1s infinite ease-in;
+// }
+
+// .locatorLightOnRnode {
+//   margin: auto;
+//   position: absolute;
+//   bottom: calc(var(--rb) * var(--rb) * -0.8px);
+//   width: 6px;
+//   height: 6px;
+//   right: 50px;
+//   background: $dark-rack-indicator-locator;
+//   border-radius: 50%;
+//   top: calc(var(--ru) * (-25));
+//   z-index: 99;
+// }
+
+// }
+
+// .theme-light{
+//   .rack{
+//     width: 350px;
+//     height: auto;
+//     box-shadow: inset 0 4px 6px $light-rack-border-color-1, 0 6px 10px $light-rack-border-color-2;
+//     animation: rackTranslate 1s ease;
+//     flex: 0 0 18%;
+//   }
+
+//   @keyframes rackTranslate {
+//     0% {
+//       transform: translateX(30px);
+//     }
+//     100% {
+//       transform: translateX(-1px);
+//     }
+//   }
+
+//   .rack-div{
+//     height: 100%;
+//     border-style: solid;
+//     border-color: $light-rack-border-color-1;
+//     border-width: 3px 12px;
+//     background-color: $light-rack-border-color-1;
+//     color:$white;
+//     width: 310px;
+//   }
+
+//   .rack-ul {
+//     margin: 0;
+//     padding: 0;
+//     display: block;
+//     width: 100%;
+//     height: 100%;
+//     list-style: none;
+//   }
+
+//   .rack_cabinet_title{
+//     border: 1px solid $light-rack-border-color-3;
+//     text-align:center;
+//     height: 14px;
+//     font-family: Arial, sans-serif, 'Microsoft JhengHei';
+//     font-size: 12px;
+//   }
+
+//   .rack_node {
+//     border: 1px solid $light-rack-border-color-3;
+//     cursor: pointer;
+//     font-size: 10.5px;
+//     height:1.77vh;
+//     background-color: $dark-rack-border-color-2;
+//     position: relative;
+//     box-shadow: inset 0 4px 6px $light-rack-border-color-1, 0 6px 10px $light-rack-border-color-2;
+//   }
+
+//   .rack_nodeNum{
+//     position: relative;
+//     z-index: 2;
+//     top:30%;
+//     left: 1%;
+//   }
+
+//   .rack_node:hover {
+//     background-color: $light-blue !important;
+//   }
+
+//   .tooltiptext {
+//     // visibility: hidden;
+//     // z-index: 999;
+//     // position: absolute;
+//     // min-width: 30px;
+//     // white-space:nowrap;
+//     // max-width: 350px;
+//     // padding: 5px 15px;
+//     // border-radius: 5px;
+//     // color: $white;
+//     // text-shadow: 0 1px 0 $light-rack-border-color-2;
+//     // text-align: left;
+//     // line-height: 1.3;
+//     visibility: hidden;
+//     display:flex;
+//     flex-wrap: wrap;
+//     position:absolute;
+//     bottom: 3em;
+//     left: 2em;
+//     color:$dark-gray-700;
+//     border:2px solid $dark-gray-300;
+//     background:$dark-gray-100;
+//     border-radius: 5px;
+//     z-index: 99;
+//   }
+
+//   .tooltiptext_title{
+//     font-weight: bold;
+//     letter-spacing: .06em;
+//     font-size: 14px;
+//     text-transform: uppercase;
+//     flex: 0 0 65%;
+//   }
+
+//   .tooltiptext_content{
+//     font-size: 14px;
+
+//     &.Created {
+//       animation: cabinetTranslate 1s ease;
+//       color: $light-secondary;
+//     }
+
+//     &.Processing {
+//       animation: cabinetTranslate 1s ease;
+//       color: $light-primary;
+//     }
+
+//     &.Pass {
+//       animation: cabinetTranslate 1s ease;
+//       color: $light-success;
+//     }
+
+//     &.Fail {
+//       animation: cabinetTranslate 1s ease;
+//       color: $light-danger;
+//     }
+
+//     &.Connected {
+//       animation: cabinetTranslate 1s ease;
+//       color: $dark-success;
+//     }
+
+//     &.Disconnected {
+//       animation: cabinetTranslate 1s ease;
+//       color: $dark-danger;
+//     }
+//   }
+
+//   .rack_node:hover .tooltiptext {
+//     visibility: visible;
+//     display:flex;
+//     flex-wrap: wrap;
+//     position:absolute;
+//     bottom: 2em;
+//     left: 2em;
+//     color:$light-rack-border-color-2;
+//     border:2px solid $light-gray-300;
+//     background:$white;
+//   }
+
+//   .rack_nodeNodata {
+//     background-color: $light-rack-border-color-2;
+//     height: 100%;
+//   }
+
+//   .rack_nodeNodata:hover {
+//     background-color: $light-blue;
+//   }
+
+//   .rack_cabinet{
+//     position: relative;
+//     // left:3.3%;
+//     bottom:calc(60% / var(--ch));
+//     z-index: 1;
+//     height: calc(var(--ch) * 83% - 10%);
+//     // width: 100%;
+//     background-color: $light-rack-border-color-1;
+//     ;
+//   }
+
+//   .rack_cabinet:hover {
+//     background-color: $dark-blue !important;
+//   }
+
+//   .rack_container_1 {
+//     display: grid;
+//     grid-template-columns: 1fr;
+//     grid-gap: 2px;
+
+//     div{
+//       background-color: $dark-rack-container-orange;
+//       aspect-ratio: var(--nr);
+//       height: 12px;
+//       width: 36px;
+//       left: 18px;
+//       position: relative;
+//       opacity: 0.8;
+//     }
+//   }
+
+//   .rack_container_2 {
+//     display: grid;
+//     grid-template-columns: 1fr 1fr 1fr 1fr;
+//     grid-gap: 2px;
+
+//     div{
+//       background-color: $light-rack-container-blue;
+//       aspect-ratio: var(--nr);
+//       height: 12px;
+//       width: 36px;
+//     }
+//   }
+
+//   .rack_container_3 {
+//     display: grid;
+//     grid-template-columns: 1fr;
+//     grid-gap: 2px;
+
+//     div{
+//       background-color: $light-rack-container-orange;
+//       aspect-ratio: calc(var(--nr) * 1.6);
+//       height: 12px;
+//       width: 50px;
+//       position: relative;
+//       left: 2px;
+//       opacity: 0.8;
+//     }
+//   }
+
+//   .rack_container_3_Lnode {
+//     display: grid;
+//     grid-template-columns: 1fr;
+//     grid-gap: 2px;
+
+//     div{
+//       background-color: $light-rack-container-orange;
+//       aspect-ratio: calc(var(--nr) * 1.6);
+//       height: 12px;
+//       width: 36px;
+//       position: relative;
+//       left: 4px;
+//       opacity: 0.8;
+//     }
+//   }
+
+//   .rack_container_3_Rnode {
+//     display: grid;
+//     grid-template-columns: 1fr;
+//     grid-gap: 2px;
+
+//     div{
+//       background-color: $light-rack-container-orange;
+//       aspect-ratio: calc(var(--nr) * 1.6);
+//       height: 12px;
+//       width: 50px;
+//       position: relative;
+//       left: 2px;
+//       opacity: 0.8;
+//     }
+//   }
+
+//   @keyframes blinker {
+//       50% {
+//         opacity: 0;
+//       }
+//     }
+
+//     @keyframes delay-animation {
+//       0% {
+//         opacity: 1;
+//       }
+//       50% {
+//         opacity: 1;
+//       }
+//       50.01% {
+//         opacity: 0;
+//       }
+//       100% {
+//         opacity: 0;
+//       }
+//     }
+
+//     @keyframes flashing {
+//       from {
+//         transform: scale(0.5);
+//         opacity: 1;
+//       }
+
+//       to {
+//         transform: scale(1.5);
+//         opacity: 0;
+//       }
+//     }
+
+//     .onlineLight::before{
+//       content: '';
+//       margin: auto;
+//       position: absolute;
+//       top: 0;
+//       bottom: 0;
+//       width: 16px;
+//       height: 16px;
+//       background: $light-green;
+//       border-radius: 50%;
+//       right: -4px;
+//       animation: flashing 1.5s infinite ease-in;
+//     }
+
+//     .onlineLight {
+//       margin: auto;
+//       position: absolute;
+//       top: 0;
+//       bottom: 0;
+//       width: 8px;
+//       height: 8px;
+//       background: $light-green;
+//       border-radius: 50%;
+//       right: 5px;
+//       // animation: delay-animation 2s linear infinite,
+//       // blinker 0.5s linear infinite;
+//       box-shadow: 0px 0px 4px 1px $light-green;
+//     }
+
+//     .onlineLightLnode::before{
+//       content: '';
+//       margin: auto;
+//       position: absolute;
+//       top: 0;
+//       bottom: 0;
+//       width: 16px;
+//       height: 16px;
+//       background: $light-green;
+//       border-radius: 50%;
+//       right: -4px;
+//       animation: flashing 1.5s infinite ease-in;
+//     }
+
+//     .onlineLightLnode {
+//       margin: auto;
+//       position: absolute;
+//       top: calc(var(--ru) * (-25));
+//       bottom: calc(var(--rb) * var(--rb) * -0.8px);
+//       width: 8px;
+//       height: 8px;
+//       background: $light-green;
+//       border-radius: 50%;
+//       left: -12px;
+//       // animation: delay-animation 2s linear infinite,
+//       // blinker 0.5s linear infinite;
+//       box-shadow: 0px 0px 4px 1px $dark-green;
+//     }
+
+//     .onlineLightRnode::before{
+//       content: '';
+//       margin: auto;
+//       position: absolute;
+//       top: 0;
+//       bottom: 0;
+//       width: 16px;
+//       height: 16px;
+//       background: $light-green;
+//       border-radius: 50%;
+//       right: -4px;
+//       animation: flashing 1.5s infinite ease-in;
+//     }
+
+//     .onlineLightRnode {
+//       margin: auto;
+//       position: absolute;
+//       top: calc(var(--ru) * (-25));
+//       bottom: calc(var(--rb) * var(--rb) * -0.8px);
+//       width: 8px;
+//       height: 8px;
+//       background: $light-green;
+//       border-radius: 50%;
+//       right: 6px;
+//       // animation: delay-animation 2s linear infinite,
+//       // blinker 0.5s linear infinite;
+//       box-shadow: 0px 0px 4px 1px $light-green;
+//     }
+
+//     .offlineLight::before{
+//       content: '';
+//       margin: auto;
+//       position: absolute;
+//       top: 0;
+//       bottom: 0;
+//       width: 16px;
+//       height: 16px;
+//       background: $light-red;
+//       border-radius: 50%;
+//       right: -4px;
+//       animation: flashing 1s infinite ease-in;
+//     }
+
+//     .offlineLight {
+//       margin: auto;
+//       position: absolute;
+//       top: 0;
+//       bottom: 0;
+//       width: 8px;
+//       height: 8px;
+//       right: 5px;
+//       background: $light-red;
+//       border-radius: 50%;
+//       // animation: blinker 0.5s linear infinite;
+//       box-shadow: 0px 0px 4px 1px $light-red;
+//     }
+
+//     .offlineLightLnode::before{
+//       content: '';
+//       margin: auto;
+//       position: absolute;
+//       top: 0;
+//       bottom: 0;
+//       width: 16px;
+//       height: 16px;
+//       background: $light-red;
+//       border-radius: 50%;
+//       right: -4px;
+//       animation: flashing 1s infinite ease-in;
+//     }
+
+//     .offlineLightLnode {
+//       margin: auto;
+//       position: absolute;
+//       top: calc(var(--ru) * (-25));
+//       bottom: calc(var(--rb) * var(--rb) * -0.8px);
+//       width: 8px;
+//       height: 8px;
+//       left: -12px;
+//       background: $light-red;
+//       border-radius: 50%;
+//       // animation: blinker 0.5s linear infinite;
+//       box-shadow: 0px 0px 4px 1px $light-red;
+//     }
+
+//     .offlineLightRnode::before{
+//       content: '';
+//       margin: auto;
+//       position: absolute;
+//       top: 0;
+//       bottom: 0;
+//       width: 16px;
+//       height: 16px;
+//       background: $light-red;
+//       border-radius: 50%;
+//       right: -4px;
+//       animation: flashing 1s infinite ease-in;
+//     }
+
+//     .offlineLightRnode {
+//       margin: auto;
+//       position: absolute;
+//       top: calc(var(--ru) * (-25));
+//       bottom: calc(var(--rb) * var(--rb) * -0.8px);
+//       width: 8px;
+//       height: 8px;
+//       right: 6px;
+//       background: $light-red;
+//       border-radius: 50%;
+//       // animation: blinker 0.5s linear infinite;
+//       box-shadow: 0px 0px 4px 1px $light-red;
+//     }
+
+//     .connectionLightOff{
+//       margin: auto;
+//       position: absolute;
+//       top: 0;
+//       bottom: 0;
+//       width: 8px;
+//       height: 8px;
+//       right: 5px;
+//       background: $light-gray-600;
+//       border-radius: 50%;
+//     }
+
+//     .connectionLightOffLnode{
+//       margin: auto;
+//       position: absolute;
+//       top: calc(var(--ru) * (-25));
+//       bottom: calc(var(--rb) * var(--rb) * -0.8px);
+//       width: 8px;
+//       height: 8px;
+//       left: -12px;
+//       background: $light-gray-600;
+//       border-radius: 50%;
+//     }
+
+//     .connectionLightOffRnode{
+//       margin: auto;
+//       position: absolute;
+//       top: calc(var(--ru) * (-25));
+//       bottom: calc(var(--rb) * var(--rb) * -0.8px);
+//       width: 8px;
+//       height: 8px;
+//       right: 6px;
+//       background: $light-gray-600;
+//       border-radius: 50%;
+//     }
+
+//     .taskLightOn {
+//       margin: auto;
+//       position: absolute;
+//       bottom: 2px;
+//       width: 8px;
+//       height: 8px;
+//       right: 35px;
+//       background: $light-yellow;
+//       border-radius: 50%;
+//       // animation: blinker 0.5s linear infinite;
+//       z-index: 99;
+
+//       &.Created {
+//         background: $light-secondary;
+//       }
+
+//       &.Processing {
+//         background: $light-primary;
+//       }
+
+//       &.Pass {
+//         background: $light-success;
+//       }
+
+//       &.Fail {
+//         background: $light-danger;
+//       }
+//     }
+
+//     .taskLightOnLnode {
+//       margin: auto;
+//       position: absolute;
+//       bottom: calc(var(--rb) * var(--rb) * -0.8px);
+//       width: 8px;
+//       height: 8px;
+//       left: 10px;
+//       border-radius: 50%;
+//       // animation: blinker 0.5s linear infinite;
+//       top: calc(var(--ru) * (-25));
+//       z-index: 99;
+
+//       &.Created {
+//         background: $light-secondary;
+//       }
+
+//       &.Processing {
+//         background: $light-primary;
+//       }
+
+//       &.Pass {
+//         background: $light-success;
+//       }
+
+//       &.Fail {
+//         background: $light-danger;
+//       }
+//     }
+
+//     .taskLightOnRnode {
+//       margin: auto;
+//       position: absolute;
+//       bottom: calc(var(--rb) * var(--rb) * -0.8px);
+//       width: 8px;
+//       height: 8px;
+//       right: 35px;
+//       border-radius: 50%;
+//       // animation: blinker 0.5s linear infinite;
+//       top: calc(var(--ru) * (-25));
+//       z-index: 99;
+
+//       &.Created {
+//         background: $light-secondary;
+//       }
+
+//       &.Processing {
+//         background: $light-primary;
+//       }
+
+//       &.Pass {
+//         background: $light-success;
+//       }
+
+//       &.Fail {
+//         background: $light-danger;
+//       }
+//     }
+
+//     .locatorLightOn::before {
+//       content: '';
+//       margin: auto;
+//       position: absolute;
+//       bottom: -4px;
+//       width: 8px;
+//       height: 8px;
+//       right: -1px;
+//       background: $light-rack-indicator-locator;
+//       border-radius: 50%;
+//       z-index: 99;
+//       animation: flashing 1s infinite ease-in;
+//     }
+
+//     .locatorLightOn {
+//       margin: auto;
+//       position: absolute;
+//       bottom: 2px;
+//       width: 6px;
+//       height: 6px;
+//       right: 50px;
+//       background: $light-rack-indicator-locator;
+//       border-radius: 50%;
+//       z-index: 99;
+//     }
+
+//     .locatorLightOnLnode::before {
+//       content: '';
+//       margin: auto;
+//       position: absolute;
+//       top: 0;
+//       bottom: 0;
+//       width: 8px;
+//       height: 8px;
+//       left: -1px;
+//       background: $light-rack-indicator-locator;
+//       border-radius: 50%;
+//       z-index: 99;
+//       animation: flashing 1s infinite ease-in;
+//     }
+
+//     .locatorLightOnLnode {
+//       margin: auto;
+//       position: absolute;
+//       bottom: calc(var(--rb) * var(--rb) * -0.8px);
+//       width: 6px;
+//       height: 6px;
+//       left: 24px;
+//       background: $light-rack-indicator-locator;
+//       border-radius: 50%;
+//       top: calc(var(--ru) * (-25));
+//       z-index: 99;
+//     }
+
+//     .locatorLightOnRnode::before {
+//       content: '';
+//       margin: auto;
+//       position: absolute;
+//       top: 0;
+//       bottom: 0;
+//       width: 8px;
+//       height: 8px;
+//       right: -1px;
+//       background: $light-rack-indicator-locator;
+//       border-radius: 50%;
+//       z-index: 99;
+//       animation: flashing 1s infinite ease-in;
+//     }
+
+//     .locatorLightOnRnode {
+//       margin: auto;
+//       position: absolute;
+//       bottom: calc(var(--rb) * var(--rb) * -0.8px);
+//       width: 6px;
+//       height: 6px;
+//       right: 50px;
+//       background: $light-rack-indicator-locator;
+//       border-radius: 50%;
+//       top: calc(var(--ru) * (-25));
+//       z-index: 99;
+//     }
+
+//   }
+
+  .rack{
+    width: 350px;
+    height: auto;
+    // box-shadow: inset 0 4px 6px $dark-rack-border-color-1, 0 6px 10px $dark-rack-border-color-2;
+    box-shadow: inset 0 4px 6px map-get($theme , rack-border-color-1 ), 0 6px 10px map-get($theme , rack-border-color-2 );
+    animation: rackTranslate 1s ease;
+    flex: 0 0 18%;
+  }
+
+  @keyframes rackTranslate {
+    0% {
+      transform: translateX(30px);
+    }
+    100% {
+      transform: translateX(-1px);
+    }
+  }
+
+  .rack-div{
+    height: 100%;
+    border-style: solid;
+    // border-color: $dark-rack-border-color-1;
+    border-color: map-get($theme , rack-border-color-1 );
+    border-width: 3px 12px;
+    // background-color: $dark-rack-border-color-1;
+    background-color: map-get($theme , rack-border-color-1 );
+    width: 310px;
+  }
+
+  .rack-ul {
+    margin: 0;
+    padding: 0;
+    display: block;
+    width: 100%;
+    height: 100%;
+    list-style: none;
+  }
+
+  .rack_cabinet_title{
+    // border: 1px solid $dark-rack-border-color-3;
+    border: 1px solid map-get($theme, rack-border-color-3 );
+    text-align:center;
+    height: 14px;
+    font-family: Arial, sans-serif, 'Microsoft JhengHei';
+    font-size: 12px;
+  }
+
+  .rack_node {
+    // border: 1px solid $dark-rack-border-color-3;
+    border: 1px solid map-get($theme, rack-border-color-3 );
+    cursor: pointer;
+    font-size: 10.5px;
+    height: 1.77vh;
+    // background-color: $dark-rack-border-color-2;
+    background-color:map-get($theme, rack-border-color-2 );
+    position: relative;
+    // box-shadow: inset 0 4px 6px $dark-rack-border-color-1, 0 6px 10px $dark-rack-border-color-2;
+    box-shadow: inset 0 4px 6px map-get($theme, rack-border-color-1 ), 0 6px 10px map-get($theme, rack-border-color-2 );
+    color: $white;
+  }
+
+  .rack_nodeNum{
+    position: relative;
+    z-index: 2;
+    top:30%;
+    left: 1%;
+  }
+
+  .rack_node:hover {
+    background-color: $dark-blue !important;
+  }
+
+  .tooltiptext {
+    // visibility: hidden;
+    // z-index: 999;
+    // position: fixed;
+    // min-width: 30px;
+    // white-space:nowrap;
+    // max-width: 350px;
+    // padding: 5px 15px;
+    // border-radius: 5px;
+    // color: $dark-gray-300;
+    // text-shadow: 0 1px 0 $dark-gray-900;
+    // text-align: left;
+    // line-height: 1.3;
+    visibility: hidden;
+    display:flex;
+    flex-wrap: wrap;
+    position:absolute;
+    bottom: 3em;
+    left: 2em;
+    color:$dark-gray-700;
+    border:2px solid $dark-gray-300;
+    background:$dark-gray-100;
+    border-radius: 5px;
+    z-index: 99;
+  }
+
+  .tooltiptext_title{
+    font-weight: bold;
+    letter-spacing: .06em;
+    font-size: 14px;
+    text-transform: uppercase;
+    flex: 0 0 65%;
+  }
+
+  .tooltiptext_content{
+    font-size: 14px;
+
+    &.Created {
+      animation: cabinetTranslate 1s ease;
+      color: $dark-secondary;
+    }
+
+    &.Processing {
+      animation: cabinetTranslate 1s ease;
+      color: $dark-blue;
+    }
+
+    &.Pass {
+      animation: cabinetTranslate 1s ease;
+      color: $dark-success;
+    }
+
+    &.Fail {
+      animation: cabinetTranslate 1s ease;
+      color: $dark-danger;
+    }
+
+    &.Connected {
+      animation: cabinetTranslate 1s ease;
+      color: $dark-success;
+    }
+
+    &.Disconnected {
+      animation: cabinetTranslate 1s ease;
+      color: $dark-danger;
+    }
+  }
+
+  .rack_node:hover .tooltiptext {
+    visibility: visible;
+    display:flex;
+    flex-wrap: wrap;
+    position:absolute;
+    bottom: 2em;
+    left: 2em;
+    color:$dark-gray-700;
+    border:2px solid $dark-gray-300;
+    background:$dark-gray-100;
+  }
+
+  .rack_nodeNodata {
+    // background-color: $dark-rack-border-color-2;
+    background-color: map-get($theme, rack-border-color-2 );
+    height: 100%;
+  }
+
+  .rack_nodeNodata:hover {
+    background-color: $dark-blue;
+  }
+
+  .rack_cabinet{
+    position: relative;
+    // left:3.3%;
+    bottom:calc(60% / var(--ch));
+    z-index: 1;
+    height: calc(var(--ch) * 83% - 10%);
+    // width: 95%;
+    // width: 16vw;
+    // background-color: $dark-rack-border-color-1;
+    background-color:map-get($theme, rack-border-color-1 );
+    ;
+  }
+
+  .rack_cabinet:hover {
+    background-color: $dark-blue !important;
+  }
+
+  .rack_container_1 {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-gap: 2px;
+
+    div{
+      // background-color: $dark-rack-container-orange;
+      background-color: map-get($theme, rack-container-orange );
+      aspect-ratio: var(--nr);
+      height: 12px;
+      width: 36px;
+      left: 18px;
+      position: relative;
+      opacity: 0.8;
+    }
+  }
+
+  .rack_container_2 {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-gap: 2px;
+
+    div{
+      // background-color: $dark-rack-container-blue;
+      background-color: map-get($theme, rack-container-blue);
+      aspect-ratio: var(--nr);
+      height: 12px;
+      width: 36px;
+    }
+  }
+
+  .rack_container_3 {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-gap: 2px;
+
+    div{
+      // background-color: $dark-rack-container-orange;
+      background-color: map-get($theme, rack-container-orange );
+      aspect-ratio: calc(var(--nr) * 1.6);
+      height: 12px;
+      width: 50px;
+      position: relative;
+      left: 2px;
+      opacity: 0.8;
+    }
+  }
+
+  .rack_container_3_Lnode {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-gap: 2px;
+
+    div{
+      // background-color: $dark-rack-container-orange;
+      background-color: map-get($theme, rack-container-orange );
+      aspect-ratio: calc(var(--nr) * 1.6);
+      height: 12px;
+      width: 36px;
+      position: relative;
+      left: 4px;
+      opacity: 0.8;
+    }
+  }
+
+  .rack_container_3_Rnode {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-gap: 2px;
+
+    div{
+      // background-color: $dark-rack-container-orange;
+      background-color: map-get($theme, rack-container-orange );
+      aspect-ratio: calc(var(--nr) * 1.6);
+      height: 12px;
+      width: 50px;
+      position: relative;
+      left: 2px;
+      opacity: 0.8;
+    }
+  }
+
+  @keyframes blinker {
+      50% {
+        opacity: 0;
+      }
+    }
+
+    @keyframes delay-animation {
+      0% {
+        opacity: 1;
+      }
+      50% {
+        opacity: 1;
+      }
+      50.01% {
+        opacity: 0;
+      }
+      100% {
+        opacity: 0;
+      }
+    }
+
+    @keyframes flashing {
+      from {
+        transform: scale(0.5);
+        opacity: 1;
+      }
+
+      to {
+        transform: scale(1.5);
+        opacity: 0;
+      }
+    }
+
+  .onlineLight::before{
+    content: '';
+    margin: auto;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 16px;
+    height: 16px;
+    background: $dark-green;
+    border-radius: 50%;
+    right: -4px;
+    animation: flashing 1.5s infinite ease-in;
+  }
+
+  .onlineLight {
+    margin: auto;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 8px;
+    height: 8px;
+    background: $dark-green;
+    border-radius: 50%;
+    right: 5px;
+    // animation: delay-animation 2s linear infinite,
+    // blinker 0.5s linear infinite;
+    box-shadow: 0px 0px 4px 1px $dark-green;
+  }
+
+  .onlineLightLnode::before{
+    content: '';
+    margin: auto;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 16px;
+    height: 16px;
+    background: $dark-green;
+    border-radius: 50%;
+    right: -4px;
+    animation: flashing 1.5s infinite ease-in;
+  }
+
+  .onlineLightLnode {
+    margin: auto;
+    position: absolute;
+    top: calc(var(--ru) * (-25));
+    bottom: calc(var(--rb) * var(--rb) * -0.8px);
+    width: 8px;
+    height: 8px;
+    background: $dark-green;
+    border-radius: 50%;
+    left: -12px;
+    // animation: delay-animation 2s linear infinite,
+    // blinker 0.5s linear infinite;
+    box-shadow: 0px 0px 4px 1px $dark-green;
+  }
+
+  .onlineLightRnode::before{
+    content: '';
+    margin: auto;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 16px;
+    height: 16px;
+    background: $dark-green;
+    border-radius: 50%;
+    right: -4px;
+    animation: flashing 1.5s infinite ease-in;
+  }
+
+  .onlineLightRnode {
+    margin: auto;
+    position: absolute;
+    top: calc(var(--ru) * (-25));
+    bottom: calc(var(--rb) * var(--rb) * -0.8px);
+    width: 8px;
+    height: 8px;
+    background: $dark-green;
+    border-radius: 50%;
+    right: 6px;
+    // animation: delay-animation 2s linear infinite,
+    // blinker 0.5s linear infinite;
+    box-shadow: 0px 0px 4px 1px $dark-green;
+  }
+
+  .offlineLight::before{
+    content: '';
+    margin: auto;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 16px;
+    height: 16px;
+    background: $dark-red;
+    border-radius: 50%;
+    right: -4px;
+    animation: flashing 1s infinite ease-in;
+  }
+
+  .offlineLight {
+    margin: auto;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 8px;
+    height: 8px;
+    right: 5px;
+    background: $dark-red;
+    border-radius: 50%;
+    // animation: blinker 0.5s linear infinite;
+    box-shadow: 0px 0px 4px 1px $dark-red;
+  }
+
+  .offlineLightLnode::before{
+    content: '';
+    margin: auto;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 16px;
+    height: 16px;
+    background: $dark-red;
+    border-radius: 50%;
+    right: -4px;
+    animation: flashing 1s infinite ease-in;
+  }
+
+  .offlineLightLnode {
+    margin: auto;
+    position: absolute;
+    top: calc(var(--ru) * (-25));
+    bottom: calc(var(--rb) * var(--rb) * -0.8px);
+    width: 8px;
+    height: 8px;
+    left: -12px;
+    background: $dark-red;
+    border-radius: 50%;
+    // animation: blinker 0.5s linear infinite;
+    box-shadow: 0px 0px 4px 1px $dark-red;
+  }
+
+  .offlineLightRnode::before{
+    content: '';
+    margin: auto;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 16px;
+    height: 16px;
+    background: $dark-red;
+    border-radius: 50%;
+    right: -4px;
+    animation: flashing 1s infinite ease-in;
+  }
+
+  .offlineLightRnode {
+    margin: auto;
+    position: absolute;
+    top: calc(var(--ru) * (-25));
+    bottom: calc(var(--rb) * var(--rb) * -0.8px);
+    width: 8px;
+    height: 8px;
+    right: 6px;
+    background: $dark-red;
+    border-radius: 50%;
+    // animation: blinker 0.5s linear infinite;
+    box-shadow: 0px 0px 4px 1px $dark-red;
+  }
+
+  .connectionLightOff{
+    margin: auto;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 8px;
+    height: 8px;
+    right: 5px;
+    background: $dark-gray-600;
+    border-radius: 50%;
+  }
+
+  .connectionLightOffLnode{
+    margin: auto;
+    position: absolute;
+    top: calc(var(--ru) * (-25));
+    bottom: calc(var(--rb) * var(--rb) * -0.8px);
+    width: 8px;
+    height: 8px;
+    left: -12px;
+    background: $dark-gray-600;
+    border-radius: 50%;
+  }
+
+  .connectionLightOffRnode{
+    margin: auto;
+    position: absolute;
+    top: calc(var(--ru) * (-25));
+    bottom: calc(var(--rb) * var(--rb) * -0.8px);
+    width: 8px;
+    height: 8px;
+    right: 6px;
+    background: $dark-gray-600;
+    border-radius: 50%;
+  }
+
+  .taskLightOn {
+    margin: auto;
+    position: absolute;
+    bottom: 2px;
+    width: 8px;
+    height: 8px;
+    right: 35px;
+    border-radius: 50%;
+    // animation: blinker 0.5s linear infinite;
+    z-index: 99;
+
+    &.Created {
+      background: $dark-secondary;
+    }
+
+    &.Processing {
+      background: $dark-blue;
+    }
+
+    &.Pass {
+      background: $dark-success;
+    }
+
+    &.Fail {
+      background: $dark-danger;
+    }
+  }
+
+  .taskLightOnLnode {
+    margin: auto;
+    position: absolute;
+    bottom: calc(var(--rb) * var(--rb) * -0.8px);
+    width: 8px;
+    height: 8px;
+    left: 10px;
+    border-radius: 50%;
+    // animation: blinker 0.5s linear infinite;
+    top: calc(var(--ru) * (-25));
+    z-index: 99;
+
+    &.Created {
+      background: $dark-secondary;
+    }
+
+    &.Processing {
+      background: $dark-blue;
+    }
+
+    &.Pass {
+      background: $dark-success;
+    }
+
+    &.Fail {
+      background: $dark-danger;
+    }
+  }
+
+  .taskLightOnRnode {
+    margin: auto;
+    position: absolute;
+    bottom: calc(var(--rb) * var(--rb) * -0.8px);
+    width: 8px;
+    height: 8px;
+    right: 35px;
+    border-radius: 50%;
+    // animation: blinker 0.5s linear infinite;
+    top: calc(var(--ru) * (-25));
+    z-index: 99;
+
+    &.Created {
+      background: $dark-secondary;
+    }
+
+    &.Processing {
+      background: $dark-blue;
+    }
+
+    &.Pass {
+      background: $dark-success;
+    }
+
+    &.Fail {
+      background: $dark-danger;
+    }
+  }
+
+  .locatorLightOn::before {
+    content: '';
+    margin: auto;
+    position: absolute;
+    bottom: -4px;
+    width: 8px;
+    height: 8px;
+    right: -1px;
+    // background: $dark-rack-indicator-locator;
+    background: map-get($theme, rack-indicator-locator);
+    border-radius: 50%;
+    z-index: 99;
+    animation: flashing 1s infinite ease-in;
+  }
+
+  .locatorLightOn {
+    margin: auto;
+    position: absolute;
+    bottom: 2px;
+    width: 6px;
+    height: 6px;
+    right: 50px;
+    // background: $dark-rack-indicator-locator;
+    background: map-get($theme, rack-indicator-locator );
+    border-radius: 50%;
+    z-index: 99;
+  }
+
+  .locatorLightOnLnode::before {
+    content: '';
+    margin: auto;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 8px;
+    height: 8px;
+    left: -1px;
+    // background: $dark-rack-indicator-locator;
+    background: map-get($theme, rack-indicator-locator );
+    border-radius: 50%;
+    z-index: 99;
+    animation: flashing 1s infinite ease-in;
+  }
+
+  .locatorLightOnLnode {
+    margin: auto;
+    position: absolute;
+    bottom: calc(var(--rb) * var(--rb) * -0.8px);
+    width: 6px;
+    height: 6px;
+    left: 24px;
+    // background: $dark-rack-indicator-locator;
+    background: map-get($theme,rack-indicator-locator );
+    border-radius: 50%;
+    top: calc(var(--ru) * (-25));
+    z-index: 99;
+  }
+
+  .locatorLightOnRnode::before {
+    content: '';
+    margin: auto;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 8px;
+    height: 8px;
+    right: -1px;
+    // background: $dark-rack-indicator-locator;
+    background: map-get($theme, rack-indicator-locato );
+    border-radius: 50%;
+    z-index: 99;
+    animation: flashing 1s infinite ease-in;
+  }
+
+  .locatorLightOnRnode {
+    margin: auto;
+    position: absolute;
+    bottom: calc(var(--rb) * var(--rb) * -0.8px);
+    width: 6px;
+    height: 6px;
+    right: 50px;
+    // background: $dark-rack-indicator-locator;
+    background: map-get($theme, rack-indicator-locator );
+    border-radius: 50%;
+    top: calc(var(--ru) * (-25));
+    z-index: 99;
+  }
+
+}

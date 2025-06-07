@@ -1,0 +1,160 @@
+// #region Color Define
+$dark-blue:     #0070cc !default;
+$dark-indigo:   #6610f2 !default;
+$dark-purple:   #6f42c1 !default;
+$dark-pink:     #d63384 !default;
+$dark-red:      #d33b27 !default;
+$dark-orange:   #fd7e14 !default;
+$dark-yellow:   #F7B911 !default;
+$dark-green:    #3ab73f !default;
+$dark-teal:     #20c997 !default;
+$dark-cyan:     #06bdd4 !default;
+// #endregion
+
+$dark-gray-100: #f8f9fa !default;
+$dark-gray-200: #e9ecef !default;
+$dark-gray-300: #dee2e6 !default;
+$dark-gray-400: #ced4da !default;
+$dark-gray-500: #adb5bd !default;
+$dark-gray-600: #6c757d !default;
+$dark-gray-700: #495057 !default;
+$dark-gray-800: #2d2d2d !default;
+$dark-gray-900: #1f1f1f !default;
+
+$dark-blue:     #0070cc !default;
+$dark-indigo:   #6610f2 !default;
+$dark-purple:   #6f42c1 !default;
+$dark-pink:     #d63384 !default;
+$dark-red:      #d33b27 !default;
+$dark-orange:   #fd7e14 !default;
+$dark-yellow:   #F7B911 !default;
+$dark-green:    #3ab73f !default;
+$dark-teal:     #20c997 !default;
+$dark-cyan:     #06bdd4 !default;
+
+$dark-secondary:    $dark-gray-600 !default;
+$dark-success:      $dark-green !default;
+$dark-info:         $dark-cyan !default;
+$dark-warning:      $dark-yellow !default;
+$dark-danger:       $dark-red !default;
+
+$dark-background:        $dark-gray-900;
+$dark-bg-lighter-5:      lighten($dark-background, 5%);
+$dark-bg-lighter-10:     lighten($dark-background, 10%);
+$dark-bg-lighter-20:     lighten($dark-background, 20%);
+$dark-bg-lighter-30:     lighten($dark-background, 30%);
+$dark-light-bg-alpha-4:  rgba($dark-gray-200, 0.04);
+$dark-light-bg-alpha-12: rgba($dark-gray-200, 0.12);
+
+$dark-theme-colors: (
+  text:                       $gray-10,
+  border-hover:               rgba($white, 0.5),
+
+  // status color define
+  primary:                    $dark-blue,
+  secondary:                  $gray-600,
+  success:                    $dark-green,
+  info:                       $dark-cyan,
+  warning:                    $dark-yellow,
+  danger:                     $dark-red,
+
+  // menu
+  menu-bg-color:              #555,
+
+  // scroll bar color define
+  scrollbar-shadow-color:     rgba($black, 0.3),
+  scrollbar-bg-color:         #8b8b8b,
+  scrollbar-thumb-bg-color:   #555,
+
+  // dialog color define
+  dialog-bg-color:            #333,
+  dialog-subtitle:            rgba($white, 0.6),
+
+  // sidemenu color define
+  sidemenu-active-bg-color:   #555,
+  sidemenu-active-left:       #333,
+
+  // status card color define
+  status-card-button-bg:      $gray-900,
+  status-card-progress-bg:    lighten($gray-900, 5%),
+
+  // table color define
+  table-color-border:         #ffffff1f,
+  table-color-header-row:     #202020,
+  table-color-row:            #1d2024,
+  table-color-row-even:       #212428,
+  table-color-row-hover:      #1d202480,
+  table-color-group-header:   #272727,
+
+  // rack color define
+  rack-border-color-1:        #222222,
+  rack-border-color-2:        rgb(3, 3, 3),
+  rack-border-color-3:        rgb(64, 76, 88),
+  rack-container-orange:      rgb(206, 101, 59),
+  rack-container-blue:        rgb(10, 49, 100),
+  rack-container-black:       #0000,
+  rack-indicator-locator:     rgb(48, 100, 212),
+
+  // test stage color define
+  stage-shadow-color-1:       rgba(0, 0, 0, 0.5),
+  stageBox-background-color:  #1F5673,
+  toolList-color:             #55b2d4,
+  testBox-color:              cadetblue
+);
+// #endregion
+
+// #region palette define
+$dark-pastel-green-palette: (
+  50:  #e7f6e8,
+  100: #c7e9c6,
+  200: #a2dba1,
+  300: #7acd7b,
+  400: #5bc25d,
+  500: $dark-green,
+  600: #30a835,
+  700: #22952a,
+  800: #11841e,
+  900: #006505,
+  contrast: (
+    50:  $gray-100,
+    100: $gray-100,
+    200: $gray-100,
+    300: $gray-100,
+    400: $gray-100,
+    500: $gray-100,
+    600: $gray-10,
+    700: $gray-10,
+    800: $gray-10,
+    900: $gray-10
+  )
+);
+
+$chili-red-palette: (
+  50:  #ffeced,
+  100: #ffced0,
+  200: #f09d97,
+  300: #e7786f,
+  400: #ef5b49,
+  500: #f24e2c,
+  600: #e5452d,
+  700: $dark-red,
+  800: #c63520,
+  900: #b72b13,
+  contrast: (
+    50:  $gray-100,
+    100: $gray-100,
+    200: $gray-100,
+    300: $gray-100,
+    400: $gray-100,
+    500: $gray-10,
+    600: $gray-10,
+    700: $gray-10,
+    800: $gray-10,
+    900: $gray-10,
+  )
+);
+// #endregion
+
+// $dark-primary: mat.define-palette($azul-palette, 700, 300, 900);
+// $dark-accent: mat.define-palette($dark-pastel-green-palette, 500, 100, 800);
+// $dark-warn: mat.define-palette($chili-red-palette, 700, 100, 900);

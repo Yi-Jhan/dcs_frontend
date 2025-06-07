@@ -1,0 +1,7 @@
+{
+  "/dcs-backend": {
+    "target": "https://dev.dcs-sw.com",
+    "secure": false,
+    "changeOrigin": true
+  }
+}

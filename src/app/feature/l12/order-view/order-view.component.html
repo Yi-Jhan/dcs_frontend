@@ -1,0 +1,145 @@
+<div class="container-fluid">
+  <div class="row">
+    <div id="orderviewDiv" class="col-9">
+        <div id="dashboardDiv">
+          <div id="cabinetCard" class="dashboardCol" ngClass="cabinetCard">
+          <mat-card class="dashboardCard">
+            <mat-card-header>
+              <mat-card-title class="dashboardTitle"><i class="fas fa-inbox"></i>&nbsp;{{'i18n_Cabinet' | translate}}</mat-card-title>
+            </mat-card-header>
+            <mat-card-content style="text-align: center;">
+              <div style="height:240px;overflow-y: auto;">
+                <div style="padding-right:1%;padding-bottom: 5%;">
+                  <button type="button" mat-raised-button  class="cabinetStatus"  ngClass="All" (click)="cabinetAll()">
+                    <span>{{'i18n_All' | translate}}</span>
+                  </button>
+                </div>
+                <div style="padding-right:1%;padding-bottom: 5%;" *ngFor="let data of cabinetData">
+                  <button type="button" mat-raised-button class="cabinetStatus" [ngClass]="data.orderStatus"
+                    (click)="clickCabinet(data.device)">
+                    {{data.device}}
+                  </button>
+                </div>
+             </div>
+            </mat-card-content>
+          </mat-card>
+        </div>
+
+        <div id="ratesCard" class="dashboardCol" ngClass="ratesCard">
+          <mat-card class="dashboardCard">
+            <mat-card-header>
+              <mat-card-title class="dashboardTitle"><i
+                class="fas fa-clipboard-list"></i>&nbsp;{{'i18n_CompletionRates' | translate}}</mat-card-title>
+            </mat-card-header>
+            <mat-card-content id="chartCompleteCard" style="margin-top: -20px;">
+              <div class="canvasDiv">
+                <canvas id="chartComplete" height="240" width="280"></canvas>
+              </div>
+              <div *ngIf="enableCompleteIcon"
+                class="completeLegend">
+                <div style="flex: 0 0 65%;">
+                  <span class="completeAllCircle"></span>
+                  <span style="position: relative;left:5%;bottom:1px;">{{'i18n_Done' | translate}}:&nbsp;{{orderviewStatusDoneSum}}</span>
+                </div>
+                <div>
+                  <span class="completeDoneCircle"></span>
+                  <span style="position: relative;left:5%;bottom:1px;">{{'i18n_Total' | translate}}:&nbsp;{{orderviewStatusSum}}</span>
+                </div>
+              </div>
+            </mat-card-content>
+          </mat-card>
+        </div>
+
+        <div id="statusCardDiv" class="dashboardCol" ngClass="statusCard">
+          <app-status-card></app-status-card>
+        </div>
+
+        <div id="durationCardDiv" class="dashboardCol" ngClass="durationCard">
+          <mat-card class="dashboardCard">
+            <mat-card-header>
+              <mat-card-title class="dashboardTitle"><i
+                class="fas fa-clock"></i>&nbsp;{{'i18n_Duration' | translate}}</mat-card-title>
+            </mat-card-header>
+            <mat-card-content>
+              <div *ngIf="startDate" class="durationDate">{{startDate|date:'d MMM. yyyy'}}&nbsp;-&nbsp;{{endDate|date:'d MMM. yyyy'}}</div>
+              <div class="durationCounter">+&nbsp;{{totalDuration}}&nbsp;{{'i18n_hrs' | translate}}</div>
+              <div class="canvasDiv">
+                <canvas id="chartDuration" height="240" width="280"></canvas>
+              </div>
+            </mat-card-content>
+          </mat-card>
+        </div>
+      </div>
+
+      <div id="tableListDiv" class="row" style="height: 0;">
+        <div class="col-12">
+          <mat-card>
+            <mat-card-header>
+              <mat-card-title>
+                <label class="list-title">{{'i18n_Devices' | translate}}&nbsp;({{orderviewDetailsListData.length}})</label>
+
+                <ng-container *ngIf="cabinetFilter">
+                  <mat-chip class="filter-item" selectable="false" (removed)="removeCabinetFilter()">{{cabinetFilter}}
+                    <button matChipRemove>
+                      <i class="fa-solid fa-xmark"></i>
+                    </button>
+                  </mat-chip>
+               </ng-container>
+
+               <ng-container *ngIf="statusFilter">
+                <mat-chip class="filter-item" [ngClass]="statusFilter" selectable="false" (removed)="removeStatusFilter()">{{statusFilter}}
+                  <button matChipRemove>
+                    <i class="fa-solid fa-xmark"></i>
+                  </button>
+                </mat-chip>
+              </ng-container>
+
+              <ng-container *ngIf="racknodeFilter">
+                <mat-chip class="filter-item" selectable="false" (removed)="removeRacknodeFilter()">{{racknodeFilter}}
+                  <button matChipRemove>
+                    <i class="fa-solid fa-xmark"></i>
+                  </button>
+                </mat-chip>
+              </ng-container>
+
+              <ng-container *ngIf="startDate">
+                <mat-chip class="filter-item" selectable="false" (removed)="removeDateRangeFilter()">
+                  Created Date:&nbsp;{{getDateString(startDate)}}&nbsp;-&nbsp;{{getDateString(endDate)}}
+                  <button matChipRemove>
+                    <i class="fa-solid fa-xmark"></i>
+                  </button>
+                </mat-chip>
+              </ng-container>
+
+              </mat-card-title>
+            </mat-card-header>
+            <mat-card-content>
+              <div class="row">
+                <div class="col-md-6 col-sm-8">
+                  <app-search-bar [id]="'tableFilterSearch'"
+                                  [enteredValue]="filters"
+                                  [dateRangerPicker]="true">
+                  </app-search-bar>
+                </div>
+              </div>
+
+              <app-data-table
+                [id]="tableID"
+                [data]="orderviewDetailsListData"
+                [columnDefs]="columnsDef"
+                [isLoading]="isLoadingResults"
+                [groupByColumns]="groupByColumns"
+                [filters]="filters"
+                [height]="'calc(100vh - 565px)'" />
+            </mat-card-content>
+          </mat-card>
+        </div>
+      </div>
+    </div>
+    <div id="resizeBar" (click)="resizedoubleClick()" [hidden] = "filterListData.length == 0"></div>
+    <div id="rackviewDiv">
+      <app-rackview id="rackview" [rackdata]="rackviewData" (selectNode)="clickRackNode($event)">
+      </app-rackview>
+    </div>
+  </div>
+</div>

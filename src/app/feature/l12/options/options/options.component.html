@@ -1,0 +1,20 @@
+<div class="container-fluid">
+  <h1>{{'i18n_Configurations' | translate}}</h1>
+  <div class="row">
+    <ng-container *ngFor="let item of optMenu; let i=index">
+      <!-- <div *ngIf="(viewAllPrivilege$|async).privilegeDefine[item.key]" class="col-12 col-md-6 col-lg-4 col-xl-3 animate__animated animate__fadeIn"> -->
+      <div class="col-12 col-md-6 col-lg-4 col-xl-3 animate__animated animate__fadeIn">
+        <mat-card class="option-card" [routerLink]="item.routerLink">
+          <mat-card-content>
+            <div class="card-icon">
+              <i [ngClass]="item.icon"></i>
+            </div>
+            <div class="card-title">
+              <h2>{{item.name}}</h2>
+            </div>
+          </mat-card-content>
+        </mat-card>
+      </div>
+    </ng-container>
+  </div>
+</div>

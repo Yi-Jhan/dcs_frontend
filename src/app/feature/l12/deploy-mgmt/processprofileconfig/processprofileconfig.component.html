@@ -1,0 +1,58 @@
+<mat-card style="padding: 10px;">
+  <form [formGroup]="profileForm">
+    <div class="row" style="padding-bottom: 8px;line-height: 36px;">
+      <div class="col-5 col-sm-3 col-md-2">{{'i18n_ProfileName' | translate}}</div>
+      <div class="col-7 col-sm-9 col-md-10">
+        <mat-form-field appearance="outline" class="form-field">
+          <input type="text" matInput formControlName="profilename">
+        </mat-form-field>
+      </div>
+    </div>
+  <div class="row" style="padding-bottom: 8px;line-height: 36px;">
+    <div class="col-5 col-sm-3 col-md-2">{{'i18n_Description' | translate}}</div>
+    <div class="col-7 col-sm-9 col-md-10">
+      <mat-form-field appearance="outline" class="form-field">
+        <textarea matInput
+        cdkTextareaAutosize
+        #autosize="cdkTextareaAutosize"
+        cdkAutosizeMinRows="1"
+        cdkAutosizeMaxRows="5" formControlName="descr" style="line-height: 36px;"></textarea>
+      </mat-form-field>
+    </div>
+  </div>
+ </form>
+</mat-card>
+<br>
+<app-teststage [displayData]="stageData" [displayOnly]="false" [chkisSaved]="isSaving || isDeleting" (detectstageData)="detectStageData($event)"></app-teststage>
+<div id="processBtn">
+  <button mat-raised-button (click)="onClickCancelBtn()"><i class="fas fa-times-circle"></i>&nbsp;&nbsp;{{'i18n_Cancel' | translate}}</button>
+  &nbsp;
+  <button *ngIf="rowProfile" mat-raised-button color="warn" (click)="opendeleteDialog()">
+    <i class="fas fa-trash-alt"></i>
+    {{'i18n_Delete' | translate}}</button>
+  &nbsp;
+  <button mat-raised-button color="primary" (click)="saveProfile()" [disabled]="stageData.length == 0">
+    <i *ngIf="!isSaving" class="fas fa-save"></i>&nbsp;&nbsp;
+    <i *ngIf="isSaving" class="fa-solid fa-spinner fa-spin-pulse"></i>
+    {{'i18n_Save' | translate}}</button>
+</div>
+
+<ng-template #createProfileDialog let-data>
+  <p>{{'i18n_CreateProcessProfileMsg' | translate}}</p>
+  <form [formGroup]="createProfileForm" >
+    <div style="margin: 10px 0;">
+      <mat-radio-group aria-label="Select an option" formControlName="createType" >
+        <mat-radio-button value="new">{{'i18n_CreateProcessProfile' | translate}}</mat-radio-button>&nbsp;
+        <mat-radio-button value="existing">{{'i18n_CreateExistsProcessProfile' | translate}}</mat-radio-button>
+      </mat-radio-group>
+    </div>
+    <div style="height: 80px;">
+      <mat-form-field class="field-select" appearance="outline" *ngIf="createProfileForm.value.createType==='existing'">
+        <mat-select formControlName="profile" disableOptionCentering>
+          <mat-option *ngFor="let profile of profileData" [value]="profile.id">{{profile.name}}</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+  </form>
+
+</ng-template>

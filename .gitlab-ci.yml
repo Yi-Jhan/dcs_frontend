@@ -1,0 +1,63 @@
+image: docker:latest
+
+services:
+  - name: docker:dind
+
+variables:
+  CI_IMAGE: $CI_REGISTRY_IMAGE
+  GIT_SUBMODULE_STRATEGY: recursive
+
+stages:
+  - build
+  - deploy DEV
+  - deploy STG
+  - deploy PROD
+
+Build:
+  stage: build
+  when: always
+  before_script:
+  - docker info
+  script:
+    - ls -al cicd
+    - cicd/scripts/angular/ng_build.sh
+
+Password Hunting:
+  stage: build
+  when: always
+  script:
+    - cicd/scripts/password_hunting.sh
+
+Code Quality:
+  stage: build
+  when: always
+  script:
+    - cicd/scripts/code_quality.sh
+
+Unit Test:
+  stage: build
+  script:
+    - cicd/scripts/angular/ng_ut.sh
+
+DEV:
+  stage: deploy DEV
+  script:
+    - cicd/scripts/deploy/deploy_dev.sh
+  needs: ["Build","Password Hunting","Code Quality","Unit Test"]
+
+STG:
+  stage: deploy STG
+  when: manual
+  script:
+    - cicd/scripts/deploy/deploy_stg.sh
+  needs: ["DEV"]
+
+PROD:
+  stage: deploy PROD
+  when: manual
+  only:
+    - tags
+  script:
+    - cicd/scripts/deploy_dev.sh
+  needs: ["STG"]
+

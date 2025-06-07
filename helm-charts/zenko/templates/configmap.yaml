@@ -1,0 +1,9 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ include "zenko.fullname" . }}
+  namespace: {{ .Values.namespace }}
+data:
+  SCALITY_ACCESS_KEY_ID: {{ .Values.accessKeyId }}
+  SCALITY_SECRET_ACCESS_KEY: {{ .Values.secretAccessKey }}
+  S3BACKEND: {{ .Values.s3backend }}

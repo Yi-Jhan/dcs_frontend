@@ -1,0 +1,12 @@
+.switch-btn {
+  position: absolute;
+  top: 22px;
+  right: 24px;
+  font-size: 1.35rem;
+  cursor: pointer;
+  color: #ced4da;
+
+  &:hover {
+    color: #fff;
+  }
+}

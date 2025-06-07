@@ -1,0 +1,15 @@
+<mat-card style="height: 311px;">
+  <mat-card-header>
+    <mat-card-title>
+      <i class="fa-solid fa-compass"></i>&nbsp;{{'i18n_EdgeGateway' | translate}}
+    </mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <div echarts
+        [options]="initialOption"
+        [merge]="option"
+        (chartClick)="onChartEvent($event)"
+        style="height: 228px;">
+    </div>
+  </mat-card-content>
+</mat-card>

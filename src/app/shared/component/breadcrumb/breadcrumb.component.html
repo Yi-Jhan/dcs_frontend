@@ -1,0 +1,16 @@
+
+<nav class="py-3 px-0">
+  <ul class="breadcrumb">
+    @for (breadcrumb of breadcrumbList; track breadcrumb.key) {
+      <li class="breadcrumb-item">
+        @if ($index === breadcrumbList.length-1) {
+          <i [ngClass]="breadcrumb.icon"></i>&nbsp;&nbsp;{{ breadcrumb.name | translate }}
+        } @else {
+          <a (click)="openPageWithBreadcrumb($index)" style="cursor: pointer;">
+            <i [ngClass]="breadcrumb.icon"></i>
+          </a>
+        }
+      </li>
+    }
+  </ul>
+</nav>

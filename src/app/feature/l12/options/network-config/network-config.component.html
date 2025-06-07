@@ -1,0 +1,165 @@
+<mat-card>
+  <mat-card-header>
+    <mat-card-title style="border-bottom: 3px solid #0070cc;font-size: 24px; padding-bottom: 14px;"><i
+      class="fab fa-connectdevelop"></i>&nbsp;Network Configuration - eth0
+      <button
+          type="submit"
+          style="float:right;"
+          id="SaveBtn"
+          mat-flat-button
+          color="primary"
+          (click)="onSubmit()">
+          <i class="far fa-save"></i>&nbsp;&nbsp;{{'i18n_Save' | translate}}
+        </button>
+    </mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <div class="row ">
+      <form  [formGroup]="netWorkFormGroup"  >
+        <div class="row formRow addWeight">
+          <div class="col-lg-2 col-md-3 col-sm-11  mt1 text-right">{{'i18n_IPAssign' | translate}}</div>
+          <div class="col-lg-9 col-md-8 col-sm-11" >
+            <mat-radio-group color="primary"
+                  formControlName="assignment">
+              <mat-radio-button class="radioMarging" value="IPmanual">{{'i18n_Manual' | translate}}</mat-radio-button>
+              <mat-radio-button value="dhcp" #dhcp >DHCP</mat-radio-button>
+            </mat-radio-group>
+          </div>
+        </div>
+        <div class="row formRow addWeight"
+            *ngIf="!dhcp.checked">
+          <div class="col-lg-2 col-md-3 col-sm-11 mt6 text-right">{{'i18n_IPAddress' | translate}}</div>
+          <div class="col-lg-2 col-md-8 col-sm-5" >
+            <mat-form-field appearance="outline" class="form-field" >
+              <input
+                matInput
+                type="text"
+                formControlName="ipAddress"
+                [required] = "netWorkFormGroup.controls.assignment.value ==='IPmanual'">
+              <mat-error
+                *ngIf="netWorkFormGroup.controls.ipAddress.hasError('required')">
+                {{'i18n_IPAddress' | translate}}{{'i18n_Is' | translate}}<strong>{{'i18n_Required' | translate}}</strong>
+              </mat-error>
+              <mat-error *ngIf="netWorkFormGroup.controls.ipAddress.hasError('pattern')">
+                {{'i18n_NotValidAddr' | translate}}
+              </mat-error>
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="row formRow addWeight"
+            *ngIf="!dhcp.checked">
+          <div class="col-lg-2 col-md-3 col-sm-11 mt6 text-right">{{'i18n_SubnetPrefix' | translate}}</div>
+          <div class="col-lg-2 col-md-8 col-sm-5" >
+            <mat-form-field appearance="outline" class="form-field" hintLabel="{{'i18n_PleaseInput0to32' | translate}}">
+              <input matInput type="text"
+                    formControlName="subnetPL"
+                    [required] = "netWorkFormGroup.controls.assignment.value ==='IPmanual'">
+              <mat-error *ngIf="netWorkFormGroup.controls.subnetPL.hasError('required')">
+                {{'i18n_SubnetPrefix' | translate}}{{'i18n_Is' | translate}}<strong>{{'i18n_Required' | translate}}</strong>
+              </mat-error>
+              <mat-error *ngIf="
+              netWorkFormGroup.controls.subnetPL.hasError('max') ||
+              netWorkFormGroup.controls.subnetPL.hasError('min') ||
+              netWorkFormGroup.controls.subnetPL.hasError('pattern') ">
+                {{'i18n_PleaseInput0to32' | translate}}
+              </mat-error>
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="row formRow addWeight"
+            *ngIf="!dhcp.checked">
+          <div class="col-lg-2 col-md-3 col-sm-11 mt6 text-right">{{'i18n_Gateway' | translate}}</div>
+          <div class="col-lg-2 col-md-8 col-sm-5" >
+            <mat-form-field appearance="outline" class="form-field" >
+              <input
+                  matInput type="text"
+                  formControlName="gateway"
+                  [required] = "netWorkFormGroup.controls.assignment.value ==='IPmanual'">
+              <mat-error *ngIf="netWorkFormGroup.controls.gateway.hasError('required')">
+                {{'i18n_Gateway' | translate}}{{'i18n_Is' | translate}}<strong>{{'i18n_Required' | translate}}</strong>
+              </mat-error>
+              <mat-error *ngIf="netWorkFormGroup.controls.gateway.hasError('pattern')">
+                {{'i18n_NotValidAddr' | translate}}
+              </mat-error>
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="row formRow addWeight">
+          <div class="col-lg-2 col-md-3 col-sm-11 mt1 text-right">DNS</div>
+          <div class="col-lg-9 col-md-8 col-sm-11" >
+            <mat-radio-group color="primary"
+                  class="radioMarging"
+                  formControlName="dns">
+              <mat-radio-button
+                      #dns
+                      value="DNSmanual"
+                      style="margin-right: 10px;"
+                      [checked]="netWorkFormGroup.controls.assignment.value ==='IPmanual'">
+                      {{'i18n_Manual' | translate}}
+              </mat-radio-button>
+              <mat-radio-button
+                      #auto
+                      value="auto"
+                      [checked]="netWorkFormGroup.controls.assignment.value ==='dhcp'&& !dns.checked"
+                      [disabled]="netWorkFormGroup.controls.assignment.value ==='IPmanual'">
+                      {{'i18n_Auto' | translate}}
+              </mat-radio-button>
+            </mat-radio-group>
+          </div>
+        </div>
+        <div class="row formRow addWeight"
+            *ngIf="!auto.checked">
+          <div class="col-lg-2 col-md-3 col-sm-11 mt6 text-right ">{{'i18n_PrefDNS' | translate}}</div>
+          <div class="col-lg-2 col-md-8 col-sm-5" >
+            <mat-form-field appearance="outline" class="form-field" >
+              <input matInput type="text"
+                    formControlName="prefDNS"
+                    [required] = "!auto.checked">
+              <mat-error
+                  *ngIf="netWorkFormGroup.controls.prefDNS.hasError('required')">
+                  {{'i18n_PrefDNS' | translate}}{{'i18n_Is' | translate}}<strong>{{'i18n_Required' | translate}}</strong>
+              </mat-error>
+              <mat-error *ngIf="netWorkFormGroup.controls.prefDNS.hasError('pattern')">
+                  {{'i18n_NotValidAddr' | translate}}
+              </mat-error>
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="row formRow addWeight"
+            *ngIf="!auto.checked">
+          <div class="col-lg-2 col-md-3 col-sm-11 mt6 text-right">{{'i18n_AltDNS' | translate}}</div>
+          <div class="col-lg-2 col-md-8 col-sm-5" >
+            <mat-form-field appearance="outline" class="form-field"  >
+              <input matInput type="text"
+                    formControlName="altDNS">
+              <mat-error
+                  *ngIf="netWorkFormGroup.controls.altDNS.hasError('required')">
+                  Alternate DNS is <strong>required</strong>
+              </mat-error>
+              <mat-error *ngIf="netWorkFormGroup.controls.altDNS.hasError('pattern')">
+                  {{'i18n_NotValidAddr' | translate}}
+              </mat-error>
+            </mat-form-field>
+          </div>
+        </div>
+
+      </form>
+    </div>
+    <div class="row">
+      <div class="col">
+        <button
+            type="submit"
+
+            id="xsSaveBtn"
+            mat-flat-button
+            color="primary"
+            [disabled]=""
+            (click)="onSubmit()">
+            <i class="far fa-save"></i>&nbsp;&nbsp;{{'i18n_Save' | translate}}
+        </button>
+      </div>
+    </div>
+  </mat-card-content>
+</mat-card>
+
+

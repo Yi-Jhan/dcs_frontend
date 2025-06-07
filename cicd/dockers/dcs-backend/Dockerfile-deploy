@@ -1,0 +1,24 @@
+#base image
+FROM maven:3.8.6-openjdk-8-slim as build
+
+# set working directory
+WORKDIR /app
+
+# add app
+COPY . /app
+
+# sonar scan
+#RUN mvn clean verify sonar:sonar -Dsonar.projectKey=L11_Backend -Dsonar.projectName=L11_Backend -Dsonar.host.url=http://10.10.31.107:32761 -Dsonar.login=08b9805c8b20e3e2325382ed37cb89fe5ac0ffbf
+
+# mvn build
+RUN mvn clean package -DskipTests=true
+
+#base image
+FROM openjdk:8-jdk-alpine3.9
+
+# copy artifact build from the 'build environment'
+COPY --from=build /app/target/backend-0.0.1-SNAPSHOT.jar ./backend-0.0.1-SNAPSHOT.jar
+CMD java $JAVA_OPTS -jar ./backend-0.0.1-SNAPSHOT.jar
+
+# expose port 8080
+EXPOSE 8080

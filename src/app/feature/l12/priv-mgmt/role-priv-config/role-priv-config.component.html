@@ -1,0 +1,138 @@
+<div class="container-fluid">
+  <div class="row animate__animated animate__fadeIn" style="margin-bottom: 10px;">
+    <div class="col">
+      <mat-card>
+        <mat-card-header>
+          <mat-card-title>
+            <label>{{'i18n_RoleInfo' | translate}}</label>
+          </mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+          <form [formGroup]="infoForm">
+            <div class="row" style="line-height: 36px;">
+              <div class="col-5 col-sm-3 col-md-2">{{'i18n_RoleName' | translate}}</div>
+              <div class="col-7 col-sm-9 col-md-10">
+                <mat-form-field class="form-field" appearance="outline">
+                  <mat-label>{{'i18n_RoleName' | translate}}</mat-label>
+                  <input matInput formControlName="name" autocomplete="off"/>
+                </mat-form-field>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-5 col-sm-3 col-md-2" style="line-height: 36px;">{{'i18n_Description' | translate}}</div>
+              <div class="col-7 col-sm-9 col-md-10">
+                <mat-form-field class="form-field" appearance="outline">
+                  <input matInput formControlName="description" autocomplete="off"/>
+                </mat-form-field>
+              </div>
+            </div>
+          </form>
+        </mat-card-content>
+      </mat-card>
+    </div>
+  </div>
+  <div class="row">
+    <div class="priv-config col-12 col-md-6 animate__animated animate__fadeIn">
+      <mat-card>
+        <mat-card-header>
+          <mat-card-title>
+            <label>{{'i18n_PrivConfig' | translate}}</label>
+          </mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+          <div class="col-md-8 col-sm-12">
+            <app-search-bar [id]="configSearchBarID"
+                            [enteredValue]="filters"
+                            [dateRangerPicker]="false">
+            </app-search-bar>
+          </div>
+          <app-data-table
+            [id]="privilegeTableID"
+            [data]="privTableData"
+            [columnDefs]="privColumnsDef"
+            [isLoading]="isLoadingTemplate"
+            [groupByColumns]="groupByColumns"
+            [filters]="filters"
+            [columnsPanel]="false"
+            [clickRowSelected]="true"
+            [height]="'calc(100vh - 539px)'"
+            [withSelection]="true" />
+        </mat-card-content>
+      </mat-card>
+    </div>
+
+    <div class="col-12 col-md-6 animate__animated animate__fadeIn">
+      <mat-card>
+        <mat-card-header>
+          <mat-card-title>
+            <label>{{'i18n_VisibleDeviceConfig' | translate}}</label>
+          </mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+          <div class="row">
+            <div class="col-12" style="padding-bottom: 8px;">
+              <div style="float: right;">
+                <button mat-raised-button color="primary" (click)="openRuleEditor()">
+                  <i class="fa-solid fa-plus"></i>&nbsp;{{'i18n_AddRule' | translate}}
+                </button>
+              </div>
+            </div>
+          </div>
+          <app-data-table
+            [id]="ruleTableID"
+            [data]="ruleTableData"
+            [columnDefs]="ruleColumnDef"
+            [columnsPanel]="false"
+            [height]="'calc(100vh - 531px)'"
+            [isLoading]="isLoadingRule" />
+        </mat-card-content>
+      </mat-card>
+    </div>
+
+    <div class="row" style="margin-top: 10px;padding: 0;">
+      <div class="col-12" style="padding: 0;">
+        <div style="float: right;">
+          <button mat-stroked-button (click)="onClickActionButton('cancel')">
+            <i class="fa-solid fa-xmark"></i>&nbsp;{{'i18n_Cancel' | translate}}
+          </button>
+          <!-- <button mat-raised-button color="warn" *ngIf="roleID" style="margin-left: 10px;" (click)="onClickActionButton('delete')">
+            <i class="fa-solid fa-trash-can"></i>&nbsp;{{'Common.Button.Delete' | translate}}
+          </button> -->
+          <button mat-raised-button color="primary" *ngIf="roleID" style="margin-left: 10px;" (click)="onClickActionButton('update')">
+            <i class="fa-solid fa-floppy-disk"></i>&nbsp;{{'i18n_Update' | translate}}
+          </button>
+          <button mat-raised-button color="primary" *ngIf="!roleID" style="margin-left: 10px;" (click)="onClickActionButton('create')">
+            <i class="fa-solid fa-plus"></i>&nbsp;{{'i18n_Add' | translate}}
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<ng-template #createDialog let-data>
+  <p>{{'i18n_CreateRoleHint' | translate}}</p>
+  <br>
+  <form [formGroup]="createForm">
+    <div class="row" style="line-height: 36px;margin-bottom: 8px;">
+      <div class="col-3">{{'i18n_CreateType' | translate}}</div>
+      <div class="col-9">
+        <mat-radio-group aria-label="Select an option" formControlName="createType" >
+          <mat-radio-button value="new">{{'i18n_CreateTypeNew' | translate}}</mat-radio-button>&nbsp;
+          <mat-radio-button value="existing">{{'i18n_CreateTypeCopy' | translate}}</mat-radio-button>
+        </mat-radio-group>
+      </div>
+    </div>
+    <div class="row" style="line-height: 36px;margin-bottom: 8px;" *ngIf="createForm.value.createType==='existing'">
+      <div class="col-3">{{'i18n_RoleName' | translate}}</div>
+      <div class="col-9">
+        <mat-form-field class="form-field" appearance="outline">
+          <mat-select formControlName="role" disableOptionCentering>
+            <mat-option *ngFor="let role of roleList" [value]="role.id">{{role.name}}</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+    </div>
+  </form>
+
+</ng-template>

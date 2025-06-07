@@ -1,0 +1,32 @@
+#############
+### build ###
+#############
+
+# base image
+FROM golang:alpine3.19 as build
+
+# set working directory
+WORKDIR /app
+
+# add app
+COPY . /app
+
+RUN apk add --no-cache make
+RUN go mod download
+RUN make release
+
+############
+### prod ###
+############
+
+# base image
+FROM nginx:alpine3.18
+
+# copy artifact build from the 'build environment'
+COPY --from=build /app/dist/*.tar.gz /usr/share/nginx/html/
+
+# expose port 80
+EXPOSE 80
+
+# run nginx
+CMD ["nginx", "-g", "daemon off;"]

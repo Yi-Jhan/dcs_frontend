@@ -1,0 +1,152 @@
+<mat-card>
+  <mat-card-header>
+    <mat-card-title style="border-bottom: 3px solid #0070cc;font-size: 24px;">
+      <i class="fas fa-tools"></i>&nbsp;{{'i18n_ToolPool' | translate}}
+    </mat-card-title>
+  </mat-card-header>
+
+  <mat-card-content>
+    <div class="row">
+      <div class="col-6">
+        <app-chips-input class="form-control" [id]="id()" [placeholder]="placeholder()"
+          [chips]="enteredValue()">
+        </app-chips-input>
+      </div>
+      <div class="col-3">
+        <button mat-raised-button color="primary" (click)="openAddDialog()"><i class="fas fa-plus"></i>&nbsp;&nbsp;{{'i18n_Add' | translate}}</button>
+      </div>
+    </div>
+
+    <app-data-table
+      [id]="tableID"
+      [data]="testToolData"
+      [columnDefs]="columnsDef"
+      [isLoading]="isLoadingResults"
+      [groupByColumns]="groupByColumns"
+      [filters]="filters"
+      [height]="500" />
+  </mat-card-content>
+</mat-card>
+
+<ng-template #addDialog let-data>
+  <div [formGroup] = "addForm">
+    <div formArrayName="itemDef">
+      <div *ngFor="let item of $any(addForm.get('itemDef'))?.controls; let i = index; let last = last;">
+        <div class="row" style="padding-bottom: 3%;">
+          <div class="col-5 fileldCol">
+            <span>{{item.value.fieldName}}</span>
+          </div>
+          <ng-container *ngIf="item.value.upload; else elseTemplate">
+            <div class="col-7" [formGroupName]="i">
+              <div style="display: flex;flex-direction:row;">
+                <div *ngIf="item.value.inputVal == '' || item.value.inputVal == ' ' " class="uploadText" ngClass="addInitFile">
+                  <span>{{'i18n_MaxFileSize' | translate}}&nbsp;1GB</span>
+                </div>
+                <div *ngIf="item.value.field == 'toolPackageName' && item.value.inputVal != '' && item.value.inputVal != ' '" class="uploadText" ngClass="toolPackage">
+                    <span>{{item.value.inputVal}}</span>
+                </div>
+                <div *ngIf="item.value.field == 'scriptName' && item.value.inputVal != '' && item.value.inputVal != ' '" class="uploadText" ngClass="toolPackage">
+                  <span>{{item.value.inputVal}}</span>
+                </div>
+                <div *ngIf="item.value.inputVal != '' && item.value.inputVal != ' ' "  class="uploadText" ngClass="removeFile">
+                    <i class="fas fa-times-circle" style="cursor:pointer;" (click)="openRemoveFileDialog(item.value)"></i>
+                </div>
+                <div style="margin-left: -5px;">
+                  <button mat-raised-button color="primary" (click) = "openuploadFile('add',item.value.field)" style="flex: 0 0 65%;position: relative;left: 10%;">
+                    <i class="fas fa-upload"></i>&nbsp;&nbsp;{{'i18n_Upload' | translate}}
+                  </button>
+                </div>
+              </div>
+            </div>
+          </ng-container>
+          <ng-template #elseTemplate>
+            <div class="col-6" [formGroupName]="i">
+              <mat-form-field *ngIf="item.value.field != 'remark' " appearance="outline" class="form-field">
+                <input matInput type="text" formControlName="inputVal">
+              </mat-form-field>
+
+              <mat-form-field *ngIf="item.value.field == 'remark' " appearance="outline" class="form-field">
+                <textarea matInput  rows="5" maxlength="100" type="text" formControlName="inputVal"></textarea>
+              </mat-form-field>
+            </div>
+          </ng-template>
+        </div>
+      </div>
+    </div>
+  </div>
+</ng-template>
+
+<ng-template #editDialog let-data>
+  <div [formGroup] = "editForm">
+    <div formArrayName="itemDef">
+      <div *ngFor="let item of $any(editForm.get('itemDef'))?.controls; let i = index; let last = last;">
+        <div class="row" style="padding-bottom: 3%;">
+          <div class="col-5 fileldCol">
+            <span>{{item.value.fieldName}}</span>
+          </div>
+          <ng-container *ngIf="item.value.upload; else elseTemplate">
+            <div class="col-7" [formGroupName]="i">
+              <div style="display: flex;flex-direction:row;">
+                <div *ngIf="item.value.inputVal == '' || item.value.inputVal == ' ' " class="uploadText" ngClass="editInitFile">
+                  <span>{{'i18n_MaxFileSize' | translate}}&nbsp;1GB</span>
+                </div>
+                <div *ngIf="item.value.field == 'toolPackageName' && item.value.inputVal != '' && item.value.inputVal != ' '" class="uploadText" ngClass="toolPackage">
+                  <span >{{item.value.inputVal}}</span>
+                </div>
+                <div *ngIf="item.value.field == 'scriptName' && item.value.inputVal != '' && item.value.inputVal != ' '" class="uploadText" ngClass="script" style="cursor: pointer;" (click)="openScirpt(item.value.inputVal)">
+                  <i class="fas fa-eye"></i>&nbsp;<span *ngIf="item.value.field == 'scriptName'">{{item.value.inputVal}}</span>
+                </div>
+                <div *ngIf="item.value.inputVal != '' && item.value.inputVal != ' ' " class="uploadText" ngClass="removeFile">
+                    <i class="fas fa-times-circle" style="cursor:pointer;" (click)="openRemoveFileDialog(item.value)"></i>
+                </div>
+                <div style="margin-left: -5px;">
+                  <button mat-raised-button color="primary" (click) = "openuploadFile('edit',item.value.field)" style="flex: 0 0 65%;position: relative;left: 10%;">
+                    <i class="fas fa-upload"></i>&nbsp;&nbsp;{{'i18n_Upload' | translate}}
+                  </button>
+                </div>
+              </div>
+            </div>
+          </ng-container>
+          <ng-template #elseTemplate>
+            <div class="col-6" [formGroupName]="i">
+              <mat-form-field *ngIf="item.value.field != 'remark' " appearance="outline" class="form-field">
+                <input  matInput type="text" formControlName="inputVal">
+              </mat-form-field>
+
+              <mat-form-field *ngIf="item.value.field == 'remark' " appearance="outline" class="form-field">
+                <textarea matInput  rows="5" maxlength="100" type="text" formControlName="inputVal"></textarea>
+              </mat-form-field>
+            </div>
+          </ng-template>
+        </div>
+      </div>
+    </div>
+  </div>
+</ng-template>
+
+<ng-template #uploadFileDialog let-data>
+  <div class="dropzone">
+    <input type="file" id="fileDrop" multiple (change)="onFileDropped($any($event.target).files)">
+    <i class="fas fa-upload fa-4x"></i>
+    <br><br>
+    <h2>{{'i18n_DragFile' | translate}}<br><br>{{'i18n_Or' | translate}}</h2>
+    <br>
+    <button for="fileDrop" mat-raised-button color="primary"
+      onclick="document.getElementById('fileDrop').click();">{{'i18n_Browsefile' | translate}}
+    </button>
+  </div>
+  <br>
+  <div *ngIf="uploadFiles" class="filesList">
+    <div class="row">
+      <div class="col-1">
+        <i class="fas fa-file fa-3x"></i>
+      </div>
+      <div class="col" style="text-align: left;">
+        <span>{{uploadFiles.name}}</span>
+        <br>
+        <span>{{uploadFileSize}}&nbsp;KB</span>
+        <mat-progress-bar mode="determinate" [value]="uploadProgress"></mat-progress-bar>
+      </div>
+    </div>
+  </div>
+</ng-template>

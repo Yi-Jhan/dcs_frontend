@@ -1,0 +1,37 @@
+@mixin border-theme($theme-colors) {
+  /* Change the border color */
+  // .mdc-text-field--outlined:not(.mdc-text-field--disabled) .mdc-notched-outline__leading,
+  // .mdc-text-field--outlined:not(.mdc-text-field--disabled) .mdc-notched-outline__notch,
+  // .mdc-text-field--outlined:not(.mdc-text-field--disabled) .mdc-notched-outline__trailing {
+  //   border-color: var(--border-color) !important;
+  // }
+  // --mdc-protected-button-container-shape: 8px;
+  // --mdc-text-button-container-shape: 8px;
+  // --mdc-filled-button-container-shape: 8px;
+  --mdc-dialog-container-shape: 16px;
+  /* Change the border width */
+  // .mdc-text-field--outlined:not(.mdc-text-field--disabled) .mdc-notched-outline .mdc-notched-outline__leading,
+  // .mdc-text-field--outlined:not(.mdc-text-field--disabled) .mdc-notched-outline .mdc-notched-outline__notch,
+  // .mdc-text-field--outlined:not(.mdc-text-field--disabled) .mdc-notched-outline .mdc-notched-outline__trailing {
+  //   border-width: 1px !important;
+  // }
+
+  /* Change the border focused color */
+  .mdc-text-field--outlined:not(.mdc-text-field--disabled).mdc-text-field--focused .mdc-notched-outline__leading,
+  .mdc-text-field--outlined:not(.mdc-text-field--disabled).mdc-text-field--focused .mdc-notched-outline__notch,
+  .mdc-text-field--outlined:not(.mdc-text-field--disabled).mdc-text-field--focused .mdc-notched-outline__trailing {
+    border-color: $blue-60 !important;
+    border-width: 1px !important;
+  }
+
+  /* Change the border hover color */
+  .mdc-text-field--outlined:not(.mdc-text-field--disabled):not(.mdc-text-field--focused):hover .mdc-notched-outline .mdc-notched-outline__leading,
+  .mdc-text-field--outlined:not(.mdc-text-field--disabled):not(.mdc-text-field--focused):hover .mdc-notched-outline .mdc-notched-outline__notch,
+  .mdc-text-field--outlined:not(.mdc-text-field--disabled):not(.mdc-text-field--focused):hover .mdc-notched-outline .mdc-notched-outline__trailing {
+    border-color: map-get($theme-colors, border-hover) !important;
+  }
+
+  // .mdc-text-field--outlined {
+  //   --mdc-outlined-text-field-container-shape: 8px !important;
+  // }
+}

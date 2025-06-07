@@ -1,0 +1,280 @@
+// #region ASUS Standard Web Colors
+$white:         #FFFFFF;
+$black:         #000000;
+
+$gray-10:       #F5F5F5;
+$gray-20:       #DCDCDC;
+$gray-30:       #CCCCCC;
+$gray-40:       #B3B3B3;
+$gray-50:       #999999;
+$gray-60:       #818181;
+$gray-70:       #666666;
+$gray-80:       #4D4D4D;
+$gray-90:       #262626;
+// $gray-100:      #181818;
+$gray-100-asus:      #181818;
+
+// $neutral-5:     #F7F8FA;
+// $neutral-10:    #F2F4F7;
+// $neutral-20:    #DADCE0;
+// $neutral-30:    #CBCDD1;
+// $neutral-40:    #AEAFB3;
+// $neutral-50:    #8A8C8F;
+// $neutral-60:    #7D7E81;
+// $neutral-70:    #636466;
+// $neutral-80:    #4B4B4D;
+// $neutral-90:    #282829;
+// $neutral-100:   #1B1B1C;
+
+$blue-10:       #e2f1fc;
+$blue-20:       #b9dcf9;
+$blue-30:       #8cc6f5;
+$blue-40:       #5eb0f1;
+$blue-50:       #399fef;
+$blue-60:       #0690ed;
+$blue-70:       #0582df;
+$blue-80:       #0070cc;
+$blue-90:       #005fba;
+$blue-100:      #00429b;
+
+$orange-40:     #E99267;
+$orange-50:     #F05E16;
+$orange-60:     #C74200;
+
+$teal-50:       #2ED3F1;
+$teal-60:       #007B91;
+$cool-100:      #16151B;
+
+$purple-50:     #A854FF;
+$purple-60:     #8B1AFF;
+$purple-70:     #6400C9;
+$purple-80:     #46008C;
+
+$yellow-10:     #fffbe5;
+$yellow-20:     #fff4bf;
+$yellow-30:     #feef95;
+$yellow-40:     #fce869;
+$yellow-50:     #BF9F00;
+$yellow-60:     #856D00;
+$yellow-70:     #6A5A00;
+$yellow-80:     #665400;
+$yellow-90:     #5B4A00;
+$yellow-100:    #4F3E00;
+
+$red-10:        #feebed;
+$red-20:        #fdced0;
+$red-30:        #eb9c97;
+$red-40:        #df776f;
+$red-50:        #e75b4b;
+$red-60:        #ea4e30;
+$red-70:        #dc4530;
+$red-80:        #ca3c2a;
+$red-90:        #bd3524;
+$red-100:       #ae2c18;
+
+$green-10:      #e9f6ea;
+$green-20:      #cbe9cc;
+$green-30:      #aadbab;
+$green-40:      #89ce8a;
+$green-50:      #6fc370;
+$green-60:      #57b857;
+$green-70:      #4ea94e;
+$green-80:      #429643;
+$green-90:      #388538;
+$green-100:     #256626;
+// #endregion
+
+// #region Color Define
+
+$gray-100:      #f8f9fa !default;
+$gray-200:      #e9ecef !default;
+$gray-300:      #dee2e6 !default;
+$gray-400:      #ced4da !default;
+$gray-500:      #adb5bd !default;
+$gray-600:      #6c757d !default;
+$gray-700:      #495057 !default;
+$gray-800:      #2d2d2d !default;
+$gray-900:      #1f1f1f !default;
+$light-black:   #112b46 !default;
+
+$blue:          #0070cc !default;
+$indigo:        #6610f2 !default;
+$purple:        #6f42c1 !default;
+$pink:          #d63384 !default;
+$red:           #ec5c44 !default;
+$orange:        #F5B22F !default;
+$yellow:        #f8bf45 !default;
+$green:         #64bc4c !default;
+$teal:          #00a84f !default;
+$cyan:          #00c2e0 !default;
+// #endregion
+
+$light-gray-100: #f8f9fa !default;
+$light-gray-200: #e9ecef !default;
+$light-gray-300: #dee2e6 !default;
+$light-gray-400: #ced4da !default;
+$light-gray-500: #adb5bd !default;
+$light-gray-600: #6c757d !default;
+$light-gray-700: #495057 !default;
+$light-gray-800: #2d2d2d !default;
+$light-gray-900: #1f1f1f !default;
+
+$light-blue:     #0070cc !default;
+$light-indigo:   #6610f2 !default;
+$light-purple:   #6f42c1 !default;
+$light-pink:     #d63384 !default;
+$light-red:      #ec5c44 !default;
+$light-orange:   #F5B22F !default;
+$light-yellow:   #f8bf45 !default;
+$light-green:    #64bc4c !default;
+$light-teal:     #00a84f !default;
+$light-cyan:     #00c2e0 !default;
+
+$light-secondary:     $light-gray-400 !default;
+$light-success:       $light-green !default;
+$light-info:          $light-cyan !default;
+$light-warning:       $light-yellow !default;
+$light-danger:        $light-red !default;
+
+// #region theme color define
+$theme-colors: (
+  text:                       $gray-100,
+  border-hover:               rgba($black, 0.5),
+
+  // status
+  primary:                    $blue,
+  secondary:                  $gray-400,
+  success:                    $green,
+  info:                       $cyan,
+  warning:                    $yellow,
+  danger:                     $red,
+
+  // menu
+  menu-bg-color:             $white,
+
+  // scroll bar color define
+  scrollbar-shadow-color:     rgba($light-black, 0.15),
+  scrollbar-bg-color:         $gray-100,
+  scrollbar-thumb-bg-color:   #ccc,
+
+  // dialog color define
+  dialog-bg-color:            $white,
+  dialog-subtitle:            rgba($black, 0.6),
+
+  // sidemenu color define
+  sidemenu-active-bg-color:   rgba(204, 204, 204),
+  sidemenu-active-left:       rgba(139, 137, 133),
+
+  // status card color define
+  status-card-button-bg:      $gray-900,
+  status-card-progress-bg:    lighten($gray-900, 5%),
+
+  // table color define
+  table-color-border:         darken($gray-100, 20%),
+  table-color-header-row:     darken($gray-100, 5%),
+  table-color-row:            $white,
+  table-color-row-even:       $gray-100,
+  table-color-row-hover:      darken($gray-100, 5%),
+  table-color-group-header:   rgba($gray-800, 0.04),
+
+  // rack color define
+  rack-border-color-1:        #222222,
+  rack-border-color-2:        rgb(3, 3, 3),
+  rack-border-color-3:        rgb(64, 76, 88),
+  rack-container-orange:      rgb(206, 101, 59),
+  rack-container-blue:        rgb(10, 49, 100),
+  rack-container-black:       #0000,
+  rack-indicator-locator:     rgb(48, 100, 21),
+
+  // test stage color define
+  stage-shadow-color-1:       rgba(0, 0, 0, 0.5),
+  stageBox-background-color:  #1F5673,
+  toolList-color:             #55b2d4,
+  testBox-color:              cadetblue
+);
+// #endregion
+
+// #region palette define
+$blue-palette: (
+  50:  #e2f1ff,
+  100: #b8dbff,
+  200: #89c6ff,
+  300: #56afff,
+  400: #279eff,
+  500: #008dff,
+  600: #007ff5,
+  700: #006de1,
+  800: #0a5bcf,
+  900: #123baf,
+  contrast: (
+    50:  rgba($black, 0.87),
+    100: rgba($black, 0.87),
+    200: rgba($black, 0.87),
+    300: rgba($black, 0.87),
+    400: rgba($black, 0.87),
+    500: #F5F5F5,
+    600: #F5F5F5,
+    700: #F5F5F5,
+    800: #F5F5F5,
+    900: #F5F5F5,
+  )
+);
+
+$green-palette: (
+  50:  #e8f6e7,
+  100: #c7e8c5,
+  200: #a3d9a0,
+  300: #7ccb79,
+  400: #5ec05b,
+  500: #3fb43b,
+  600: #36a533,
+  700: #289327,
+  800: #1a821c,
+  900: #006303,
+  contrast: (
+    50:  rgba($black, 0.87),
+    100: rgba($black, 0.87),
+    200: rgba($black, 0.87),
+    300: rgba($black, 0.87),
+    400: rgba($black, 0.87),
+    500: rgba($black, 0.87),
+    600: #F5F5F5,
+    700: #F5F5F5,
+    800: #F5F5F5,
+    900: #F5F5F5,
+  )
+);
+
+$red-palette: (
+  50:  #ffeced,
+  100: #ffcfd1,
+  200: #ef9d98,
+  300: #e47870,
+  400: #E75B4B,// $red-50:
+  500: #f04f30,
+  600: #e24630,
+  700: #d03c2b,
+  800: #c33624,
+  900: #5A140C,// $red-80:
+  contrast: (
+    50:  rgba($black, 0.87),
+    100: rgba($black, 0.87),
+    200: rgba($black, 0.87),
+    300: rgba($black, 0.87),
+    400: rgba($black, 0.87),
+    500: #F5F5F5,
+    600: #F5F5F5,
+    700: #F5F5F5,
+    800: #F5F5F5,
+    900: #F5F5F5,
+  )
+);
+// #endregion
+
+$material-light-primary: mat.m2-define-palette($blue-palette, 600);
+$material-light-accent: mat.m2-define-palette($green-palette, 700);
+$material-light-warn: mat.m2-define-palette($red-palette, 500);
+
+$material-dark-primary: mat.m2-define-palette($blue-palette, 700);
+$material-dark-accent: mat.m2-define-palette($green-palette, 900);
+$material-dark-warn: mat.m2-define-palette($red-palette, 800);

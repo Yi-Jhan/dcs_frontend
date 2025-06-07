@@ -1,0 +1,45 @@
+<mat-card class="dashboard-card">
+  <mat-card-header>
+    <mat-card-title style="white-space: nowrap;margin-right: 16px;">
+      <i class="fas fa-bolt"></i>&nbsp;{{'i18n_Status' | translate}}
+    </mat-card-title>
+    <mat-card-subtitle>{{'i18n_'+statusSelection | translate}}</mat-card-subtitle>
+    <div class="btn-container">
+      <ng-container *ngFor="let button of statusButtons; let i=index">
+        <div class="status-btn" [ngClass]="{'btn-selected': statusSelection===button.name}" mat-ripple (click)="onClickStatusButton(button)">
+          <div class="btn-icon" [ngClass]="button.cssClass">
+            <i *ngIf="button.value > 0" [ngClass]="button.iconAct" [style]="button.style"></i>
+            <i *ngIf="button.value == 0" [ngClass]="button.icon"></i>
+          </div>
+          <div class="btn-info">
+            <div class="sataus-info">
+              <span class="sataus-name">{{ 'i18n_' + button.name | translate }}</span>
+              <span>{{button.value}}</span>
+            </div>
+            <!-- <div class="sataus-info">
+              <span>{{button.value}}</span>
+            </div> -->
+            <!-- <div class="proportion-info">
+              <mat-progress-bar [ngClass]="button.key+'-bar'" class="status-progress-bar" [value]="(button.value/displayedCount)*100"></mat-progress-bar>
+            </div> -->
+          </div>
+        </div>
+      </ng-container>
+    </div>
+  </mat-card-header>
+  <div class="displayedCount">
+    <div style="font-size: 1.5rem;">{{'i18n_Total' | translate}}</div>
+    <div class="count">{{displayedCount}}</div>
+  </div>
+</mat-card>
+<div class="status-bar" [style.opacity]="statusSelection == 'All' ? 1:0">
+  <ng-container *ngFor="let button of statusButtons">
+    <div class="status-proportion"
+      *ngIf="button.value > 0"
+      [ngClass]="button.cssClass"
+      [style.width.%]="button.value/displayedCount*100"
+      [matTooltip] ="calPercent(button.value, displayedCount)"
+      matTooltipPosition="below">
+    </div>
+  </ng-container>
+</div>

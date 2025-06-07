@@ -1,0 +1,49 @@
+#############
+### build ###
+#############
+
+# base image
+FROM node:20.11.1 as build
+
+# set working directory
+WORKDIR /app
+
+# add `/app/node_modules/.bin` to $PATH
+ENV PATH /app/node_modules/.bin:$PATH
+
+# add app
+COPY . /app
+
+# install and cache app dependencies
+RUN npm install --legacy-peer-deps
+
+RUN npm i ngx-echarts
+
+# puppeteer can't launch chromium, missing shared library libgbm.so
+RUN apt-get update && \
+    apt-get install -y libnss3 libnspr4 libatk1.0-0 libatk-bridge2.0-0 libcups2 libdrm2 libxkbcommon0 libxcomposite1 libxdamage1 libxfixes3 libxrandr2 libgbm1 libasound2
+
+# sonar scan
+#RUN npm run test:ci
+#RUN npm run sonar
+
+# generate build
+ARG dcs_frontend_feature
+RUN npm run build:$dcs_frontend_feature
+
+############
+### prod ###
+############
+
+# base image
+FROM nginx:alpine3.18
+
+# copy artifact build from the 'build environment'
+COPY --from=build /app/dist/dcs-frontend/* /usr/share/nginx/html/
+COPY --from=build /app/dist/dcs-frontend/browser/assets/i18n/* /usr/share/nginx/html/
+
+# expose port 80
+EXPOSE 80
+
+# run nginx
+CMD ["nginx", "-g", "daemon off;"]

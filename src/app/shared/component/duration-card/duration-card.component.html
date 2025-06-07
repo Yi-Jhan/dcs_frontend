@@ -1,0 +1,24 @@
+<mat-card style="height: 311px;">
+  <mat-card-header>
+    <mat-card-title>
+      <i class="fas fa-clock"></i>&nbsp;{{'i18n_Duration' | translate}}&nbsp;{{'i18n_Top'| translate}}&nbsp;{{top5.length}}
+    </mat-card-title>
+  </mat-card-header>
+  <i  class="switch-btn fa-solid"
+      matRipple
+      [ngClass]="{'fa-arrow-down-wide-short': sortDirection==='desc', 'fa-arrow-up-short-wide': sortDirection==='asc'}"
+      [matRippleUnbounded]="true"
+      [matRippleCentered]="true"
+      [matRippleRadius]="20"
+      (click)="sort()"></i>
+
+  <mat-card-content>
+    <div echarts
+      [options]="initialOption"
+      [merge]="option"
+      style="height: 228px;"
+      (chartClick)="onChartEvent($event)">
+  </div>
+  </mat-card-content>
+
+</mat-card>

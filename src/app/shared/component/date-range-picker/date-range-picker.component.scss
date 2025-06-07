@@ -1,0 +1,109 @@
+.search-container {
+
+  display: flex;
+
+  app-chips-input {
+    flex: 1 1 0;
+  }
+
+  .calendar-container {
+    display: flex;
+    // border: 1px solid rgba(173, 181, 189, 0.6);
+    border-top: 1px solid rgba(173, 181, 189, 0.6);
+    border-bottom: 1px solid rgba(173, 181, 189, 0.6);
+    // border-right: 1px solid rgba(173, 181, 189, 0.6);
+    height: 34px;
+
+    .calendar-input {
+      width: 0px;
+    }
+  }
+
+  .search-operator {
+    border: 1px solid rgba(173, 181, 189, 0.6);
+  }
+}
+
+.search-input {
+  width: 100%;
+
+  &.mat-form-field-appearance-outline {
+
+    .mat-form-field-wrapper{
+      margin: 0;
+      padding-bottom: 8px;
+    }
+
+    .mat-form-field-outline {
+      color: rgba(173, 181, 189, 0.6);
+      height: 36px;
+    }
+
+    .mat-form-field-outline-end {
+      border-width: 1px;
+      border-radius: 0;
+    }
+
+    .mat-form-field-outline-thick {
+      color: rgba(173, 181, 189, 0.6);
+
+      .mat-form-field-outline-start {
+        border-width: 1px;
+      }
+
+      .mat-form-field-outline-end {
+        border-width: 1px;
+        border-radius: 0;
+      }
+    }
+
+    // &.mat-focused .mat-form-field-outline-thick {
+    //   color: rgba(173, 181, 189, 0.6);
+    // }
+  }
+
+  .mat-form-field-infix {
+    border-top: 0px solid transparent;
+    padding: 6px 0;
+    width: 80px;
+  }
+
+  .mat-chip-list-wrapper {
+    height: 35px;
+    margin-top: -2px;
+    overflow-y: auto;
+
+    input.mat-input-element {
+      line-height: 24px;
+      caret-color: auto;
+    }
+  }
+
+  .mat-standard-chip {
+    &.mat-chip-with-trailing-icon {
+      padding: 0 8px 0px 12px;
+      min-height: 24px;
+      line-height: 24px;
+      margin: 4px 2px;
+    }
+
+    .mat-chip-remove, .mat-chip-trailing-icon {
+      height: 24px;
+      margin-left: 4px;
+    }
+  }
+}
+
+.clear-btn.mat-flat-button {
+  border-radius: 0 4px 4px 0;
+}
+
+.calendar-btn.mat-stroked-button {
+  padding: 0;
+  min-width: 36px;
+  border: 0;
+}
+
+.hide-input .mat-date-range-input-separator {
+  display: none;
+}

@@ -1,0 +1,199 @@
+<div class="container-fluid">
+    <div class="row animate__animated animate__fadeIn">
+        <div class="col">
+            <mat-card >
+              <mat-card-header>
+                <mat-card-title style="border-bottom: 3px solid #0070cc; font-size:24px;">{{'i18n_AccountMgm' | translate}}</mat-card-title>
+              </mat-card-header>
+              <mat-card-content>
+                <div class="row" style="align-items: center;">
+                    <div class="col-md-6 col-sm-8">
+                      <app-search-bar [id]="'tableFilterSearch'" [enteredValue]="filters" [dateRangerPicker]="false"></app-search-bar>
+                    </div>
+                    <div class="col-md-6 col-sm-4">
+                      <div style="float:right;">
+                        <button mat-raised-button color="primary" (click)="openCreateAccountDialog()"><i class="fa-solid fa-plus"></i>&nbsp;{{'i18n_Add' | translate}}</button>
+                      </div>
+                    </div>
+                  </div>
+                <app-data-table
+                  [id]="tableID"
+                  [columnDefs]="columnsDef"
+                  [data]="accountList"
+                  [isLoading]="isLoadingResults"
+                  [groupByColumns]="groupByColumns"
+                  [filters]="filters"
+                  [height]="'75vh'" />
+              </mat-card-content>
+            </mat-card>
+        </div>
+    </div>
+</div>
+
+<ng-template #createAccountDialog let-data>
+  <form [formGroup]="createAccountForm">
+    <div class="row">
+      <div class="col-3">{{'i18n_Username' | translate}}</div>
+      <div class="col-9">
+        <mat-form-field class="form-field" appearance="outline">
+          <input matInput type="text" formControlName="username">
+          <mat-error *ngIf="isControlHasError('createAccountForm', 'username', 'required')">{{'i18n_UsernameRequiredMsg' | translate}}</mat-error>
+        </mat-form-field>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-3">{{'i18n_Password' | translate}}</div>
+      <div class="col-9">
+        <mat-form-field class="form-field" appearance="outline">
+          <input matInput [type]="hidePassword ? 'password' : 'text'" formControlName="password">
+          <button mat-icon-button matSuffix (click)="hidePassword = !hidePassword" [attr.aria-label]="'hidePassword password'" [attr.aria-pressed]="hidePassword">
+            <mat-icon>{{hidePassword ? 'visibility_off' : 'visibility'}}</mat-icon>
+          </button>
+          <mat-error *ngIf="isControlHasError('createAccountForm', 'password', 'required')">{{'i18n_PasswordRequiredMsg' | translate}}</mat-error>
+          <mat-error *ngIf="createAccountForm.value.password">{{'i18n_PasswordInvalidMsg' | translate}}</mat-error>
+        </mat-form-field>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-3">{{'i18n_ConfirmPassword' | translate}}</div>
+      <div class="col-9">
+        <mat-form-field class="form-field" appearance="outline">
+          <input matInput [type]="hideConfirmPassword ? 'password' : 'text'" formControlName="confirmPassword">
+          <button mat-icon-button matSuffix (click)="hideConfirmPassword = !hideConfirmPassword" [attr.aria-label]="'hideConfirmPassword password'" [attr.aria-pressed]="hideConfirmPassword">
+            <mat-icon>{{hideConfirmPassword ? 'visibility_off' : 'visibility'}}</mat-icon>
+          </button>
+          <mat-error *ngIf="isControlHasError('createAccountForm', 'confirmPassword', 'required')">{{'i18n_PasswordRequiredMsg' | translate}}</mat-error>
+          <mat-error *ngIf="createAccountForm.get('confirmPassword')?.errors && $any(createAccountForm.get('confirmPassword')?.errors).ConfirmPassword"><strong>{{'AccountMgm.Dialog.ConfirmInvalidMsg' | translate}}</strong></mat-error>
+        </mat-form-field>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-3">{{'i18n_Dialog.Email' | translate}}</div>
+      <div class="col-9">
+        <mat-form-field class="form-field" appearance="outline">
+          <!-- <input matInput type="text" formControlName="email" pattern="[a-zA-Z0-9.-_]{1,}@[a-zA-Z.-]{2,}[.]{1}[a-zA-Z]{2,}"> -->
+          <!-- <input matInput type="text" formControlName="email" pattern="/^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/"> -->
+          <input matInput type="text" formControlName="email">
+          <mat-error *ngIf="isControlHasError('createAccountForm', 'email', 'required')">{{'i18n_EmailRequiredMsg' | translate}}</mat-error>
+          <mat-error *ngIf="createAccountForm.get('email')?.hasError('email')">{{'i18n_EmailInvalidMsg' | translate}}</mat-error>
+        </mat-form-field>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-3">{{'i18n_Role' | translate}}</div>
+      <div class="col-9">
+        <mat-form-field class="form-field" appearance="outline">
+          <mat-select formControlName="roleId">
+            <mat-option *ngFor="let role of roleOpt" [value]="role.id">{{role.name}}</mat-option>
+          </mat-select>
+          <mat-error *ngIf="createAccountForm.get('roleId')?.hasError('required')">{{'i18n_RoleMsg' | translate}}</mat-error>
+        </mat-form-field>
+        <!-- <mat-form-field class="form-field" appearance="outline" style="width:150px; font-size:16px;">
+          <mat-select [(value)]="defaultOpt" (selectionChange)="selectStage($event.value)">
+            <mat-option class="stage-option" *ngFor="let opt of stagesOpt" [value]="opt.value">{{opt.display}}</mat-option>
+          </mat-select>
+        </mat-form-field> -->
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-3">{{'i18n_Active' | translate}}</div>
+      <div class="col-9"><mat-slide-toggle formControlName="active" color="primary"></mat-slide-toggle></div>
+      <!-- <div class="col-9"><mat-checkbox color="primary" labelPosition="before" formControlName="active"></mat-checkbox></div> -->
+    </div>
+  </form>
+</ng-template>
+
+<ng-template #updateAccountDialog let-data>
+  <form [formGroup]="updateAccountForm">
+    <div class="row">
+      <div class="col-3">{{'i18n_Username' | translate}}</div>
+      <div class="col-9">{{username}}
+        <!-- <mat-form-field class="form-field" appearance="outline">
+          <input matInput [readonly]="true" type="text" formControlName="username">
+        </mat-form-field> -->
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-3">{{'i18n_Password' | translate}}</div>
+      <div class="col-9">
+        <mat-form-field class="form-field" appearance="outline">
+          <input matInput [type]="hidePassword ? 'password' : 'text'" formControlName="password">
+          <button mat-icon-button matSuffix (click)="hidePassword = !hidePassword" [attr.aria-label]="'hidePassword password'" [attr.aria-pressed]="hidePassword">
+            <mat-icon>{{hidePassword ? 'visibility_off' : 'visibility'}}</mat-icon>
+          </button>
+          <mat-error *ngIf="isControlHasError('updateAccountForm', 'password', 'required')">{{'i18n_PasswordRequiredMsg' | translate}}</mat-error>
+          <mat-error *ngIf="updateAccountForm.value.password">{{'i18n_PasswordInvalidMsg' | translate}}</mat-error>
+        </mat-form-field>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-3">{{'i18n_ConfirmPassword' | translate}}</div>
+      <div class="col-9">
+        <mat-form-field class="form-field" appearance="outline">
+          <input matInput [type]="hideConfirmPassword ? 'password' : 'text'" formControlName="confirmPassword">
+          <button mat-icon-button matSuffix (click)="hideConfirmPassword = !hideConfirmPassword" [attr.aria-label]="'hideConfirmPassword password'" [attr.aria-pressed]="hideConfirmPassword">
+            <mat-icon>{{hideConfirmPassword ? 'visibility_off' : 'visibility'}}</mat-icon>
+          </button>
+          <mat-error *ngIf="isControlHasError('updateAccountForm', 'confirmPassword', 'required')">{{'i18n_PasswordRequiredMsg' | translate}}</mat-error>
+          <mat-error *ngIf="updateAccountForm.get('confirmPassword')?.errors && $any(updateAccountForm.get('confirmPassword')?.errors).ConfirmPassword"><strong>{{'i18n_ConfirmPasswordInvalidMsg' | translate}}</strong></mat-error>
+        </mat-form-field>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-3">{{'i18n_Email' | translate}}</div>
+      <div class="col-9">
+        <mat-form-field class="form-field" appearance="outline">
+          <input matInput type="text" formControlName="email">
+          <mat-error *ngIf="isControlHasError('updateAccountForm', 'email', 'required')">{{'i18n_EmailRequiredMsg' | translate}}</mat-error>
+          <mat-error *ngIf="updateAccountForm.get('email')?.hasError('email')">{{'i18n_EmailInvalidMsg' | translate}}</mat-error>
+        </mat-form-field>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-3">{{'i18n_Role' | translate}}</div>
+      <div class="col-9">
+        <mat-form-field class="form-field" appearance="outline">
+          <!-- <mat-select [formControl]="roleIdControl" name="roleId"> -->
+          <mat-select formControlName="roleId">
+            <mat-option *ngFor="let role of roleOpt" [value]="role.id">{{role.name}}</mat-option>
+          </mat-select>
+          <mat-error *ngIf="updateAccountForm.get('roleId')?.hasError('required')">{{'i18n_RoleMsg' | translate}}</mat-error>
+        </mat-form-field>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-3">{{'i18n_Active' | translate}}</div>
+      <div class="col-9"><mat-slide-toggle formControlName="active" color="primary"></mat-slide-toggle></div>
+      <!-- <div class="col-9"><mat-checkbox color="primary" labelPosition="before" formControlName="active"></mat-checkbox></div> -->
+    </div>
+    <div class="row">
+      <!-- <div class="col-3"><mat-slide-toggle color="primary" (change)="toggle($event)" [checked]="usingMFA" formControlName="using2FA"></mat-slide-toggle></div> -->
+      <div class="col-3">{{'i18n_MFA' | translate}}</div>
+      <div class="col-9"><mat-slide-toggle color="primary" (change)="toggleMFA($event.checked)" [checked]="usingMFA" formControlName="usingMFA"></mat-slide-toggle></div>
+    </div>
+  </form>
+</ng-template>
+
+<ng-template #mfaDialog let-data>
+  <h4>{{'i18n_FollowSteps' | translate}}</h4>
+  <br>
+  <span>{{'i18n_MFAStep1' | translate}}</span>
+  <br><br>
+  <span>{{'i18n_MFAStep2' | translate}}</span>
+  <div style="text-align: center;padding: 10px;">
+    <span *ngIf="verifyTimeLeft > 0">{{'i18n_MFAQRCodeExpired' | translate}}&nbsp;{{verifyTimeLeft}}&nbsp;{{'i18n_Seconds' | translate}}</span>
+    <br><br>
+    <img *ngIf="verifyTimeLeft > 0" style="height: 180px;" [src]="qrcode">
+  </div>
+  <span>{{'i18n_MFAStep3' | translate}}</span>
+  <div style="text-align: center;padding: 10px;">
+    <!-- <mat-form-field appearance="outline">
+      <mat-label>Verification Code</mat-label>
+      <input matInput placeholder="">
+    </mat-form-field> -->
+    <mat-form-field appearance="fill">
+      <input matInput type="text" maxlength="6" [(ngModel)]="code">
+    </mat-form-field>
+  </div>
+  <div *ngIf="invalidCode" style="text-align: center;">{{'i18n_MFAInvalidCode' | translate}}</div>
+</ng-template>

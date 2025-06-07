@@ -1,0 +1,30 @@
+<!-- Header -->
+<app-banner />
+
+<mat-sidenav-container class="sidenav-container">
+  <!-- Sidemenu -->
+  <mat-sidenav class="sidenav-menu" mode="side" [opened]="sideMenuStatus()">
+    <app-sidemenu />
+  </mat-sidenav>
+
+  <mat-sidenav-content>
+    @if (loginStatus()) {
+      <app-breadcrumb />
+    }
+    <router-outlet></router-outlet>
+  </mat-sidenav-content>
+
+</mat-sidenav-container>
+
+<ng-template #timeoutDialog>
+  <div>
+    @if (expire) {
+        Your session has been expire in <strong class="status-font-danger">{{expiretDate}}</strong>
+    } @else {
+        Your session will expire in
+        <strong class='status-font-danger'>{{countdown}}</strong>
+        seconds starting from
+        <strong class='tatus-font-danger'>{{idleStartDate}}</strong>
+    }
+  </div>
+</ng-template>

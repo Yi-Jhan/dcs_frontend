@@ -1,0 +1,28 @@
+<mat-card>
+
+  <mat-card-header>
+    <mat-card-title style="border-bottom: 3px solid #0070cc;font-size: 24px;"><i
+      class="fas fa-tasks"></i>&nbsp;{{'i18n_ProcessProfile' | translate}}</mat-card-title>
+  </mat-card-header>
+
+  <mat-card-content>
+    <div class="row">
+      <div class="col mb-3">
+        <app-chips-input class="form-control" [id]="id()" [placeholder]="placeholder()"
+          [chips]="enteredValue()">
+        </app-chips-input>
+      </div>
+      <div class="col mb-3">
+        <button mat-raised-button color="primary" (click)="createNewProfile()"><i class="fas fa-plus"></i>&nbsp;&nbsp;{{'i18n_Add' | translate}}</button>
+      </div>
+    </div>
+    <app-data-table
+      [id]="tableID"
+      [data]="profileData"
+      [columnDefs]="columnsDef"
+      [isLoading]="isLoadingResults"
+      [groupByColumns]="groupByColumns"
+      [filters]="filters" [height]="500" />
+  </mat-card-content>
+
+</mat-card>

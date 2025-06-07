@@ -1,0 +1,43 @@
+<mat-toolbar class="p-2">
+  <div class="banner">
+    @if (loginStatus()) {
+      <button mat-icon-button (click)="sideMenuToggle()"><i class="fa-solid fa-bars fa-sm"></i></button>
+    }
+    <span class="logo-name ms-2">{{ title }}</span>
+    <span class="spacer"></span>
+    <span class="current-time me-2">{{ currentTime }}</span>
+    <div class="vertical-line"></div>
+
+    <!-- <mat-button-toggle-group [(ngModel)]="mode" name="themeMode" (change)="test()">
+      <mat-button-toggle value="theme-light">Light</mat-button-toggle>
+      <mat-button-toggle value="theme-dark">Dark</mat-button-toggle>
+    </mat-button-toggle-group> -->
+
+    @if (loginStatus()) {
+      <button mat-icon-button><i class="fa-solid fa-face-smile fa-sm"></i></button>
+    }
+    <button mat-icon-button [matMenuTriggerFor]="langsOption"><i class="fa-solid fa-globe fa-sm"></i></button>
+    <button mat-icon-button><i class="fa-solid fa-circle-info fa-sm"></i></button>
+    @if (loginStatus()) {
+      <button mat-icon-button><i class="fa-solid fa-envelope fa-sm"></i></button>
+    }
+
+    <button mat-icon-button (click)="switchTheme()"><i [ngClass]="{'fa-solid fa-moon fa-sm' : mode === 'theme-light', 'fa-regular fa-sun fa-sm' : mode === 'theme-dark'}"></i></button>
+
+    <div class="vertical-line"></div>
+    @if (loginStatus()) {
+      <button mat-button [matMenuTriggerFor]="accountMenu" class="ms-1"><i class="fa-solid fa-user fa-xl me-2"></i>{{ userName }}</button>
+    }
+
+  </div>
+</mat-toolbar>
+
+<mat-menu #accountMenu>
+  <button mat-menu-item (click)="logout()">Logout</button>
+</mat-menu>
+
+<mat-menu #langsOption>
+  @for (lang of languageList; track lang;) {
+    <button mat-menu-item (click)="changeLang(lang.key)">{{ lang.value }}</button>
+  }
+</mat-menu>

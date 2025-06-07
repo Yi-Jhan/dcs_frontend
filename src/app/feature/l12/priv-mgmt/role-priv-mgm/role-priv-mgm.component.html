@@ -1,0 +1,42 @@
+<div class="container-fluid">
+  <div class="row animate__animated animate__fadeIn">
+    <div class="col">
+      <mat-card>
+        <mat-card-header>
+          <mat-card-title style="border-bottom: 3px solid #0070cc;font-size: 24px;">
+            <label>{{'i18n_RoleInfo' | translate}}</label>
+          </mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+          <div class="row">
+            <div class="col-md-6 col-sm-8">
+              <app-search-bar [id]="'tableFilterSearch'"
+                              [enteredValue]="filters"
+                              [dateRangerPicker]="false">
+              </app-search-bar>
+            </div>
+            <div class="col-md-6 col-sm-4">
+              <div style="float: right;">
+                <button mat-raised-button color="primary" (click)="createNewRole()">
+                  <i class="fa-solid fa-plus"></i>&nbsp;{{'i18n_Add' | translate}}
+                </button>
+              </div>
+            </div>
+          </div>
+          <app-data-table
+            [id]="tableID"
+            [data]="data"
+            [columnDefs]="columnsDef"
+            [columnsPanel]="false"
+            [filters]="filters"
+            [height]="'calc(100vh - 278px)'"
+            [isLoading]="isLoadingResults" />
+        </mat-card-content>
+      </mat-card>
+    </div>
+  </div>
+</div>
+
+<ng-template #confirmDialog let-data>
+  <p style="white-space: pre-wrap;">{{'i18n_Confirm' | translate}}{{data}}</p>
+</ng-template>

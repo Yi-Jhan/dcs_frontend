@@ -1,0 +1,64 @@
+<div>
+  <form [formGroup]="exportForm">
+    <div class="field">
+      <div class="field-title">{{'i18n_ExportType' | translate}}&nbsp;</div>
+      <div class="field-content">
+        <mat-radio-group aria-label="Select an option" formControlName="fileType">
+          <mat-radio-button value="csv">CSV</mat-radio-button>
+          <mat-radio-button value="pdf">PDF</mat-radio-button>
+        </mat-radio-group>
+      </div>
+    </div>
+
+    <div class="field">
+      <div class="field-title">{{'i18n_FileName' | translate}}</div>
+      <div class="field-content">
+        <mat-form-field class="form-field" appearance="outline">
+          <input matInput class="form-field" formControlName="fileName" autocomplete="off">
+        </mat-form-field>
+      </div>
+    </div>
+  </form>
+
+  <div class="columns-header" style="margin: 10px 0 5px 0;">{{'i18n_Fields' | translate}}</div>
+
+  <div class="cloumns-container">
+    <div class="column-title">{{'i18n_Hide' | translate}}</div>
+    <div
+      cdkDropList
+      #todoList="cdkDropList"
+      [cdkDropListData]="columnsHide"
+      [cdkDropListConnectedTo]="[doneList]"
+      class="cloumns-list"
+      (cdkDropListDropped)="drop($event)">
+      <div class="cloumns-box" *ngFor="let item of columnsHide" cdkDrag cdkDragPreviewContainer="parent">
+        {{item.headerName | translate}}
+      </div>
+    </div>
+  </div>
+
+  <div style="display: inline-block; margin: 0 20px; font-size: 18px;">
+    <i class="fa-solid fa-right-left"></i>
+  </div>
+
+  <div class="cloumns-container">
+    <div class="column-title">{{'i18n_Show' | translate}}</div>
+    <div
+      cdkDropList
+      #doneList="cdkDropList"
+      [cdkDropListData]="columnsShow"
+      [cdkDropListConnectedTo]="[todoList]"
+      class="cloumns-list"
+      (cdkDropListDropped)="drop($event)">
+      <div class="cloumns-box col-selected" *ngFor="let item of columnsShow" cdkDrag cdkDragPreviewContainer="parent">
+        {{item.headerName | translate}}
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+

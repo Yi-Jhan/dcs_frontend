@@ -1,0 +1,365 @@
+@font-face {
+  font-family: 'icon_acc';
+  src:  url('./fonts/icon_acc.eot?26wd6p');
+  src:  url('./fonts/icon_acc.eot?26wd6p#iefix') format('embedded-opentype'),
+    url('./fonts/icon_acc.ttf?26wd6p') format('truetype'),
+    url('./fonts/icon_acc.ttf?26wd6p') format('woff'),
+    url('./fonts/icon_acc.svg?26wd6p#icon_acc') format('svg');
+  font-weight: normal;
+  font-style: normal;
+  font-display: block;
+}
+
+i {
+  /* use !important to prevent issues with browser extensions that change fonts */
+  font-family: 'icon_acc';
+  speak: never;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+
+  /* Better Font Rendering =========== */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.iconacc-access:before {
+  content: "\e900";
+}
+.iconacc-accounts:before {
+  content: "\e901";
+}
+.iconacc-add-on-cards:before {
+  content: "\e902";
+}
+.iconacc-add:before {
+  content: "\e903";
+}
+.iconacc-add_redfish:before {
+  content: "\e904";
+}
+.iconacc-add_vsphere:before {
+  content: "\e905";
+}
+.iconacc-agents_update:before {
+  content: "\e906";
+}
+.iconacc-appearance:before {
+  content: "\e907";
+}
+.iconacc-application:before {
+  content: "\e908";
+}
+.iconacc-backplane_s_on:before {
+  content: "\e909";
+}
+.iconacc-ic_backup:before {
+  content: "\e90a";
+}
+.iconacc-bad:before {
+  content: "\e90b";
+}
+.iconacc-bios:before {
+  content: "\e90c";
+}
+.iconacc-bios_update:before {
+  content: "\e90d";
+}
+.iconacc-bmc:before {
+  content: "\e90e";
+}
+.iconacc-centralized:before {
+  content: "\e90f";
+}
+.iconacc-chassis_s_on:before {
+  content: "\e910";
+}
+.iconacc-check_s:before {
+  content: "\e911";
+}
+.iconacc-close:before {
+  content: "\e912";
+}
+.iconacc-collapse_s:before {
+  content: "\e913";
+}
+.iconacc-connection:before {
+  content: "\e914";
+}
+.iconacc-cpu:before {
+  content: "\e915";
+}
+.iconacc-cpu_s_on:before {
+  content: "\e916";
+}
+.iconacc-critical:before {
+  content: "\e917";
+}
+.iconacc-data-base-access:before {
+  content: "\e918";
+}
+.iconacc-delete:before {
+  content: "\e919";
+}
+.iconacc-deploy_agents:before {
+  content: "\e91a";
+}
+.iconacc-deployment:before {
+  content: "\e91b";
+}
+.iconacc-device_access:before {
+  content: "\e91c";
+}
+.iconacc-dimm:before {
+  content: "\e91d";
+}
+.iconacc-dimm_s_on:before {
+  content: "\e91e";
+}
+.iconacc-disable:before {
+  content: "\e91f";
+}
+.iconacc-edit:before {
+  content: "\e920";
+}
+.iconacc-ic_empty:before {
+  content: "\e921";
+}
+.iconacc-enviroment-info:before {
+  content: "\e922";
+}
+.iconacc-event-log:before {
+  content: "\e923";
+}
+.iconacc-expand:before {
+  content: "\e924";
+}
+.iconacc-expand_s:before {
+  content: "\e925";
+}
+.iconacc-export:before {
+  content: "\e926";
+}
+.iconacc-fan:before {
+  content: "\e927";
+}
+.iconacc-fan_s_on:before {
+  content: "\e928";
+}
+.iconacc-feedback:before {
+  content: "\e929";
+}
+.iconacc-file:before {
+  content: "\e92a";
+}
+.iconacc-filter-config:before {
+  content: "\e92b";
+}
+.iconacc-filter:before {
+  content: "\e92c";
+}
+.iconacc-focus_software:before {
+  content: "\e92d";
+}
+.iconacc-good:before {
+  content: "\e92e";
+}
+.iconacc-hard-disk:before {
+  content: "\e92f";
+}
+.iconacc-hardware:before {
+  content: "\e930";
+}
+.iconacc-hidden:before {
+  content: "\e931";
+}
+.iconacc-home:before {
+  content: "\e932";
+}
+.iconacc-hotfix:before {
+  content: "\e933";
+}
+.iconacc-hw-sensor:before {
+  content: "\e934";
+}
+.iconacc-import:before {
+  content: "\e935";
+}
+.iconacc-language:before {
+  content: "\e936";
+}
+.iconacc-led-loccator:before {
+  content: "\e937";
+}
+.iconacc-led:before {
+  content: "\e938";
+}
+.iconacc-led_s_on:before {
+  content: "\e939";
+}
+.iconacc-licence:before {
+  content: "\e93a";
+}
+.iconacc-logout:before {
+  content: "\e93b";
+}
+.iconacc-maintenace:before {
+  content: "\e93c";
+}
+.iconacc-market:before {
+  content: "\e93d";
+}
+.iconacc-menu:before {
+  content: "\e93e";
+}
+.iconacc-metadata-editor:before {
+  content: "\e93f";
+}
+.iconacc-model:before {
+  content: "\e940";
+}
+.iconacc-network:before {
+  content: "\e941";
+}
+.iconacc-network_s_on:before {
+  content: "\e942";
+}
+.iconacc-noresult:before {
+  content: "\e943";
+}
+.iconacc-notification:before {
+  content: "\e944";
+}
+.iconacc-partition_s_on:before {
+  content: "\e945";
+}
+.iconacc-power-supply:before {
+  content: "\e946";
+}
+.iconacc-power-supply_s_on:before {
+  content: "\e947";
+}
+.iconacc-power:before {
+  content: "\e948";
+}
+.iconacc-process:before {
+  content: "\e949";
+}
+.iconacc-refetch:before {
+  content: "\e94a";
+}
+.iconacc-refresh:before {
+  content: "\e94b";
+}
+.iconacc-remote:before {
+  content: "\e94c";
+}
+.iconacc-remove_agents:before {
+  content: "\e94d";
+}
+.iconacc-remove_redfish:before {
+  content: "\e94e";
+}
+.iconacc-remove_vsphere:before {
+  content: "\e950";
+}
+.iconacc-report:before {
+  content: "\e951";
+}
+.iconacc-save:before {
+  content: "\e952";
+}
+.iconacc-scan_deploy:before {
+  content: "\e953";
+}
+.iconacc-search:before {
+  content: "\e954";
+}
+.iconacc-security:before {
+  content: "\e955";
+}
+.iconacc-sensor-threshold:before {
+  content: "\e956";
+}
+.iconacc-server:before {
+  content: "\e957";
+}
+.iconacc-settings:before {
+  content: "\e958";
+}
+.iconacc-show-devices:before {
+  content: "\e959";
+}
+.iconacc-smart_s_on:before {
+  content: "\e95a";
+}
+.iconacc-smtp:before {
+  content: "\e95b";
+}
+.iconacc-software:before {
+  content: "\e95c";
+}
+.iconacc-software_dispatch:before {
+  content: "\e95d";
+}
+.iconacc-software_pool:before {
+  content: "\e95e";
+}
+.iconacc-software_remove:before {
+  content: "\e95f";
+}
+.iconacc-storage:before {
+  content: "\e960";
+}
+.iconacc-subscription-report:before {
+  content: "\e961";
+}
+.iconacc-task_report:before {
+  content: "\e962";
+}
+.iconacc-temperature:before {
+  content: "\e963";
+}
+.iconacc-temperature_s_on:before {
+  content: "\e964";
+}
+.iconacc-time:before {
+  content: "\e965";
+}
+.iconacc-trust_software:before {
+  content: "\e966";
+}
+.iconacc-utilization:before {
+  content: "\e967";
+}
+.iconacc-visiable:before {
+  content: "\e968";
+}
+.iconacc-voltage:before {
+  content: "\e969";
+}
+.iconacc-voltage_s_on:before {
+  content: "\e96a";
+}
+.iconacc-warning:before {
+  content: "\e96b";
+}
+.iconacc-warning_s .path1:before {
+  content: "\e96c";
+  color: rgb(0, 0, 0);
+}
+.iconacc-warning_s .path2:before {
+  content: "\e96d";
+  margin-left: -1em;
+  color: rgb(255, 255, 255);
+}
+.iconacc-warning_s .path3:before {
+  content: "\e96e";
+  margin-left: -1em;
+  color: rgb(255, 255, 255);
+}
+.iconacc-zoom-out:before {
+  content: "\e96f";
+}

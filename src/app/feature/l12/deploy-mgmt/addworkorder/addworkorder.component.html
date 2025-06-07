@@ -1,0 +1,347 @@
+<mat-stepper [@.disabled]="true" linear #stepper orientation="vertical" class="stepSidebar" (selectionChange)="changeStep($event)">
+  <mat-step [stepControl]="firststepFormGroup" [editable]="stepperEditable">
+    <mat-card class="stepContent" ngClass="firststep">
+      <mat-card-header>
+        <mat-card-title style="font-size: 24px;"><i
+          class="fas fa-clipboard-list"></i>&nbsp;{{'i18n_OrderDetails' | translate}}</mat-card-title>
+      </mat-card-header>
+
+      <form [formGroup]="firststepFormGroup" style="padding: 1% 10%;">
+        <ng-template matStepLabel>{{'i18n_FillOutOrderDetails' | translate}}</ng-template>
+        <div class="row formRowfield">
+          <div style="text-align: left;"><i class="fas fa-clipboard-list"></i>&nbsp;{{'i18n_OrderNo' | translate}}</div>
+          <div>
+            <mat-form-field appearance="outline" class="form-field">
+              <input type="text" matInput formControlName="ordernumber" [readonly]="isCreated">
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="row formRowfield">
+          <div style="text-align: left;"><i class="fas fa-industry"></i>&nbsp;{{'i18n_EdgeGateway' | translate}}</div>
+          <div>
+            <mat-form-field appearance="outline" class="form-field">
+              <mat-select disableOptionCentering formControlName="edgegateway">
+                  <mat-option *ngFor="let factories of factoriesData" [value]="factories.id">
+                    {{factories.name}}
+                  </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="row formRowfield">
+          <div style="text-align: left;"><i class="far fa-calendar-alt"></i>&nbsp;{{'i18n_StartDateTime' | translate}}</div>
+          <div>
+            <!-- <mat-form-field appearance="outline" class="form-field">
+              <input matInput type="datetime-local" formControlName="startTime">
+            </mat-form-field> -->
+            <!-- <mat-form-field appearance="outline" class="form-field">
+              <input matInput [matDatepicker]="picker" formControlName="startTime">
+              <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+              <mat-datepicker #picker></mat-datepicker>
+            </mat-form-field> -->
+            <input type="datetime-local" formControlName="startTime" [ngStyle]="{'color':chartsLabelColor == 'black' ? 'black':'white'}" style="width: 100%;height: 100%;background: transparent;border: 1px solid rgba(173, 181, 189, 0.6)">
+          </div>
+        </div>
+        <div class="row formRowfield">
+          <div style="text-align: left;"><i class="fas fa-edit"></i>&nbsp;{{'i18n_Description' | translate}}</div>
+          <div>
+            <mat-form-field appearance="outline" style="width: 100%;">
+              <textarea matInput  rows="5" maxlength="100" type="text" formControlName="description"></textarea>
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="stepBtn">
+          <button mat-raised-button color="primary" matStepperNext [disabled]="!firststepFormGroup.valid">Next</button>
+        </div>
+      </form>
+    </mat-card>
+  </mat-step>
+
+  <mat-step label="{{'i18n_AddDevice' | translate}}" [completed] = "deviceData.length > 0" [editable]="stepperEditable">
+    <mat-card class="stepContent" ngClass="secondStep">
+      <mat-card-content>
+        <div id="deviceTable">
+          <mat-card-title id="deviceTitle" style="font-size: 24px;">
+            <div class="row">
+              <div class="col-11">
+                <i class="fas fa-clipboard-list"></i>&nbsp;{{'i18n_Devices' | translate}}
+              </div>
+              <div class="col-1">
+                <ng-container *ngIf="stageData">
+                  <i *ngIf="!tableListExpand" class="fas fa-expand-arrows-alt" style="position: absolute;right: 20px;cursor: pointer;" (click)="expandTableList()"></i>
+                  <i *ngIf="tableListExpand" class="fas fa-compress-arrows-alt" style="position: absolute;right: 20px;cursor: pointer;" (click)="collapseTableList()"></i>
+                </ng-container>
+              </div>
+            </div>
+            </mat-card-title>
+          <div style="display: flex; flex-direction: row; flex-wrap: wrap;">
+            <div style="flex: 0 0 60%; padding: 0 10px 0 0;">
+              <app-chips-input class="form-control" [id]="id()" [placeholder]="placeholder()"
+                [chips]="enteredValue()">
+              </app-chips-input>
+            </div>
+            <div style="flex: 0 0 6%;padding: 0 10px 0 0;">
+              <button mat-raised-button color="primary" id="Browse" value="Browse"
+                onclick="document.getElementById('csvfile').click();" style="text-wrap: nowrap;">
+                <i class="fas fa-upload"></i>&nbsp;&nbsp;{{'i18n_Import' | translate}}</button>
+              <input type="file" style="display:none;" id="csvfile" name="csvfile" (click)="$any($event.target).value=null" (change)="uploadCSV($event.target)" />
+            </div>
+            <div>
+              <button mat-raised-button color="primary" (click)="openAddDialog()">
+                <i class="fas fa-plus"></i>&nbsp;&nbsp;{{'i18n_Add' | translate}}</button>
+            </div>
+          </div>
+
+          <app-data-table
+            [id]="tableID"
+            [data]="tableInfoData"
+            [columnDefs]="columnsDef"
+            [isLoading]="isLoadingResults"
+            [groupByColumns]="groupByColumns"
+            [filters]="filters"
+            [height]="'calc(60vh - 320px)'" />
+       </div>
+        <br>
+        <div id="tasksetDiv">
+          <mat-card-title style="font-size: 24px;">
+            <div class="row">
+              <div class="col-11">
+                <i class="fas fa-tasks"></i>&nbsp;{{'i18n_TasksetInfo' | translate}}
+                <ng-container *ngIf="serialNumFilter">
+                  <mat-chip class="filter-item" selectable="false">{{serialNumFilter}}
+                  </mat-chip>
+                </ng-container>
+                <ng-container *ngIf="profileFilter">
+                  <mat-chip class="filter-item" selectable="false">{{profileFilter}}
+                  </mat-chip>
+                </ng-container>
+              </div>
+              <div class="col-1">
+                <ng-container *ngIf="stageData">
+                  <i *ngIf="!tasksetExpand" class="fas fa-expand-arrows-alt" style="position: absolute;right: 20px;cursor: pointer;" (click)="expandTaskset()"></i>
+                  <i *ngIf="tasksetExpand" class="fas fa-compress-arrows-alt" style="position: absolute;right: 20px;cursor: pointer;" (click)="collapseTaskset()"></i>
+                </ng-container>
+              </div>
+            </div>
+          </mat-card-title>
+          <div id="profileDiv" *ngIf="stageData">
+            <app-teststage [displayOnly]="true" [displayData]="stageData" [toolDialog]="toolDialog"></app-teststage>
+          </div>
+        </div>
+      </mat-card-content>
+      <div id="deviceStepButton" class="stepBtn">
+        <button mat-raised-button color="primary" matStepperPrevious>{{'i18n_Back' | translate}}</button>
+        &nbsp;
+        <button mat-raised-button color="primary" matStepperNext  [disabled]="deviceData.length == 0">{{'i18n_NextStep' | translate}}</button>
+      </div>
+    </mat-card>
+  </mat-step>
+
+  <mat-step>
+   <mat-card class="stepContent" ngClass="thirdstep">
+      <ng-template matStepLabel>{{'i18n_CheckDeviceStatus' | translate}}</ng-template>
+      <div style="display: flex;flex-direction: row;height: 100%;overflow-y: hidden;overflow-x: auto;padding: 6px;">
+      <div class="rackviewContainer">
+        <app-rackview [rackdata]="previewRackData" (selectNode)="getRackNode($event)">
+        </app-rackview>
+      </div>
+
+      <div style="display: flex; flex-direction: column;padding-right: 1%;margin-left: auto;">
+        <div style="border-bottom: 3px solid #0070cc;font-size: 20px;flex: 0 0 5%;padding-bottom: 1%;">
+          <i *ngIf="!isDiscovering" class="fas fa-wifi"></i>
+          <i *ngIf="isDiscovering" class="fas fa-wifi fa-beat" style="--fa-animation-duration: 1s;"></i>
+          &nbsp;<span>{{'i18n_ConnectionInfo' | translate}}</span>&nbsp;
+          <button mat-raised-button color="primary" (click)="discoverDevice()" [disabled]="deviceData == 0">
+            <i *ngIf="!isDiscovering" class="fas fa-search"></i>
+            <i *ngIf="isDiscovering" class="fa-solid fa-spinner fa-spin-pulse"></i>
+            &nbsp;&nbsp;{{'i18n_Search' | translate}}</button>
+        </div>
+        <div style="text-align: end;padding-top: 1%;flex: 0 0 5%;">
+          <i *ngIf="!isupdating" class="far fa-clock"></i>
+          <i *ngIf="isupdating" class="fa-solid fa-spinner fa-spin-pulse"></i>
+          &nbsp;
+          <span>{{'i18n_Timeupdated' | translate}}:&nbsp;{{connectionUpdatetime | date:'yyyy/MM/dd HH:mm:ss'}}</span>
+        </div>
+        <div style="margin-bottom: -10%;">
+          <div><span class="cxnTypeTitle">{{'i18n_ConnectionStatus' | translate}}&nbsp;<i class="fas fa-arrow-right"></i></span></div>
+          <div style="margin-top: -10%;">
+            <canvas id="chartConnectionBar" height="220"></canvas>
+          </div>
+        </div>
+        <div style="margin-bottom: -10%;">
+          <div><span class="cxnTypeTitle">{{'i18n_ConnectionRates' | translate}}&nbsp;<i class="fas fa-arrow-right"></i></span></div>
+          <div style="display: flex;flex-direction: row;">
+            <div style="flex: 0 0 30%;padding-left: 3%;">
+              <div style="padding-top: 50%;">
+                <span class="connectionAllCircle"></span>
+                <span class="ratesText">{{'i18n_Total' | translate}}:&nbsp;{{connectedAll}}</span>
+              </div>
+              <div style="padding-top: 35%;">
+                <span class="connectedCircle"></span>
+                <span class="ratesText">{{'i18n_Connected' | translate}}:&nbsp;{{connectedResp}}</span>
+              </div>
+            </div>
+            <div>
+              <canvas id="chartConnectionPie" height="220" style="position: relative;left: -2vw;"></canvas>
+            </div>
+          </div>
+        </div>
+        <div>
+          <div><span class="cxnTypeTitle">{{'i18n_DeviceStatus' | translate}}&nbsp;<i class="fas fa-arrow-right"></i></span></div>
+          <canvas id="chartDevice" height="250" style="position: relative;left: 2vw;"></canvas>
+        </div>
+      </div>
+     </div>
+      <div class="stepBtn">
+        <button *ngIf="stepperEditable" mat-raised-button color="primary" matStepperPrevious>{{'i18n_Back' | translate}}</button>
+        &nbsp;
+        <button *ngIf="stepperEditable" mat-raised-button color="primary" (click)="openResetDialog()">{{'i18n_Reset' | translate}}</button>
+        &nbsp;
+        <button mat-raised-button color="primary" (click)="runTask()" [disabled]="(!isDiscovered || (isDiscovered && connectedAll != connectedResp))">
+          <i *ngIf="!isRunning" class="fas fa-play-circle"></i>
+          <i *ngIf="isRunning" class="fa-solid fa-spinner fa-spin-pulse"></i>
+          &nbsp;&nbsp;{{'i18n_Run' | translate}}</button>
+      </div>
+    </mat-card>
+  </mat-step>
+</mat-stepper>
+
+<ng-template #addDialog let-data>
+  <div [formGroup]="addForm">
+    <div formArrayName="itemDef">
+      <div *ngFor="let item of $any(addForm.get('itemDef'))?.controls; let i = index; let last = last;">
+        <div class="row rowfield p-2">
+          <div class="col-3 fileldCol">
+            <span>{{item.value.fieldName}}</span>
+          </div>
+          <div [id]="item.value.id" class="col-6" [formGroupName]="i">
+            <mat-form-field appearance="outline" class="form-field">
+                <input [type]="item.value.type" matInput formControlName="inputVal" [min]="item.value.min" [max]="item.value.max">
+                <ng-container *ngIf="item.value.type == 'number'">
+                  <i class="fas fa-minus-circle" onclick="this.parentNode.querySelector('input[type=number]').stepDown()" style="position: absolute;right: 15%;cursor: pointer;line-height: 30px;"></i>
+                  <i class="fas fa-plus-circle" onclick="this.parentNode.querySelector('input[type=number]').stepUp()" style="position: absolute;right: 0%;cursor: pointer;line-height: 30px;"></i>
+                </ng-container>
+              </mat-form-field>
+          </div>
+          <!-- <div class="col-md-3" *ngIf="last">
+            <button mat-raised-button color="primary" (click)="addCustomItem(addForm)">
+              <i class="fas fa-plus"></i>&nbsp;&nbsp;{{'Common.Button.Add' | translate}}</button>
+          </div> -->
+        </div>
+      </div>
+      <div [formGroup]="nodeProfileForm">
+        <div formArrayName="itemDef">
+          <div *ngFor="let item of $any(nodeProfileForm.get('itemDef'))?.controls; let n = index;">
+            <div class="row rowfield p-2">
+              <div class="col-3 fileldCol">
+                <span>{{item.value.fieldName}}</span>
+              </div>
+              <div class="col-6" [formGroupName]="n">
+                <mat-form-field appearance="outline" class="form-field">
+                  <mat-select formControlName="selectVal">
+                    <mat-option *ngFor="let profile of profileData" [value]="profile.name">
+                      {{profile.name}}
+                    </mat-option>
+                    <mat-option [routerLink]="'/ProcessProfile'">
+                      <i class="fas fa-plus"></i>&nbsp;&nbsp;{{'i18n_AddProfile' | translate}}
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </div>
+              </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div formArrayName="customItemList">
+      <div *ngFor="let customitem of $any(addForm.get('customItemList'))?.controls; let i = index;">
+        <div class="row rowfield p-2">
+          <div class="col-3" style="top: 10px;" [formGroupName]="i">
+            <mat-form-field appearance="outline" class="form-field" style="text-align:right;">
+              <input matInput type="text" formControlName="field">
+            </mat-form-field>
+          </div>
+          <div class="col-6" [formGroupName]="i">
+            <mat-form-field appearance="outline" class="form-field">
+              <input matInput type="text" formControlName="inputVal">
+            </mat-form-field>
+          </div>
+          <div class="col-3">
+            <button mat-raised-button color="primary" (click)="removecustomItem(addForm,i)">
+              <i class="fas fa-minus"></i>&nbsp;&nbsp;{{'i18n_Remove' | translate}}</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</ng-template>
+
+<ng-template #editDialog let-data>
+  <div [formGroup] = "editForm">
+    <div formArrayName="itemDef">
+      <div *ngFor="let item of $any(editForm.get('itemDef'))?.controls; let i = index; let last = last;">
+        <div class="row rowfield p-2">
+          <div class="col-3 fileldCol">
+            <span>{{item.value.fieldName}}</span>
+          </div>
+          <div [id]="item.value.id" class="col-6" [formGroupName]="i">
+            <mat-form-field appearance="outline" class="form-field">
+              <input [type]="item.value.type" matInput formControlName="inputVal" [min]="item.value.min" [max]="item.value.max">
+              <ng-container *ngIf="item.value.type == 'number'">
+                <i class="fas fa-minus-circle" onclick="this.parentNode.querySelector('input[type=number]').stepDown()" style="position: absolute;right: 15%;cursor: pointer;line-height: 30px;"></i>
+                <i class="fas fa-plus-circle" onclick="this.parentNode.querySelector('input[type=number]').stepUp()" style="position: absolute;right: 0%;cursor: pointer;line-height: 30px;"></i>
+              </ng-container>
+            </mat-form-field>
+          </div>
+          <!-- <div class="col-md-3" *ngIf="last">
+            <button mat-raised-button color="primary" (click)="addCustomItem(editForm)">
+              <i class="fas fa-plus"></i>&nbsp;&nbsp;{{'Common.Button.Add' | translate}}</button>
+          </div> -->
+        </div>
+      </div>
+      <div [formGroup]="nodeProfileForm">
+        <div formArrayName="itemDef">
+          <div *ngFor="let item of $any(nodeProfileForm.get('itemDef'))?.controls; let n = index;">
+            <div class="row rowfield p-2">
+              <div class="col-3 fileldCol">
+                <span>{{item.value.fieldName}}</span>
+              </div>
+              <div class="col-6" [formGroupName]="n">
+                <mat-form-field appearance="outline" class="form-field">
+                  <mat-select formControlName="selectVal">
+                    <mat-option *ngFor="let profile of profileData" [value]="profile.name">
+                      {{profile.name}}
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </div>
+              </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div formArrayName="customItemList">
+      <div *ngFor="let customitem of $any(editForm.get('customItemList'))?.controls; let i = index;">
+        <div class="row rowfield p-2">
+          <div class="col-3" style="top: 10px;" [formGroupName]="i">
+            <mat-form-field appearance="outline" class="form-field" style="text-align:right;">
+              <input matInput type="text" formControlName="field">
+            </mat-form-field>
+          </div>
+          <div class="col-6" [formGroupName]="i">
+            <mat-form-field appearance="outline" class="form-field">
+              <input matInput type="text" formControlName="inputVal">
+            </mat-form-field>
+          </div>
+          <div class="col-3">
+            <button mat-raised-button color="primary" (click)="removecustomItem(editForm,i)">
+              <i class="fas fa-minus"></i>&nbsp;&nbsp;remove</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  </ng-template>
+

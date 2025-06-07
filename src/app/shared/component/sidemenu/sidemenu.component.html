@@ -1,0 +1,25 @@
+<mat-nav-list class="custom-nav-list">
+  @for (menu of menuList; track menu.text) {
+
+    @if (menu.children) {
+      <mat-expansion-panel class="mat-elevation-z0 custom-expansion-panel"> <!-- hideToggle -->
+        <mat-expansion-panel-header class="custom-expansion-panel-header">
+          <i [ngClass]="menu.icon"></i>{{menu.text}}
+        </mat-expansion-panel-header>
+        <mat-nav-list class="custom-nav-list">
+          @for (submenu of menu.children; track submenu.text) {
+            <mat-list-item class="custom-sub-nav-list-item" [routerLink]="submenu.routerLink" [routerLinkActiveOptions]="{exact: true}" routerLinkActive="is-active">
+              <i [ngClass]="submenu.icon"></i>{{submenu.text}}
+            </mat-list-item>
+          }
+        </mat-nav-list>
+      </mat-expansion-panel>
+    } @else {
+      <mat-nav-list class="custom-nav-list">
+        <mat-list-item class="custom-nav-list-item" [routerLink]="menu.routerLink" [routerLinkActiveOptions]="{exact: true}" routerLinkActive="is-active">
+          <i [ngClass]="menu.icon"></i>{{menu.text}}
+        </mat-list-item>
+      </mat-nav-list>
+    }
+  }
+</mat-nav-list>

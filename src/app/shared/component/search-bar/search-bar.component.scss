@@ -1,0 +1,44 @@
+@mixin search-bar-theme($theme-colors) {
+
+  .search-bar {
+    display: flex;
+    // margin-top: 8px;
+
+    .search-container {
+      flex: 1 1 0;
+
+      .mdc-notched-outline__trailing {
+        border-radius: 0;
+      }
+
+      .mat-mdc-form-field-subscript-wrapper {
+        height: 8px;
+      }
+    }
+
+    .calendar-container {
+      display: flex;
+      border-top: 1px solid rgba(173, 181, 189, 0.6);
+      border-bottom: 1px solid rgba(173, 181, 189, 0.6);
+      height: 34px;
+
+      .mat-date-range-input-separator {
+        display: none;
+      }
+
+      .mat-date-range-input {
+        width: 0;
+      }
+
+      .mdc-button {
+        padding: 0;
+        min-width: 36px;
+        border: 0;
+      }
+    }
+
+    .search-btn {
+      border-radius: 0 4px 4px 0;
+    }
+  }
+}

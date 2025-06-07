@@ -1,0 +1,207 @@
+.formRowfield{
+  padding-bottom:1%;
+  line-height: 36px;
+  text-align: right;
+}
+
+.rowfield{
+  padding-bottom:3%;
+  line-height: 0px;
+}
+
+.fileldCol{
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  line-height: 36px;
+}
+
+.matInput{
+  left: 10%;
+  font-size: 10px;
+}
+
+.mat-form-field-flex{
+  padding-top: 0 !important;
+}
+
+input[type="datetime-local"]::-webkit-calendar-picker-indicator {
+  width: 100%;
+  height: 20px;
+  cursor: pointer;
+  position: absolute;
+  background: transparent;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.stepSidebar{
+  max-width: 360px;
+  height: 80vh;
+
+  @media screen and (max-width: 900px){
+    max-width: 240px;
+  }
+
+  @media screen and (max-width: 750px){
+    height:85vh;
+  }
+
+  @media screen and (max-width: 400px){
+    height:90vh;
+  }
+
+  @media screen and (max-width: 320px){
+    max-width: 180px;
+    height: 105vh;
+  }
+}
+
+.stepContent{
+  position: absolute;
+  left: 105%;
+  height: calc(80vh);
+  min-width: 73.5vw;
+  width: -webkit-fill-available;
+  width: -moz-fill-available;
+  width: -moz-available;
+
+  @media screen and (max-width: 750px){
+    height: calc(85vh - 31px);
+  }
+
+  @media screen and (max-width: 400px){
+    height: calc(90vh - 31px);
+  }
+
+  @media screen and (max-width: 320px){
+    height: calc(105vh - 31px);
+  }
+  &.firststep{
+    margin-top: -72px;
+  }
+
+  &.secondStep{
+    margin-top: -144px;
+  }
+
+  &.thirdstep{
+    margin-top: -216px;
+    padding-left: 0%;
+  }
+}
+
+.rackviewContainer{
+  overflow-x: auto;
+  transform: translate(-3%, -7%) scale(0.86, 0.86);
+  max-width: 54vw;
+  min-height: 43vw;
+  // overflow-y: hidden;
+}
+
+.cxnTypeTitle{
+  font-size: 16px;
+}
+
+.ratesText{
+  position: relative;
+  left:5%;
+  bottom:3px;
+}
+
+.stepBtn{
+  position: absolute;
+  right: 0;
+  bottom: -40px;
+}
+
+#profileDiv{
+  transform-origin: top left;
+  width: 123vw;
+  transform: translate(0%,0%) scale(0.6, 0.6);
+
+  @media screen and (max-width: 429px){
+    transform: translate(0%, 0%) scale(0.58, 0.58);
+  }
+}
+
+.connectionAllCircle {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  border-style: solid;
+  border-width: 3px;
+  border-color:#f8f9fa;
+}
+
+.connectedCircle {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  border-style: solid;
+  border-width: 3px;
+  border-color: rgba(79, 185, 254);
+}
+
+// input[type="datetime-local"]::-webkit-calendar-picker-indicator {
+//   background: transparent;
+//   bottom: 0;
+//   color: transparent;
+//   cursor: pointer;
+//   height: auto;
+//   left: 0;
+//   position: absolute;
+//   right: 0;
+//   top: 0;
+//   width: auto;
+// }
+
+.deviceTableExpand{
+  position: absolute;
+  z-index: 99;
+  width: 125%;
+  transform: translate(-21%, 0%);
+  transform-origin: top;
+  transition: transform 1s;
+  height: 85vh;
+}
+
+.deviceTableCollapse{
+  transform: translate(0%, 0%);
+  transform-origin: bottom;
+  transition: transform 1s;
+}
+
+.tasksetInfoExpand{
+  position: absolute;
+  z-index: 99;
+  width: 124%;
+  transform: translate(-21%, -45%);
+  transform-origin: top left;
+  transition: transform 1s;
+}
+
+.profileExpand{
+  width: auto !important;
+  transform: none !important;
+  transform-origin: top left;
+  transition: transform 1s;
+}
+
+.tasksetInfoCollapse{
+  transform: translate(0%, 0%);
+  transform-origin: bottom;
+  transition: transform 1s;
+}
+
+.profileCollapse{
+  transform: translate(0%, 0%) scale(0.6, 0.6) !important;
+  transform-origin: bottom;
+  transition: transform 1s;
+}

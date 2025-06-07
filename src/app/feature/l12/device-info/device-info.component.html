@@ -1,0 +1,229 @@
+<!-- <div class="info-btn-group">
+  <button mat-flat-button><i class="fa fa-tags"></i></button>
+  <button mat-flat-button><i class="fas fa-desktop"></i></button>
+  <button mat-flat-button><i class="fa fa-power-off"></i></button>
+</div> -->
+<div class="container-fluid">
+  <div class="row" *ngIf="deviceInfo.length!==0">
+    <div class="col-md-4">
+      <mat-card class="info-card">
+        <mat-card-header>
+          <mat-card-title >{{'i18n_Summary' | translate}}</mat-card-title>
+        </mat-card-header>
+
+        <mat-card-content>
+          <!-- <div class="row">
+            <div class="col-sd-12 col-md-4">{{'DeviceInfo.Item.CreatedAt' | translate}}</div>
+            <div class="col-md-8">{{deviceInfo[0].createdAt | date:'yyyy/MM/dd hh:mm:ss'}}</div>
+          </div> -->
+            <mat-list>
+              <mat-list-item class="info-item-title">{{'i18n_CreatedAt' | translate}}</mat-list-item>
+              <mat-list-item class="info-item-content" >{{deviceInfo[0].createdAt | date:'yyyy/MM/dd hh:mm:ss'}}</mat-list-item>
+              <mat-list-item class="info-item-title">{{'i18n_UpdateAt' | translate}}</mat-list-item>
+              <mat-list-item class="info-item-content" >{{deviceInfo[0].updatedAt | date:'yyyy/MM/dd hh:mm:ss'}}</mat-list-item>
+              <mat-list-item class="info-item-title">{{'i18n_Duration' | translate}}</mat-list-item>
+              <mat-list-item class="info-item-content">{{deviceInfo[0].duration}}</mat-list-item>
+              <mat-list-item class="info-item-title">{{'i18n_Status' | translate}}</mat-list-item>
+              <mat-list-item class="info-item-content">
+                <!-- <mat-chip-list>
+                  <mat-chip [color]="profileColor" selected [ngClass]="profileStatus === 'Fail' || profileStatus === 'Processing' ? 'animate__animated animate__flash animate__slower	3s animate__infinite	infinite' : ''">{{profileStatus}}</mat-chip>
+                </mat-chip-list> -->
+              </mat-list-item>
+              <mat-list-item class="info-item-title">{{'i18n_Completed' | translate}}</mat-list-item>
+              <mat-list-item class="info-item-content">
+                <div class="progress" style="width:150px;">
+                  <div class="progress-bar progress-bar-striped progress-bar-info progress-bar-animated" role="progressbar" [style.width.%]="completedProgress" >
+                    <span>{{completedProgress}}%</span>
+                  </div>
+                </div>
+                <div style="margin-left:15px;">( {{'i18n_Pass' | translate}}: {{passTool.length}} / {{'i18n_All' | translate}}: {{allTool.length}} )</div>
+              </mat-list-item>
+              <mat-list-item class="info-item-title">{{'i18n_Description' | translate}}</mat-list-item>
+              <mat-list-item class="info-item-content" *ngIf="passTool.length === allTool.length && failProcessingTools.length === 0">{{'i18n_PassDescription' | translate}}</mat-list-item>
+              <mat-list-item class="info-item-content" *ngIf="failTool.length!==0">{{'i18n_FailDescription' | translate}}: {{'i18n_Stage' | translate}} {{failTool[0].stageIndex}}, {{'i18n_Tool' | translate}} {{failTool[0].index+1}}</mat-list-item>
+              <mat-list-item class="info-item-content" *ngIf="processingTool.length!==0">{{'i18n_ProcessingDescription' | translate}}: {{'i18n_Stage' | translate}} {{processingTool[0].stageIndex}}, {{'i18n_Tool' | translate}} {{processingTool[0].index+1}}</mat-list-item>
+              <mat-list-item class="info-item-content" *ngIf="createdTool.length === allTool.length && failProcessingTools.length === 0">{{'i18n_CreatedDescription' | translate}}</mat-list-item>
+            </mat-list>
+        </mat-card-content>
+      </mat-card>
+    </div>
+    <div class="col-md-5">
+      <mat-card class="info-card">
+        <mat-card-header>
+          <mat-card-title>{{'i18n_Specification' | translate}}</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+          <mat-accordion >
+            <mat-expansion-panel *ngIf="deviceInfo[0].processorSet.length!==0">
+              <mat-expansion-panel-header>
+                <mat-panel-title class="info-panel-title">{{'i18n_Processor' | translate}}</mat-panel-title>
+                <mat-panel-description *ngIf="innerWidth>=768">{{deviceInfo[0].processorSet[0].value[0].vendor}} CPU<span class="info-badge" matBadge={{deviceInfo[0].processorSet[0].value.length}} matBadgeSize="small" matBadgeOverlap="false"></span></mat-panel-description>
+              </mat-expansion-panel-header>
+              <mat-list *ngFor="let processor of deviceInfo[0].processorSet[0].value;">
+                <mat-list-item>{{processor.vendor}}</mat-list-item>
+                <mat-list-item class="info-item-title">{{'i18n_Model' | translate}}</mat-list-item>
+                <mat-list-item class="info-item-content">{{processor.model}}</mat-list-item>
+                <mat-list-item class="info-item-title">{{'i18n_Cores' | translate}}</mat-list-item>
+                <mat-list-item class="info-item-content">{{processor.cores}}</mat-list-item>
+              </mat-list>
+            </mat-expansion-panel>
+            <mat-expansion-panel *ngIf="deviceInfo[0].gpuSet.length!==0">
+              <mat-expansion-panel-header>
+                <mat-panel-title class="info-panel-title">{{'i18n_GPU' | translate}}</mat-panel-title>
+                <mat-panel-description *ngIf="innerWidth>=768">{{deviceInfo[0].gpuSet[0].value[0].model}} GPU<span class="info-badge" matBadge={{deviceInfo[0].gpuSet[0].value.length}} matBadgeSize="small" matBadgeOverlap="false"></span></mat-panel-description>
+              </mat-expansion-panel-header>
+              <mat-list *ngFor="let gpu of deviceInfo[0].gpuSet[0].value;">
+                <mat-list-item class="info-item-title">{{'i18n_Model' | translate}}</mat-list-item>
+                <mat-list-item class="info-item-content">{{gpu.model}}</mat-list-item>
+                <mat-list-item class="info-item-title">{{'i18n_SerialNumber' | translate}}</mat-list-item>
+                <mat-list-item class="info-item-content">{{gpu.serialNumber}}</mat-list-item>
+              </mat-list>
+            </mat-expansion-panel>
+            <mat-expansion-panel *ngIf="deviceInfo[0].baseboardSet.length!==0">
+              <mat-expansion-panel-header>
+                <mat-panel-title>{{'i18n_Baseboard' | translate}}</mat-panel-title>
+                <mat-panel-description *ngIf="innerWidth>=768">{{deviceInfo[0].baseboardSet[0].value[0].model}}</mat-panel-description>
+              </mat-expansion-panel-header>
+              <mat-list *ngFor="let baseboard of deviceInfo[0].baseboardSet[0].value;">
+                <mat-list-item class="info-item-title">{{'i18n_Vendor' | translate}}</mat-list-item>
+                <mat-list-item class="info-item-content">{{baseboard.vendor}}</mat-list-item>
+                <mat-list-item class="info-item-title">{{'i18n_Model' | translate}}</mat-list-item>
+                <mat-list-item class="info-item-content">{{baseboard.model}}</mat-list-item>
+              </mat-list>
+            </mat-expansion-panel>
+            <mat-expansion-panel *ngIf="deviceInfo[0].diskSet.length!==0">
+              <mat-expansion-panel-header>
+                <mat-panel-title class="info-panel-title">{{'i18n_Disk' | translate}}</mat-panel-title>
+                <mat-panel-description *ngIf="innerWidth>=768">{{'i18n_TotalSize' | translate}}{{diskTotalSize | number:'1.0-0'}} GB</mat-panel-description>
+              </mat-expansion-panel-header>
+              <mat-list *ngFor="let disk of deviceInfo[0].diskSet[0].value;">
+                <mat-list-item class="info-item-title">{{'i18n_Model' | translate}}</mat-list-item>
+                <mat-list-item class="info-item-content">{{disk.model}}</mat-list-item>
+                <mat-list-item class="info-item-title">{{'i18n_Name' | translate}}</mat-list-item>
+                <mat-list-item class="info-item-content">{{disk.name}}</mat-list-item>
+                <mat-list-item class="info-item-title">{{'i18n_Size' | translate}}</mat-list-item>
+                <mat-list-item class="info-item-content">{{disk.size / 1000 / 1000 / 1000 | number:'1.0-0'}} GB</mat-list-item>
+                <mat-list-item class="info-item-title">{{'i18n_SerialNumber' | translate}}</mat-list-item>
+                <mat-list-item class="info-item-content">{{disk.serialNumber}}</mat-list-item>
+              </mat-list>
+            </mat-expansion-panel>
+            <mat-expansion-panel *ngIf="deviceInfo[0].memorySet.length!==0">
+              <mat-expansion-panel-header>
+                <mat-panel-title>{{'i18n_Memory' | translate}}</mat-panel-title>
+                <mat-panel-description *ngIf="innerWidth>=768">{{'i18n_TotalSize' | translate}}{{memoryTotalSize | number:'1.0-0'}} GB</mat-panel-description>
+              </mat-expansion-panel-header>
+              <mat-list *ngFor="let memory of deviceInfo[0].memorySet[0].value;">
+                <mat-list-item class="info-item-title">{{'i18n_Manufacturer' | translate}}</mat-list-item>
+                <mat-list-item class="info-item-content">{{memory.manufacturer}}</mat-list-item>
+                <mat-list-item class="info-item-title">{{'i18n_Capacity' | translate}}</mat-list-item>
+                <mat-list-item class="info-item-content">{{memory.capacity / 1000 / 1000 / 1000 | number:'1.0-0'}} GB</mat-list-item>
+                <mat-list-item class="info-item-title">{{'i18n_Speed' | translate}}</mat-list-item>
+                <mat-list-item class="info-item-content">{{memory.speed}}</mat-list-item>
+                <mat-list-item class="info-item-title">{{'i18n_Type' | translate}}</mat-list-item>
+                <mat-list-item class="info-item-content">{{memory.type}}</mat-list-item>
+                <mat-list-item class="info-item-title">{{'i18n_SerialNumber' | translate}}</mat-list-item>
+                <mat-list-item class="info-item-content">{{memory.serialNumber}}</mat-list-item>
+                <mat-list-item class="info-item-title">{{'i18n_PartNumber' | translate}}</mat-list-item>
+                <mat-list-item class="info-item-content">{{memory.partNumber}}</mat-list-item>
+              </mat-list>
+            </mat-expansion-panel>
+            <mat-expansion-panel *ngIf="deviceInfo[0].biosSet.length!==0">
+              <mat-expansion-panel-header>
+                <mat-panel-title>{{'i18n_BIOS' | translate}}</mat-panel-title>
+                <mat-panel-description *ngIf="innerWidth>=768">{{'i18n_Version' | translate}}{{deviceInfo[0].biosSet[0].value[0].version}}</mat-panel-description>
+              </mat-expansion-panel-header>
+              <mat-list *ngFor="let bios of deviceInfo[0].biosSet[0].value;">
+                <mat-list-item class="info-item-title">{{'i18n_Vendor' | translate}}</mat-list-item>
+                <mat-list-item class="info-item-content">{{bios.vendor}}</mat-list-item>
+                <mat-list-item class="info-item-title">{{'i18n_Version' | translate}}</mat-list-item>
+                <mat-list-item class="info-item-content">{{bios.version}}</mat-list-item>
+                <mat-list-item class="info-item-title">{{'i18n_ReleaseDate' | translate}}</mat-list-item>
+                <mat-list-item class="info-item-content">{{bios.releaseDate | date:'short'}}</mat-list-item>
+              </mat-list>
+            </mat-expansion-panel>
+            <mat-expansion-panel *ngIf="deviceInfo[0].bmcSet.length!==0">
+              <mat-expansion-panel-header>
+                <mat-panel-title>{{'i18n_BMC' | translate}}</mat-panel-title>
+                <mat-panel-description *ngIf="innerWidth>=768">{{'i18n_Version' | translate}}{{deviceInfo[0].bmcSet[0].value[0].version}}</mat-panel-description>
+              </mat-expansion-panel-header>
+              <mat-list>
+                <mat-list-item class="info-item-title">{{'i18n_Version' | translate}}</mat-list-item>
+                <mat-list-item class="info-item-content">{{deviceInfo[0].bmcSet[0].value[0].version}}</mat-list-item>
+                <mat-list-item class="info-item-title">{{'i18n_IPv4' | translate}}</mat-list-item>
+                <mat-list-item class="info-item-content">{{deviceInfo[0].bmcSet[0].value[0].interfaces.ipv4[0]}}</mat-list-item>
+                <mat-list-item class="info-item-title">{{'i18n_IPv6' | translate}}</mat-list-item>
+                <mat-list-item class="info-item-content">{{deviceInfo[0].bmcSet[0].value[0].interfaces.ipv6[0]}}</mat-list-item>
+              </mat-list>
+            </mat-expansion-panel>
+            <mat-expansion-panel *ngIf="deviceInfo[0].ethernetSet.length!==0">
+              <mat-expansion-panel-header>
+                <mat-panel-title>{{'i18n_Ethernet' | translate}}</mat-panel-title>
+                <mat-panel-description *ngIf="innerWidth>=768">{{'i18n_MAC' | translate}}{{deviceInfo[0].ethernetSet[0].value[0].macAddress}}</mat-panel-description>
+              </mat-expansion-panel-header>
+              <mat-list *ngFor="let ethernet of deviceInfo[0].ethernetSet[0].value;">
+                <mat-list-item class="info-item-title">{{'i18n_Model' | translate}}</mat-list-item>
+                <mat-list-item class="info-item-content">{{ethernet.model}}</mat-list-item>
+                <mat-list-item class="info-item-title">{{'i18n_MacAddress' | translate}}</mat-list-item>
+                <mat-list-item class="info-item-content">{{ethernet.macAddress}}</mat-list-item>
+              </mat-list>
+            </mat-expansion-panel>
+          </mat-accordion>
+      </mat-card-content>
+      </mat-card>
+    </div>
+    <div class="col-md-3">
+      <mat-card class="info-card">
+        <mat-card-header>
+          <mat-card-title>{{'i18n_Position' | translate}}</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+          <app-rackview [rackdata]="deviceInfo" [racksize]="deviceInfo[0].position+9" ></app-rackview>
+        </mat-card-content>
+      </mat-card>
+    </div>
+  </div>
+  <div class="row" style="margin-top:25px;">
+    <mat-card class="info-card">
+      <mat-card-header>
+        <mat-card-title>
+          <div class="row">
+            <div class="col-md-3">{{'i18n_Stage' | translate}}</div>
+            <div class="col-md-9" style="text-align:right;">
+              <mat-form-field class="form-field" appearance="outline" style="width:150px; font-size:16px;">
+                <mat-select [(value)]="defaultOpt" (selectionChange)="selectStage($event.value)">
+                  <mat-option class="stage-option" *ngFor="let opt of stagesOpt" [value]="opt.value">{{opt.display}}</mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+          </div>
+        </mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <div style="display:flex">
+          <div style="flex-basis: 100%;"><app-teststage [displayOnly]="true" [displayData]="selectedStage" [toolDialog]="toolDialog"></app-teststage></div>
+          <!-- <div class="side-bar">
+            <div class="column-panel" [ngClass]="{'panel-close': !columnPanelExpanded}">
+              <div class="column-select">
+                <div class="title">Status</div>
+                <div  class="column-content">
+                  <ng-container *ngFor="let status of toolStatusOpt;">
+                    <div class="column-item">
+                      <mat-checkbox [checked]="status.checked" (change)="filterTask(status.value, $event.checked)" >{{status.name}}</mat-checkbox>
+                    </div>
+                  </ng-container>
+                </div>
+              </div>
+            </div>
+            <div class="side-button-panel">
+              <button class="side-button-button" mat-ripple [matRippleCentered]="true" (click)="columnPanelExpanded=!columnPanelExpanded">
+                <i *ngIf="columnPanelExpanded" class="fa-solid fa-down-left-and-up-right-to-center fa-fw"></i>
+                <i *ngIf="!columnPanelExpanded"class="fa-solid fa-up-right-and-down-left-from-center fa-fw"></i>
+                <span class="side-button-label" style="margin-top: 6px;">{{'Common.Table.Options' | translate}}</span>
+              </button>
+            </div>
+          </div> -->
+        </div>
+      </mat-card-content>
+    </mat-card>
+  </div>
+</div>

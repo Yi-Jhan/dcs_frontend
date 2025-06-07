@@ -1,0 +1,42 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: demo
+  namespace: development
+  labels:
+    app: l11-backend
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: demo
+  template:
+    metadata:
+      labels:
+        app: demo
+    spec:
+      serviceAccountName: default
+      securityContext: null
+      containers:
+        - name: demo
+          securityContext: null
+          image: 10.10.31.108:30003/demo/springboot:latest
+          imagePullPolicy: Always
+          ports:
+            - name: http
+              containerPort: 8080
+              protocol: TCP
+          env:
+            - name: app_name
+              value: demo
+            - name: version
+              value: 1.01.002
+            - name: JAVA_OPTS
+              value: -XX:+UseContainerSupport
+          resources:
+            limits:
+              memory: "1024Mi"
+              cpu: "500m"
+            requests:
+              memory: "512Mi"
+              cpu: "250m"

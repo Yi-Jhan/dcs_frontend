@@ -1,0 +1,25 @@
+FROM gitlab/gitlab-runner:alpine3.15
+
+RUN echo 'http://dl-cdn.alpinelinux.org/alpine/edge/testing' >> /etc/apk/repositories
+RUN echo 'http://dl-cdn.alpinelinux.org/alpine/edge/community' >> /etc/apk/repositories
+
+RUN apk update
+
+# Install  OpenJDK 8 LTS
+RUN apk add openjdk8=8.362.09-r1
+
+# Install Maven
+RUN apk add maven
+
+# Install Make
+RUN apk add make
+
+# Install kubectl
+RUN apk add kubectl
+
+# Install sudo
+RUN apk add sudo
+
+COPY /etc/sudoers.d/* /etc/sudoers.d/
+
+CMD ["/bin/bash"]

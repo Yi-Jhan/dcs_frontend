@@ -1,0 +1,168 @@
+<div class="table-container noselect mat-elevation-z0" [style.height]="'calc('+ (height() | cssHeight) + '-2px)'">
+  <div class="table-outline">
+    <!-- Virtual Scroll -->
+    <cdk-virtual-scroll-viewport tvsItemSize="40" headerHeight="50" [style.height]="height() | cssHeight">
+      <!-- Table -->
+      <table  mat-table
+              matSort
+              fixedLayout
+              [dataSource]="dataSource"
+              (matSortChange)="setSortInfo($event)">
+
+        <!-- Select Column Defined-->
+        @if (withSelection()) {
+          <ng-container matColumnDef="select">
+            <th mat-header-cell *matHeaderCellDef>
+              <mat-checkbox (change)="changeMasterSelect($event)"
+                            [checked]="rowSelection.hasValue() && isRowAllSelected()"
+                            [indeterminate]="rowSelection.hasValue() && !isRowAllSelected()">
+              </mat-checkbox>
+            </th>
+            <td mat-cell *matCellDef="let row">
+              <mat-checkbox (click)="$event.stopPropagation()"
+                            (change)="changeSelect($event, row)"
+                            [checked]="row.__rowSelected">
+              </mat-checkbox>
+            </td>
+          </ng-container>
+        }
+
+        <!-- Column Defined-->
+        @for (col of columnDefs(); track $index) {
+          <ng-container [matColumnDef]="col.field">
+            <th *matHeaderCellDef
+                mat-header-cell
+                mat-sort-header
+                [style.width]="col.width ? col.width : 'auto'">
+            @if (col.headerCellRender) {
+              <div appCellRender [cellRender]="col.headerCellRender(col)"></div>
+            } @else {
+              <div>{{col.headerName| translate}}</div>
+            }
+          </th>
+          <td mat-cell *matCellDef="let element">
+            @if (col.cellRender) {
+              <!-- Custom CellRender -->
+              <div  appCellRender
+                    [id]="id()"
+                    [rowData]="element"
+                    [cellRender]="col.cellRender(element)"
+                    [eventName]="col.cellEvent ? col.cellEvent : ''">
+              </div>
+            } @else {
+              <div>{{element[col.field]}}</div>
+            }
+          </td>
+          </ng-container>
+        }
+
+        <!-- Header & Row Display -->
+        <tr mat-header-row *matHeaderRowDef="columnsDisplay; sticky: true"></tr>
+        <tr mat-row *matRowDef="let row; columns: columnsDisplay" (click)="onRowClicked(row)"></tr>
+
+        <!-- Group Header Defined -->
+        <ng-container matColumnDef="groupHeader">
+          <td mat-cell *matCellDef="let group" [attr.colspan]="columnsDisplay.length" [style.padding-left.px]="4+(group.groupLevel*8)">
+            @if (group.expanded) {
+              <i class="fas fa-chevron-down fa-fw"></i>
+            } @else {
+              <i class="fas fa-chevron-right fa-fw"></i>
+            }
+            {{getGroupName(groupByColumns()[group.groupLevel-1]) | translate}} = {{group['group'].value | translate}} ({{group.totalCounts}})
+          </td>
+        </ng-container>
+
+        <!-- Group Header Display -->
+        <tr mat-row
+            *matRowDef="let row; columns: ['groupHeader']; when: isGroup"
+            (click)="clickGroupHeader(row)"
+            style="cursor: pointer;">
+        </tr>
+
+        <!-- Row shown when there is no matching data. -->
+        <tr class="cdk-row" *matNoDataRow>
+          @if (isLoading()) {
+            <td [attr.colspan]="columnsDisplay.length">
+              <!-- <div style="display: flex;align-items: center;"> -->
+              <div class="d-flex align-items-center">
+                @if (isLoading()) {
+                  <mat-spinner [diameter]="20"></mat-spinner>
+                }
+                <div style="font-size: 14px;">&nbsp;&nbsp;loading...</div>
+              </div>
+            </td>
+          } @else {
+            <!-- <td class="mat-cell" *ngIf="filters.length>0" [attr.colspan]="columnsDisplay.length">No data matching the filter "{{filters}}"</td> -->
+            @if (showNoDataMessage()) {
+              <td [attr.colspan]="columnsDisplay.length" style="padding: 0 14px;">{{noDataMessage() | translate}}</td>
+            }
+          }
+        </tr>
+      </table>
+    </cdk-virtual-scroll-viewport>
+  </div>
+
+  <!-- Columns Panel -->
+  @if (columnsPanel()) {
+    <div class="side-bar">
+      <div class="column-panel" [ngClass]="{'panel-close': !columnPanelExpanded()}">
+        <div class="column-select">
+          <div class="title">{{'i18n_Fields' | translate}}</div>
+          <div  class="column-content"
+                cdkDropList
+                [cdkDropListData]="columnDefs()"
+                [cdkDropListConnectedTo]="groupList"
+                (cdkDropListDropped)="dropColumsItem($event)">
+
+            @for (col of columnDefs(); track $index) {
+              <div class="column-item" cdkDrag cdkDragPreviewContainer="parent">
+                <mat-checkbox [(ngModel)]="col.visible" [disableRipple]="false"
+                              (ngModelChange)="$event ? updateColumnsDisplay() : removeColumn(col.field)">
+                  {{col.headerName| translate}}
+                </mat-checkbox>
+                <div class="custom-placeholder" *cdkDragPlaceholder></div>
+              </div>
+            }
+          </div>
+        </div>
+        <div class="column-groupby">
+          <div class="title">{{'i18n_RowGroupings' | translate}}</div>
+          <div  #groupList="cdkDropList" class="column-content"
+                [ngClass]="{'moveIn': moveInGroupContent}"
+                cdkDropList
+                [cdkDropListData]="groupByColumns"
+                (cdkDropListDropped)="dropGroupItem($event)"
+                (cdkDropListEntered)="moveInGroupContent=true"
+                (cdkDropListExited)="moveInGroupContent=false">
+            @for (item of groupByColumns(); track $index) {
+              <div class="column-item" cdkDrag cdkDragPreviewClass="column-item" cdkDragPreviewContainer="parent">
+                {{getGroupName(item) | translate}}
+                <i  class="close-btn fa-solid fa-xmark fa-fw"
+                    mat-ripple
+                    [matRippleUnbounded]="true"
+                    [matRippleCentered]="true"
+                    (click)="unGroupByColumn(item)"></i>
+                <div class="custom-placeholder" *cdkDragPlaceholder></div>
+              </div>
+            }
+          </div>
+        </div>
+      </div>
+      <div class="side-button-panel">
+        <button class="side-button-button"
+                mat-ripple [matRippleCentered]="true"
+                (click)="columnPanelExpanded.set(!columnPanelExpanded())">
+          @if (columnPanelExpanded()) {
+            <i class="fa-solid fa-down-left-and-up-right-to-center fa-fw"></i>
+          }
+          @else {
+            <i class="fa-solid fa-up-right-and-down-left-from-center fa-fw"></i>
+          }
+          <span class="side-button-label" style="margin-top: 6px;font-size: 14px;">{{'i18n_Options' | translate}}</span>
+        </button>
+      </div>
+    </div>
+  }
+
+</div>
+

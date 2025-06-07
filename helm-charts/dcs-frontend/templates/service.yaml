@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ include "dcs-frontend.fullname" . }}
+  namespace: {{ .Values.namespace }}
+  labels:
+    {{- include "dcs-frontend.labels" . | nindent 4 }}
+spec:
+  type: {{ .Values.service.type }}
+  ports:
+    - name: http
+      port: {{ .Values.service.port }}
+      protocol: TCP
+      targetPort: {{ .Values.service.targetPort }}
+  selector:
+    {{- include "dcs-frontend.selectorLabels" . | nindent 4 }}

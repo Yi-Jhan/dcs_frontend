@@ -1,0 +1,82 @@
+.formRow{
+  line-height:40px;
+  margin-top:0px;
+}
+
+.mt6{
+  margin-top:8px;
+}
+
+.mt1{
+  margin-top:1px;
+}
+
+.text-right{
+  text-align: right;
+  margin-right: 5px;
+}
+
+.radioMarging{
+  margin-right: 10px;
+}
+
+.addWeight{
+  font-weight: bolder;
+}
+
+#xsSaveBtn{
+  display: none;
+}
+
+
+
+
+/* lg 大桌*/
+@media screen and (min-width: 992px){
+  .text-right{
+  //  background-color: rgb(112, 85, 161);
+  }
+
+}
+
+/* md 桌*/
+@media screen and (max-width: 991px){
+  .text-right{
+   // background-color: rgb(161, 85, 85);
+  }
+}
+
+/* sm 平板*/
+@media screen and (max-width: 767px){
+  .text-right{
+    text-align: left;
+    margin-right: 0;
+  }
+  .formRow{
+    margin-left:10px;
+  }
+}
+
+/* xs 手機*/
+@media screen and (max-width: 575px){
+  .text-right{
+    text-align: left;
+    margin-right: 0;
+  }
+
+  .mt6{
+    padding-top:0px;
+    margin-top: 8px;
+
+  }
+
+  #SaveBtn{
+    display: none;
+  }
+
+  #xsSaveBtn {
+    float:right;
+    display: inline-block;
+    margin-top: 20px;
+  }
+}

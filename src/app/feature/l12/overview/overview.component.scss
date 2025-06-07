@@ -1,0 +1,25 @@
+:host {
+  .list-view {
+    margin-top: 6px;
+
+    mat-card-title {
+      display: flex;
+
+      .list-title {
+        margin-right: 10px;
+      }
+
+      .filter-item {
+        margin: 0 4px;
+
+        &.mat-standard-chip {
+          min-height: 28px;
+        }
+      }
+    }
+  }
+}
+
+.mat-form-field-appearance-outline .mat-form-field-wrapper {
+  padding-bottom: 0 !important;
+}

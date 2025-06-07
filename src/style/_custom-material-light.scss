@@ -1,0 +1,126 @@
+// $light-theme: mat.m2-define-light-theme((
+//   color: (
+//     primary: $material-light-primary,
+//     accent: $material-light-accent,
+//     warn: $material-light-warn
+//   )
+// ));
+.html {
+  @include mat.all-component-themes(m3-theme.$light-theme);
+}
+
+
+.theme-light {
+  @include table-theme($theme-colors);
+  @include scrollbar-theme($theme-colors);
+  @include orderview-theme($theme-colors);
+  @include rack-theme($theme-colors);
+  @include status-card-theme($theme-colors);
+  @include teststage-theme($theme-colors);
+  @include form-field-theme($theme-colors);
+  @include overlay-theme($theme-colors);
+  @include dialog-theme($theme-colors);
+  @include sidemenu-theme($theme-colors);
+  @include border-theme($theme-colors);
+  @include banner-theme($theme-colors);
+  @include search-bar-theme($theme-colors);
+
+  // --mat-list-active-indicator-shape: 0px;
+}
+
+.status-font-init {
+  color: $dark-secondary !important;
+}
+.status-font-default {
+  color: $dark-blue !important;
+}
+.status-font-success {
+  color: $dark-success !important;
+}
+.status-font-warning {
+  color: $dark-warning !important;
+}
+.status-font-danger {
+  color: $dark-danger !important;
+}
+
+.status-bg-init {
+  color: $white !important;
+  background-color: $dark-secondary !important;
+}
+
+.status-bg-default {
+  color: $white !important;
+  background-color: $light-cyan !important;
+}
+
+.status-bg-success {
+  color: $white !important;
+  background-color: $dark-success !important;
+}
+
+.status-bg-warning {
+  color: $white !important;
+  background-color: $dark-warning !important;
+}
+
+.status-bg-danger {
+  color: $white !important;
+  background-color: $light-danger !important;
+}
+
+.status-bg-primary {
+  color: $white !important;
+  background-color: $dark-blue !important;
+}
+.status-bg-secondary {
+  color: $white !important;
+  background-color: $dark-secondary !important;
+}
+.status-bg-info {
+  color: $white !important;
+  background-color: $dark-info !important;
+}
+
+.mat-select-panel {
+  margin-top: 30px;
+}
+
+mat-radio-button {
+  &.mat-radio-disabled{
+    .mat-radio-outer-circle{
+      border-color:  rgba($white, 0.4) !important;
+    }
+    .mat-radio-label-content{
+      color: rgba($white, 0.4) !important;
+    }
+  }
+}
+
+.mat-mdc-card-header{
+  margin-bottom: 10px !important;
+}
+
+.mat-mdc-card-title{
+  margin-bottom: 10px !important;
+}
+
+.cellBtn {
+  cursor: pointer;
+  color: #fff;
+  border-radius: 2px;
+  line-height: 20px;
+
+  &.primary {
+    background: $light-blue;
+    border: 1px solid $light-blue;
+  }
+  &.accent {
+    background: $light-success;
+    border: 1px solid $light-success;
+  }
+  &.danger {
+    background: $light-danger;
+    border: 1px solid $light-danger;
+  }
+}

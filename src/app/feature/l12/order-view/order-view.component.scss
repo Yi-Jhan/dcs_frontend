@@ -1,0 +1,983 @@
+@mixin orderview-theme($theme) {
+  @keyframes cabinetTranslate {
+    0% {
+      transform: translateX(-20px);
+    }
+
+    100% {
+      transform: translateX(1px);
+    }
+  }
+
+  @keyframes glowing {
+    to {
+      filter: drop-shadow(0 0 5px $dark-gray-100) drop-shadow(0 0 15px $dark-success) drop-shadow(0 0 10px $dark-success);
+    }
+  }
+
+  @keyframes rotate {
+    to {
+      transform: rotate(360deg);
+    }
+  }
+
+  @keyframes bling {
+    50% {
+      opacity: 0;
+    }
+  }
+
+  @keyframes statusBar {
+    0% {
+      width: 0;
+    }
+
+    100% {
+      width: 100%;
+    }
+  }
+
+  @keyframes progress-bar-stripes {
+    100% {
+      background-position: 100% 100%;
+    }
+  }
+
+  // .theme-dark {
+  //   #resizeBar {
+  //     position: absolute;
+  //     width: 1px;
+  //     padding-left: 1px;
+  //     height: 94%;
+  //     right: 0;
+  //     z-index: 99;
+  //     left: 74.5%;
+  //     cursor: pointer;
+  //     touch-action: none;
+  //     @media screen and (max-width: 1200px){
+  //       left: 75%;
+  //     }
+  //     @media screen and (max-width: 650px){
+  //       left: 75.5%;
+  //     }
+  //     @media screen and (max-width: 500px){
+  //       left: 77.5%;
+  //     }
+  //     @media screen and (max-width: 420px){
+  //       left: 87.5%;
+  //     }
+  //   }
+
+  //   #rackviewDiv{
+  //     position: absolute;
+  //     left:74%;
+  //     @media screen and (max-width: 500px){
+  //       left: 75%;
+  //     }
+  //     @media screen and (max-width: 420px){
+  //       left: 85%;
+  //     }
+  //   }
+
+  //   #resizeBar:hover {
+  //     background-color: $dark-blue;
+  //   }
+
+  //   #resizeBar::after {
+  //     content: '';
+  //     background-color: $white;
+  //     position: absolute;
+  //     top: 40%;
+  //     left: 30%;
+  //     width: 6px;
+  //     height: 6%;
+  //     border-radius: 20px;
+  //     z-index: 99;
+  //     cursor: col-resize;
+  //   }
+
+  //   #dashboardDiv{
+  //     display: flex;
+  //     flex-direction: row;
+  //     flex-wrap: wrap;
+  //   }
+
+  //   .dashboardTitle {
+  //     border-bottom: 3px solid #0070cc;
+  //     font-size: 24px;
+  //   }
+
+  //   .dashboardCol{
+  //     min-width: 280px;
+  //     padding: 6px;
+
+  //     &.cabinetCard{
+  //       flex: 1 0 0;
+  //     }
+
+  //     &.ratesCard{
+  //       flex: 1 0 5%;
+  //     }
+  //     &.statusCard{
+  //       flex: 1 0 10%;
+  //       @media screen and (max-width: 1286px) {
+  //         display: none;
+  //       }
+  //       @media screen and (max-width: 886px) {
+  //         display: block;
+  //       }
+  //     }
+  //     &.durationCard{
+  //       flex: 1 0 5%;
+  //       @media screen and (max-width: 1676px) {
+  //         display: none;
+  //       }
+  //     }
+  //   }
+
+  //   #tableListDiv{
+  //     @media screen and (max-width: 886px) {
+  //       display: none;
+  //     }
+  //   }
+
+  //   .dashboardCard{
+  //     // height:86.5%;
+  //     min-height: 280px;
+  //     max-height: 280px;
+  //   }
+
+  //   .canvasDiv{
+  //     margin: 5px auto 0px;
+  //     width: 280px;
+  //     height: 240px;
+  //   }
+
+  //   .cabinetStatus {
+  //     width: 50%;
+  //     &.Created {
+  //       animation: cabinetTranslate 1s ease;
+  //       background-color: $dark-secondary;
+  //     }
+
+  //     &.Processing {
+  //       animation: cabinetTranslate 1s ease;
+  //       background-color: $dark-primary;
+  //     }
+
+  //     &.Pass {
+  //       animation: cabinetTranslate 1s ease;
+  //       background-color: $dark-success;
+  //     }
+
+  //     &.Fail {
+  //       animation: cabinetTranslate 1s ease;
+  //       background-color: $dark-danger;
+  //     }
+
+  //     &.All {
+  //       background-color: $dark-rack-border-color-3;
+  //       color: $white;
+  //     }
+  //   }
+
+  //   .statusDiv {
+  //     height: 0px;
+  //     text-align: center;
+  //     padding-top: 6px;
+  //     cursor: pointer;
+  //     border-radius: 20px;
+  //     margin: 2.5%;
+  //     padding-bottom: 24%;
+
+  //     &.Created {
+  //       color: $dark-secondary;
+  //       background-color: $dark-secondary;
+  //     }
+
+  //     &.Processing {
+  //       color: $dark-primary;
+  //       background-color: $dark-primary;
+  //     }
+
+  //     &.Pass {
+  //       color: $dark-success;
+  //       background-color: $dark-success;
+  //     }
+
+  //     &.Fail {
+  //       color: $dark-danger;
+  //       background-color: $dark-danger;
+
+  //       .statusIcon {
+  //         padding-top: 8%;
+  //         padding-bottom: 8%;
+  //         padding-right: 12%;
+  //         padding-left: 12%;
+  //       }
+  //     }
+
+  //     .statusIcon {
+  //       background-color: $dark-gray-100;
+  //       border-radius: 50%;
+  //       padding: 10%;
+  //       font-size: 1.5vw;
+  //     }
+  //   }
+
+  //   .completeLegend{
+  //     display: flex;
+  //     flex-wrap: wrap;
+  //     font-size: 16px;
+  //     margin-top: -10%;
+  //     position: relative;
+  //     left: 5%;
+  //   }
+
+  //   .completeAllCircle {
+  //     display: inline-block;
+  //     width: 8px;
+  //     height: 8px;
+  //     border-radius: 50%;
+  //     border-style: solid;
+  //     border-width: 3px;
+  //     border-color: $dark-success;
+  //   }
+
+  //   .completeDoneCircle {
+  //     display: inline-block;
+  //     width: 8px;
+  //     height: 8px;
+  //     border-radius: 50%;
+  //     border-style: solid;
+  //     border-width: 3px;
+  //     border-color: $dark-gray-100;
+  //   }
+
+  //   .iconPass {
+  //     animation: glowing 1.5s ease-in-out infinite alternate;
+  //   }
+
+  //   .iconProcessing {
+  //     animation: rotate 3s linear infinite;
+  //   }
+
+  //   .iconFail {
+  //     animation: bling 1s linear infinite;
+  //   }
+
+  //   .statusBar {
+  //     height: 10px;
+  //     position: relative;
+  //     background: $dark-gray-100;
+  //     top: 8px;
+  //     overflow: hidden;
+  //     border-radius: 20px;
+  //   }
+
+  //   .statusBar span {
+  //     display: block;
+  //     height: 100%;
+  //   }
+
+  //   .status {
+  //     // background-color: $dark-success;
+  //     // animation: statusBar 3s ease-in-out infinite;
+  //     // animation-fill-mode: both;
+  //     border-radius: unset;
+
+  //     &.Created {
+  //       background-color: $dark-secondary;
+  //     }
+
+  //     &.Processing {
+  //       background-color: $dark-primary;
+  //     }
+
+  //     &.Pass {
+  //       background-color: $dark-success;
+  //     }
+
+  //     &.Fail {
+  //       background-color: $dark-danger;
+  //     }
+
+  //   }
+
+  //   .statusRate {
+  //     float: left;
+  //     width: calc(var(--r)/var(--c)*100);
+  //   }
+
+  //   .filter-item {
+  //     margin: 0 4px;
+
+  //     &.mat-standard-chip {
+  //       min-height: 28px;
+  //     }
+
+  //     &.Created {
+  //       background-color: $dark-secondary !important;
+  //     }
+
+  //     &.Processing {
+  //       background-color: $dark-primary !important;
+  //     }
+
+  //     &.Pass {
+  //       background-color: $dark-success !important;
+  //     }
+
+  //     &.Fail {
+  //       background-color: $dark-danger !important;
+  //     }
+  //   }
+
+  //   .moving {
+  //     user-select: none;
+  //     -moz-user-select: none;
+  //     -webkit-user-select: none;
+  //     -ms-user-select: none;
+  //   }
+
+  //   .durationDate{
+  //     position: absolute;
+  //     left: 10%;
+  //     font-weight: bold;
+  //     font-size: 0.8vw;
+  //     opacity: 0.5;
+  //   }
+
+  //   .durationCounter{
+  //     position: absolute;
+  //     right: 10%;
+  //     font-weight: bold;
+  //     font-size: 1vw;
+  //   }
+
+  // }
+
+  // .theme-light {
+  //   #resizeBar {
+  //     position: absolute;
+  //     width: 1px;
+  //     padding-left: 1px;
+  //     height: 94%;
+  //     right: 0;
+  //     z-index: 99;
+  //     left: 74.5%;
+  //     cursor: pointer;
+  //     touch-action: none;
+  //     @media screen and (max-width: 1200px){
+  //       left: 75%;
+  //     }
+  //     @media screen and (max-width: 650px){
+  //       left: 75.5%;
+  //     }
+  //     @media screen and (max-width: 500px){
+  //       left: 77.5%;
+  //     }
+  //     @media screen and (max-width: 420px){
+  //       left: 87.5%;
+  //     }
+  //   }
+
+  //   #rackviewDiv{
+  //     position: absolute;
+  //     left:74%;
+  //     @media screen and (max-width: 500px){
+  //       left: 75%;
+  //     }
+  //     @media screen and (max-width: 420px){
+  //       left: 85%;
+  //     }
+  //   }
+
+  //   #resizeBar:hover {
+  //     background-color: $dark-blue;
+  //   }
+
+  //   #resizeBar::after {
+  //     content: '';
+  //     background-color: $white;
+  //     position: absolute;
+  //     top: 40%;
+  //     left: 30%;
+  //     width: 6px;
+  //     height: 6%;
+  //     border-radius: 20px;
+  //     z-index: 99;
+  //     cursor: col-resize;
+  //   }
+
+  //   #dashboardDiv{
+  //     display: flex;
+  //     flex-direction: row;
+  //     flex-wrap: wrap;
+  //   }
+
+  //   .dashboardTitle {
+  //     border-bottom: 3px solid #0070cc;
+  //     font-size: 24px;
+  //   }
+
+  //   .dashboardCol{
+  //     min-width: 280px;
+  //     padding: 6px;
+
+  //     &.cabinetCard{
+  //       flex: 1 0 0;
+  //     }
+
+  //     &.ratesCard{
+  //       flex: 1 0 5%;
+  //     }
+  //     &.statusCard{
+  //       flex: 1 0 10%;
+  //       @media screen and (max-width: 1286px) {
+  //         display: none;
+  //       }
+  //       @media screen and (max-width: 886px) {
+  //         display: block;
+  //       }
+  //     }
+  //     &.durationCard{
+  //       flex: 1 0 5%;
+  //       @media screen and (max-width: 1676px) {
+  //         display: none;
+  //       }
+  //     }
+  //   }
+
+  //   #tableListDiv{
+  //     @media screen and (max-width: 886px) {
+  //       display: none;
+  //     }
+  //   }
+
+  //   .dashboardCard{
+  //     // height:86.5%;
+  //     min-height: 280px;
+  //     max-height: 280px;
+  //   }
+
+  //   .canvasDiv{
+  //     margin: 5px auto 0px;
+  //     width: 280px;
+  //     height: 240px;
+  //   }
+
+  //   .cabinetStatus {
+  //     width: 50%;
+  //     &.Created {
+  //       animation: cabinetTranslate 1s ease;
+  //       background-color: $light-secondary;
+  //     }
+
+  //     &.Processing {
+  //       animation: cabinetTranslate 1s ease;
+  //       background-color: $light-primary;
+  //     }
+
+  //     &.Pass {
+  //       animation: cabinetTranslate 1s ease;
+  //       background-color: $light-success;
+  //     }
+
+  //     &.Fail {
+  //       animation: cabinetTranslate 1s ease;
+  //       background-color: $light-danger;
+  //     }
+
+  //     &.All {
+  //       background-color: $dark-rack-border-color-3;
+  //       color: $white;
+  //     }
+  //   }
+
+  //   .statusDiv {
+  //     height: 0px;
+  //     text-align: center;
+  //     padding-top: 6px;
+  //     cursor: pointer;
+  //     border-radius: 20px;
+  //     margin: 2.5%;
+  //     padding-bottom: 24%;
+
+  //     &.Created {
+  //       color: $light-secondary;
+  //       background-color: $light-secondary;
+  //     }
+
+  //     &.Processing {
+  //       color: $light-primary;
+  //       background-color: $light-primary;
+  //     }
+
+  //     &.Pass {
+  //       color: $light-success;
+  //       background-color: $light-success;
+  //     }
+
+  //     &.Fail {
+  //       color: $light-danger;
+  //       background-color: $light-danger;
+
+  //       .statusIcon {
+  //         padding-top: 8%;
+  //         padding-bottom: 8%;
+  //         padding-right: 12%;
+  //         padding-left: 12%;
+  //       }
+  //     }
+
+  //     .statusIcon {
+  //       background-color: $light-gray-100;
+  //       border-radius: 50%;
+  //       padding: 10%;
+  //       font-size: 1.5vw;
+  //     }
+  //   }
+
+  //   .completeLegend{
+  //     display: flex;
+  //     flex-wrap: wrap;
+  //     font-size: 16px;
+  //     margin-top: -10%;
+  //     position: relative;
+  //     left: 5%;
+  //   }
+
+  //   .completeAllCircle {
+  //     display: inline-block;
+  //     width: 8px;
+  //     height: 8px;
+  //     border-radius: 50%;
+  //     border-style: solid;
+  //     border-width: 3px;
+  //     border-color: $light-success;
+  //   }
+
+  //   .completeDoneCircle {
+  //     display: inline-block;
+  //     width: 8px;
+  //     height: 8px;
+  //     border-radius: 50%;
+  //     border-style: solid;
+  //     border-width: 3px;
+  //     border-color: $light-gray-100;
+  //   }
+
+  //   .iconPass {
+  //     animation: glowing 1.5s ease-in-out infinite alternate;
+  //   }
+
+  //   .iconProcessing {
+  //     animation: rotate 3s linear infinite;
+  //   }
+
+  //   .iconFail {
+  //     animation: bling 1s linear infinite;
+  //   }
+
+  //   .statusBar {
+  //     height: 10px;
+  //     position: relative;
+  //     background: $light-gray-100;
+  //     top: 8px;
+  //     overflow: hidden;
+  //     border-radius: 20px;
+  //   }
+
+  //   .statusBar span {
+  //     display: block;
+  //     height: 100%;
+  //   }
+
+  //   .status {
+  //     // background-color: $light-success;
+  //     // animation: statusBar 3s ease-in-out infinite;
+  //     // animation-fill-mode: both;
+  //     border-radius: unset;
+
+  //     &.Created {
+  //       background-color: $dark-secondary;
+  //     }
+
+  //     &.Processing {
+  //       background-color: $dark-primary;
+  //     }
+
+  //     &.Pass {
+  //       background-color: $dark-success;
+  //     }
+
+  //     &.Fail {
+  //       background-color: $dark-danger;
+  //     }
+  //   }
+
+  //   .statusRate {
+  //     float: left;
+  //     width: calc(var(--r)/var(--c)*100);
+  //   }
+
+  //   .filter-item {
+  //     margin: 0 4px;
+
+  //     &.mat-standard-chip {
+  //       min-height: 28px;
+  //     }
+
+  //     &.Created {
+  //       background-color: $dark-secondary !important;
+  //     }
+
+  //     &.Processing {
+  //       background-color: $dark-primary !important;
+  //     }
+
+  //     &.Pass {
+  //       background-color: $dark-success !important;
+  //     }
+
+  //     &.Fail {
+  //       background-color: $dark-danger !important;
+  //     }
+  //   }
+
+  //   .moving {
+  //     user-select: none;
+  //     -moz-user-select: none;
+  //     -webkit-user-select: none;
+  //     -ms-user-select: none;
+  //   }
+
+  //   .durationDate{
+  //     position: absolute;
+  //     left: 10%;
+  //     font-weight: bold;
+  //     font-size: 0.8vw;
+  //     opacity: 0.5;
+  //   }
+
+  //   .durationCounter{
+  //     position: absolute;
+  //     right: 10%;
+  //     font-weight: bold;
+  //     font-size: 1vw;
+  //   }
+  // }
+
+    #resizeBar {
+      position: absolute;
+      width: 1px;
+      padding-left: 1px;
+      height: 94%;
+      right: 0;
+      z-index: 99;
+      left: 74.5%;
+      cursor: pointer;
+      touch-action: none;
+      @media screen and (max-width: 1200px){
+        left: 75%;
+      }
+      @media screen and (max-width: 650px){
+        left: 75.5%;
+      }
+      @media screen and (max-width: 500px){
+        left: 77.5%;
+      }
+      @media screen and (max-width: 420px){
+        left: 87.5%;
+      }
+    }
+
+    #rackviewDiv{
+      position: absolute;
+      left:74%;
+      @media screen and (max-width: 500px){
+        left: 75%;
+      }
+      @media screen and (max-width: 420px){
+        left: 85%;
+      }
+    }
+
+    #resizeBar:hover {
+      background-color: $dark-blue;
+    }
+
+    #resizeBar::after {
+      content: '';
+      background-color: $white;
+      position: absolute;
+      top: 40%;
+      left: 30%;
+      width: 6px;
+      height: 6%;
+      border-radius: 20px;
+      z-index: 99;
+      cursor: col-resize;
+    }
+
+    #dashboardDiv{
+      display: flex;
+      flex-direction: row;
+      flex-wrap: wrap;
+    }
+
+    .dashboardTitle {
+      border-bottom: 3px solid #0070cc;
+      font-size: 24px;
+    }
+
+    .dashboardCol{
+      min-width: 280px;
+      padding: 6px;
+
+      &.cabinetCard{
+        flex: 1 0 0;
+      }
+
+      &.ratesCard{
+        flex: 1 0 5%;
+      }
+      &.statusCard{
+        flex: 1 0 10%;
+        @media screen and (max-width: 1286px) {
+          display: none;
+        }
+        @media screen and (max-width: 886px) {
+          display: block;
+        }
+      }
+      &.durationCard{
+        flex: 1 0 5%;
+        @media screen and (max-width: 1676px) {
+          display: none;
+        }
+      }
+    }
+
+    #tableListDiv{
+      @media screen and (max-width: 886px) {
+        display: none;
+      }
+    }
+
+    .dashboardCard{
+      // height:86.5%;
+      min-height: 280px;
+      max-height: 310px;
+    }
+
+    .canvasDiv{
+      margin: 5px auto 0px;
+      width: 280px;
+      height: 240px;
+    }
+
+    .cabinetStatus {
+      width: 50%;
+      &.Created {
+        animation: cabinetTranslate 1s ease;
+        background-color: $dark-secondary;
+      }
+
+      &.Processing {
+        animation: cabinetTranslate 1s ease;
+        background-color: $dark-blue;
+      }
+
+      &.Pass {
+        animation: cabinetTranslate 1s ease;
+        background-color: $dark-success;
+      }
+
+      &.Fail {
+        animation: cabinetTranslate 1s ease;
+        background-color: $dark-danger;
+      }
+
+      &.All {
+        // background-color: $dark-rack-border-color-3;
+        background-color: map-get($theme, rack-border-color-3);
+        color: $white;
+      }
+    }
+
+    .statusDiv {
+      height: 0px;
+      text-align: center;
+      padding-top: 6px;
+      cursor: pointer;
+      border-radius: 20px;
+      margin: 2.5%;
+      padding-bottom: 24%;
+
+      &.Created {
+        color: $dark-secondary;
+        background-color: $dark-secondary;
+      }
+
+      &.Processing {
+        color: $dark-blue;
+        background-color: $dark-blue;
+      }
+
+      &.Pass {
+        color: $dark-success;
+        background-color: $dark-success;
+      }
+
+      &.Fail {
+        color: $dark-danger;
+        background-color: $dark-danger;
+
+        .statusIcon {
+          padding-top: 8%;
+          padding-bottom: 8%;
+          padding-right: 12%;
+          padding-left: 12%;
+        }
+      }
+
+      .statusIcon {
+        background-color: $dark-gray-100;
+        border-radius: 50%;
+        padding: 10%;
+        font-size: 1.5vw;
+      }
+    }
+
+    .completeLegend{
+      display: flex;
+      flex-wrap: wrap;
+      font-size: 16px;
+      margin-top: -10%;
+      position: relative;
+      left: 5%;
+    }
+
+    .completeAllCircle {
+      display: inline-block;
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      border-style: solid;
+      border-width: 3px;
+      border-color: $dark-success;
+    }
+
+    .completeDoneCircle {
+      display: inline-block;
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      border-style: solid;
+      border-width: 3px;
+      border-color: $dark-gray-100;
+    }
+
+    .iconPass {
+      animation: glowing 1.5s ease-in-out infinite alternate;
+    }
+
+    .iconProcessing {
+      animation: rotate 3s linear infinite;
+    }
+
+    .iconFail {
+      animation: bling 1s linear infinite;
+    }
+
+    .statusBar {
+      height: 10px;
+      position: relative;
+      background: $dark-gray-100;
+      top: 8px;
+      overflow: hidden;
+      border-radius: 20px;
+    }
+
+    .statusBar span {
+      display: block;
+      height: 100%;
+    }
+
+    .status {
+      // background-color: $dark-success;
+      // animation: statusBar 3s ease-in-out infinite;
+      // animation-fill-mode: both;
+      border-radius: unset;
+
+      &.Created {
+        background-color: $dark-secondary;
+      }
+
+      &.Processing {
+        background-color: $dark-blue;
+      }
+
+      &.Pass {
+        background-color: $dark-success;
+      }
+
+      &.Fail {
+        background-color: $dark-danger;
+      }
+
+    }
+
+    .statusRate {
+      float: left;
+      width: calc(var(--r)/var(--c)*100);
+    }
+
+    .filter-item {
+      margin: 0 4px;
+
+      &.mat-standard-chip {
+        min-height: 28px;
+      }
+
+      &.Created {
+        background-color: $dark-secondary !important;
+      }
+
+      &.Processing {
+        background-color: $dark-blue !important;
+      }
+
+      &.Pass {
+        background-color: $dark-success !important;
+      }
+
+      &.Fail {
+        background-color: $dark-danger !important;
+      }
+    }
+
+    .moving {
+      user-select: none;
+      -moz-user-select: none;
+      -webkit-user-select: none;
+      -ms-user-select: none;
+    }
+
+    .durationDate{
+      position: absolute;
+      left: 10%;
+      font-weight: bold;
+      font-size: 0.8vw;
+      opacity: 0.5;
+    }
+
+    .durationCounter{
+      position: absolute;
+      right: 10%;
+      font-weight: bold;
+      font-size: 1vw;
+    }
+}

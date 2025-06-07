@@ -1,0 +1,60 @@
+<form [formGroup]="ruleForm">
+  <div class="row" style="line-height: 36px;margin-bottom: 8px;">
+    <div class="col-3">{{'i18n_Fields' | translate}}</div>
+    <div class="col-9">
+      <ng-container *ngIf="dataFromMatDialog; else elseTemplate">
+        <div>{{fields[ruleForm.value.field-1].displayName}}</div>
+      </ng-container>
+      <ng-template #elseTemplate>
+        <mat-form-field class="form-field" appearance="outline">
+          <mat-select disableOptionCentering formControlName="field">
+            <mat-option *ngFor="let field of fields" [value]="field.value">
+              {{field.displayName}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </ng-template>
+    </div>
+  </div>
+
+  <!-- <div class="row" style="line-height: 36px;margin-bottom: 8px;">
+    <div class="col-3">{{'RolePrivConfig.Dialog.Operator' | translate}}</div>
+    <div class="col-9">
+      <mat-form-field class="field-select" appearance="outline">
+        <mat-select disableOptionCentering formControlName="operator">
+          <mat-option *ngFor="let operator of operators" [value]="operator.value">
+            {{operator.text}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+  </div> -->
+
+  <div *ngIf="!isDateField" class="row" style="line-height: 36px;">
+    <div class="col-3">{{'i18n_Keyword' | translate}}</div>
+    <div class="col-9">
+      <app-chips-input
+        [id]="chipsInputID"
+        [placeholder]="placeHolder"
+        [chips]="enteredValue"
+        [valid]="keywordChanged ? enteredValue.length>0 : true"
+        [hint]="'RolePrivConfig.Dialog.KeywordHint'">
+      </app-chips-input>
+    </div>
+  </div>
+
+  <div *ngIf="isDateField" class="row" style="line-height: 36px;margin-bottom: 8px;">
+    <div class="col-3">{{'Range*' | translate}}</div>
+    <div class="col-9">
+      <mat-form-field class="field-date-range-input" appearance="outline">
+        <mat-date-range-input [rangePicker]="picker"(click)="picker.open()">
+          <input matStartDate [placeholder]="'i18n_StartDate'|translate" autocomplete="off" formControlName="start">
+          <input matEndDate [placeholder]="'i18n_EndDate'|translate" autocomplete="off" formControlName="end">
+        </mat-date-range-input>
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-date-range-picker #picker disabled="false"></mat-date-range-picker>
+        <mat-hint>{{'i18n_RangeHint'|translate}}</mat-hint>
+      </mat-form-field>
+    </div>
+  </div>
+</form>

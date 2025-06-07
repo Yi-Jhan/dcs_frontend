@@ -1,0 +1,123 @@
+@mixin table-export-theme($theme) {
+  .theme-dark {
+    .columns-header {
+      background: lighten($dark-background, 2%);
+      border: solid 1px $dark-bg-lighter-20;
+      text-align: center;
+      line-height: 26px;
+    }
+
+    .cloumns-container {
+      width: 240px;
+      display: inline-block;
+      vertical-align: middle;
+      border: solid 1px $dark-bg-lighter-20;
+      border-radius: 4px;
+      overflow: hidden;
+    }
+
+    .cloumns-list {
+      padding: 4px;
+      height: 40vh;
+      overflow-y: auto;
+      display: block;
+    }
+
+    .column-title {
+      padding: 5px 10px;
+      box-sizing: border-box;
+      background: lighten($dark-background, 2%);
+      border-bottom: solid 1px $dark-bg-lighter-20;
+      text-align: center;
+    }
+
+    .cloumns-box {
+      padding: 10px 10px;
+      margin-bottom: 4px;
+      border: solid 1px $dark-bg-lighter-20;
+      box-sizing: border-box;
+      background: lighten($dark-background, 3%);
+      text-align: center;
+      cursor:grab;
+    }
+
+    .cdk-drag-placeholder {
+      opacity: 0;
+    }
+  }
+
+  .theme-light {
+    .columns-header {
+      background: $light-bg-darker-10;
+      border: solid 1px $light-bg-darker-20;
+      text-align: center;
+      line-height: 26px;
+    }
+
+    .cloumns-container {
+      width: 240px;
+      display: inline-block;
+      vertical-align: middle;
+      border: solid 1px $light-bg-darker-20;
+      border-radius: 4px;
+      overflow: hidden;
+    }
+
+    .cloumns-list {
+      padding: 4px;
+      height: 40vh;
+      overflow-y: auto;
+      display: block;
+    }
+
+    .column-title {
+      padding: 5px 10px;
+      box-sizing: border-box;
+      background: $light-bg-darker-10;
+      border-bottom: solid 1px $light-bg-darker-20;
+      text-align: center;
+    }
+
+    .cloumns-box {
+      padding: 10px 10px;
+      margin-bottom: 4px;
+      border: solid 1px $light-bg-darker-20;
+      box-sizing: border-box;
+      background: $light-bg-darker-5;
+    }
+
+    .field {
+      .field-header {
+        background: $light-bg-darker-10;
+        border: solid 1px $light-bg-darker-20;
+      }
+    }
+  }
+}
+
+:host {
+
+  .field {
+    display: flex;
+    font-size: 14px;
+    line-height: 36px;
+
+    .field-title {
+      // font-weight: bold;
+      flex: 0 0 180px;
+    }
+
+    .field-content {
+      flex: 1 1 0;
+
+      .mat-radio-button {
+        margin: 0 12px;
+      }
+    }
+
+    .field-header {
+      flex: 1 1 0;
+      text-align: center;
+    }
+  }
+}

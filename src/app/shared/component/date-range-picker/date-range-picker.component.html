@@ -1,0 +1,23 @@
+<div class="search-container">
+  <app-chips-input [id]="id()"
+                   [placeholder]="placeholder()"
+                   [chips]="enteredValue()"
+                   [isSearchBar]="true">
+  </app-chips-input>
+  <div *ngIf="dateRangerPicker" class="calendar-container">
+    <div style="position: relative;display: flex;">
+        <mat-date-range-input class="hide-input" [formGroup]="range" [rangePicker]="picker" style="width: 0px;margin-bottom: -2px;">
+          <input class="calendar-input" matStartDate formControlName="start" (ngModelChange)="dateChange('start', $event)">
+          <input class="calendar-input" matEndDate formControlName="end" (ngModelChange)="dateChange('end', $event)">
+        </mat-date-range-input>
+      <div>
+        <mat-date-range-picker #picker (closed)="closeDatePicker()"></mat-date-range-picker>
+        <button class="calendar-btn" mat-stroked-button (click)="picker.open()"><i class="fa-solid fa-calendar-days"></i></button>
+      </div>
+    </div>
+  </div>
+  <div>
+    <button class="clear-btn" mat-flat-button [color]="'primary'" (click)="clearSerchInput()"><i class="fa-solid fa-xmark"></i>&nbsp;{{'i18n_Search' | translate}}</button>
+  </div>
+
+</div>

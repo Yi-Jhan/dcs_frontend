@@ -1,0 +1,17 @@
+@mixin overlay-theme($theme-colors) {
+  &.cdk-overlay-container {
+
+    // select option
+    .mat-mdc-option {
+      min-height: 36px !important;
+    }
+
+    .mat-mdc-menu-item {
+      min-height: 36px !important;
+    }
+
+    .cdk-overlay-pane {
+      margin-top: 4px;
+    }
+  }
+}

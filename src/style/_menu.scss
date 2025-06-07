@@ -1,0 +1,41 @@
+@mixin menu-theme($theme-colors) {
+  .cdk-menu {
+    display: inline-flex !important;
+    flex-direction: column;
+    min-width: 160px;
+    max-width: 280px;
+    background-color: map-get($theme-colors, menu-bg-color);
+    padding: 6px 0;
+  }
+
+  .cdk-menu-item {
+    background-color: transparent;
+    cursor: pointer;
+    border: none;
+    color: map-get($theme-colors, text);;
+
+    user-select: none;
+    min-width: 64px;
+    line-height: 32px;
+    padding: 0 16px;
+
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    flex: 1;
+  }
+
+  .cdk-menu-item:hover {
+    background-color: rgb(208, 208, 208);
+  }
+
+  .cdk-menu-item:active {
+    background-color: rgb(170, 170, 170);
+  }
+
+  .cdk-menu-item {
+    &:not(:last-child){
+      border-bottom: 1px solid rgb(240, 240, 240);
+    }
+  }
+}
